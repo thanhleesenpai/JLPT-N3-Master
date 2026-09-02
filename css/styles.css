@@ -1,0 +1,1026 @@
+/* ==========================================================================
+   JLPT N3 VOCABULARY LEARNING & TYPING TEST APP - STYLESHEET
+   Design Theme: Japanese Dark Slate & Sakura Neon Glassmorphism
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Color System */
+  --bg-primary: #0b0f19;
+  --bg-secondary: #131b2e;
+  --bg-card: rgba(22, 31, 52, 0.75);
+  --bg-card-hover: rgba(30, 43, 72, 0.85);
+  --bg-input: rgba(15, 23, 42, 0.9);
+  
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-focus: #f43f5e;
+  
+  --accent-sakura: #f43f5e;
+  --accent-sakura-glow: rgba(244, 63, 94, 0.35);
+  --accent-cyan: #06b6d4;
+  --accent-cyan-glow: rgba(6, 182, 212, 0.35);
+  --accent-purple: #8b5cf6;
+  --accent-gold: #f59e0b;
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-japanese: #ffffff;
+  
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-jp: 'Noto Sans JP', 'Hiragino Kaku Gothic Pro', sans-serif;
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  
+  --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  --shadow-glow-sakura: 0 0 20px rgba(244, 63, 94, 0.4);
+  --shadow-glow-cyan: 0 0 20px rgba(6, 182, 212, 0.4);
+  
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* CSS Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(244, 63, 94, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 60%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-sakura);
+}
+
+/* App Header & Navbar */
+.app-header {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0.4rem 1.5rem;
+}
+
+.header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.logo-badge {
+  background: linear-gradient(135deg, var(--accent-sakura), var(--accent-purple));
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.1rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-glow-sakura);
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #ffffff, #cbd5e1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-title span {
+  color: var(--accent-sakura);
+  -webkit-text-fill-color: var(--accent-sakura);
+}
+
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.25rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-btn:hover {
+  color: var(--text-primary);
+}
+
+.nav-btn.active {
+  background: linear-gradient(135deg, var(--accent-sakura), #e11d48);
+  color: #ffffff;
+  box-shadow: var(--shadow-glow-sakura);
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+  border-color: var(--accent-sakura);
+}
+
+/* Main Container */
+.main-content {
+  flex: 1;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  overflow: hidden;
+}
+
+.tab-pane {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+/* Quiz pane specifically should never scroll */
+#pane-quiz.active {
+  display: block;
+  max-height: calc(100vh - 55px);
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   QUIZ VIEW - CORE TYPING & MULTIPLE CHOICE FEATURE (COMPACT NO SCROLL)
+   ========================================================================== */
+
+.quiz-container {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 70px);
+  overflow: hidden;
+}
+
+.quiz-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.quiz-progress-wrapper {
+  flex: 1;
+  margin-right: 1.25rem;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+.progress-track {
+  height: 6px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-sakura));
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+.quiz-stats-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stat-pill {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.stat-pill.streak {
+  color: var(--accent-gold);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.stat-pill.score {
+  color: var(--accent-cyan);
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+/* Prompt Card */
+.prompt-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.2rem;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-normal);
+}
+
+.prompt-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-sakura), var(--accent-cyan));
+}
+
+.question-tag {
+  display: inline-block;
+  background: rgba(244, 63, 94, 0.15);
+  color: var(--accent-sakura);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.15rem 0.65rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+}
+
+.prompt-main-text {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: var(--font-jp);
+  margin-bottom: 0.15rem;
+  line-height: 1.2;
+}
+
+.prompt-sub-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+/* Typing Input Section */
+.typing-box {
+  margin-top: 0.5rem;
+}
+
+.input-helper-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.romaji-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--accent-cyan);
+  font-weight: 600;
+  background: rgba(6, 182, 212, 0.12);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.input-mode-toggle {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.input-mode-toggle:hover {
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
+}
+
+.typing-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.quiz-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: var(--font-jp);
+  text-align: center;
+  outline: none;
+  transition: var(--transition-fast);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.quiz-input:focus {
+  border-color: var(--accent-sakura);
+  box-shadow: 0 0 0 4px var(--accent-sakura-glow);
+}
+
+/* Multiple Choice Grid (Trắc nghiệm 1 trong 4) */
+.mc-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.mc-option-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.mc-option-btn:hover {
+  background: rgba(6, 182, 212, 0.18);
+  border-color: var(--accent-cyan);
+  transform: translateY(-1px);
+}
+
+.mc-option-btn.selected {
+  background: linear-gradient(135deg, var(--accent-cyan), #0284c7);
+  color: #ffffff;
+  border-color: var(--accent-cyan);
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+.mc-badge {
+  background: rgba(255, 255, 255, 0.15);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+/* Onscreen Hiragana Helper Keys */
+.soft-keyboard {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.key-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: var(--font-jp);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.key-btn:hover {
+  background: rgba(244, 63, 94, 0.2);
+  border-color: var(--accent-sakura);
+}
+
+/* Action Controls */
+.quiz-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.btn-primary {
+  flex: 1;
+  background: linear-gradient(135deg, var(--accent-sakura), #e11d48);
+  color: #ffffff;
+  border: none;
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  box-shadow: var(--shadow-glow-sakura);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.5);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Feedback Card / Overlay */
+.feedback-box {
+  margin-top: 0.5rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--radius-md);
+  display: none;
+  animation: slideUp 0.2s ease;
+  text-align: left;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback-box.correct {
+  display: block;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.feedback-box.incorrect {
+  display: block;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.feedback-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 0.3rem;
+}
+
+.feedback-box.correct .feedback-header { color: var(--accent-green); }
+.feedback-box.incorrect .feedback-header { color: var(--accent-red); }
+
+.feedback-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.9rem;
+}
+
+.word-breakdown {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.word-breakdown .kanji {
+  font-size: 1.2rem;
+  font-weight: 800;
+  font-family: var(--font-jp);
+}
+
+.word-breakdown .reading {
+  color: var(--accent-cyan);
+  font-weight: 700;
+  font-family: var(--font-jp);
+  font-size: 0.9rem;
+}
+
+.word-breakdown .hanviet {
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-sm);
+}
+
+/* Animations */
+.shake {
+  animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-2px, 0, 0); }
+  20%, 80% { transform: translate3d(4px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+  40%, 60% { transform: translate3d(6px, 0, 0); }
+}
+
+.correct-pulse {
+  animation: correctPulse 0.5s ease;
+}
+
+@keyframes correctPulse {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* ==========================================================================
+   FLASHCARDS VIEW (THẺ GHI NHỚ 3D)
+   ========================================================================== */
+
+.flashcard-wrapper {
+  max-width: 550px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.flashcard-3d {
+  width: 100%;
+  min-height: 360px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.flashcard-3d.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.card-face.back {
+  transform: rotateY(180deg);
+  background: rgba(26, 36, 60, 0.95);
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+.card-kanji {
+  font-size: 3.5rem;
+  font-weight: 900;
+  font-family: var(--font-jp);
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.card-furigana {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: var(--font-jp);
+  color: var(--accent-cyan);
+  margin-bottom: 0.75rem;
+}
+
+.card-hanviet-tag {
+  background: rgba(244, 63, 94, 0.2);
+  color: var(--accent-sakura);
+  font-size: 0.9rem;
+  font-weight: 800;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.card-meaning {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.card-example {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  width: 100%;
+  font-size: 0.95rem;
+  text-align: left;
+  border-left: 3px solid var(--accent-cyan);
+}
+
+.card-example .jp {
+  font-family: var(--font-jp);
+  font-weight: 600;
+  color: var(--text-japanese);
+  margin-bottom: 0.25rem;
+}
+
+.card-example .vi {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.flashcard-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  gap: 0.75rem;
+}
+
+/* ==========================================================================
+   DICTIONARY & MANAGEMENT VIEW
+   ========================================================================== */
+
+.dictionary-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search-input-group {
+  flex: 1;
+  min-width: 280px;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: var(--accent-sakura);
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+.filter-select {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  outline: none;
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+}
+
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.vocab-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  transition: var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.vocab-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(244, 63, 94, 0.4);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+}
+
+.vocab-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.vocab-kanji {
+  font-size: 1.8rem;
+  font-weight: 900;
+  font-family: var(--font-jp);
+  color: var(--text-primary);
+}
+
+.vocab-hiragana {
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: var(--font-jp);
+  color: var(--accent-cyan);
+}
+
+.vocab-hanviet {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--accent-sakura);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  margin-top: 0.25rem;
+}
+
+.vocab-meaning {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.vocab-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: #131b2e;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  max-width: 500px;
+  width: 100%;
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-card {
+  transform: scale(1);
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.form-control {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  color: #fff;
+  font-family: var(--font-main);
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: var(--accent-sakura);
+}
+
+/* Responsive Grid */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .nav-tabs {
+    justify-content: center;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .nav-btn {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.8rem;
+  }
+  .prompt-main-text {
+    font-size: 1.8rem;
+  }
+  .quiz-input {
+    font-size: 1.25rem;
+    padding: 0.8rem 1rem;
+  }
+  .card-kanji {
+    font-size: 2.5rem;
+  }
+}
+
+/* ==========================================================================
+   LARGE SCREEN OPTIMIZATIONS (Phóng to giao diện phần thẻ kiểm tra)
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .quiz-container {
+    max-width: 900px;
+  }
+  
+  .prompt-card {
+    padding: 3rem 4rem;
+  }
+  
+  .prompt-main-text {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .quiz-input {
+    font-size: 1.8rem;
+    padding: 1rem 1.5rem;
+  }
+  
+  .mc-option-btn {
+    font-size: 1.2rem;
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .mc-badge {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+  }
+  
+  .word-breakdown .kanji {
+    font-size: 2rem;
+  }
+  
+  .word-breakdown .reading {
+    font-size: 1.3rem;
+  }
+}
