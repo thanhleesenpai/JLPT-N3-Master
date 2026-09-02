@@ -26,8 +26,9 @@ export function setupAuthUI() {
 
     // Bước 2: Tạm thời ghi đè window.open để Firebase SDK dùng lại cửa sổ đã mở
     const _originalOpen = window.open.bind(window);
-    window.open = (...args) => {
+    window.open = (url, ...rest) => {
       window.open = _originalOpen; // Khôi phục ngay lập tức
+      popup.location.href = url;  // Điều hướng popup tới trang đăng nhập Google
       return popup;
     };
 
