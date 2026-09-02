@@ -1,4 +1,4 @@
-import { auth, signInWithRedirect, googleProvider, onAuthStateChanged, signOut } from './firebase-config.js';
+import { auth, signInWithRedirect, getRedirectResult, googleProvider, onAuthStateChanged, signOut } from './firebase-config.js';
 import { loadDataFromFirestore, clearLocalDataOnLogout } from './storage.js';
 
 export function setupAuthUI() {
@@ -8,6 +8,16 @@ export function setupAuthUI() {
   const authAvatar = document.getElementById('auth-avatar');
 
   if (!btnLogin || !btnLogout) return;
+
+  // Xử lý kết quả đăng nhập sau khi chuyển hướng về
+  getRedirectResult(auth).then((result) => {
+    if (result) {
+      console.log("Đăng nhập thành công qua Redirect:", result.user);
+    }
+  }).catch((error) => {
+    console.error("Lỗi getRedirectResult:", error);
+    alert("Lỗi đăng nhập: " + error.message);
+  });
 
   btnLogin.addEventListener('click', async () => {
     try {
