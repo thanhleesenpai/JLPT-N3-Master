@@ -9,5 +9,11 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/__/auth/(.*)",
+      "destination": "https://jlpt-n3-master.firebaseapp.com/__/auth/$1"
+    }
   ]
 }

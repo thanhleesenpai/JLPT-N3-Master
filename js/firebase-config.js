@@ -5,7 +5,7 @@ import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, addDoc, getD
 // Lấy biến môi trường trực tiếp từ Vite (Được nhúng tự động lúc build)
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  authDomain: window.location.hostname === 'localhost' ? import.meta.env.VITE_FIREBASE_AUTH_DOMAIN : window.location.hostname,
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
