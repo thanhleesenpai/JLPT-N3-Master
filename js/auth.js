@@ -8,11 +8,15 @@ export function setupAuthUI() {
   const authAvatar = document.getElementById('auth-avatar');
 
   // Xử lý Popup
-  btnLogin.addEventListener('click', async () => {
+  btnLogin.addEventListener('click', async (e) => {
+    e.preventDefault();
+    // GỌI NGAY LẬP TỨC để tránh bị trình duyệt tước quyền popup
+    const loginPromise = signInWithPopup(auth, googleProvider);
+    
     try {
       btnLogin.textContent = 'Đang đăng nhập...';
       btnLogin.disabled = true;
-      const result = await signInWithPopup(auth, googleProvider);
+      const result = await loginPromise;
       console.log("Đăng nhập thành công qua Popup:", result.user);
     } catch (error) {
       console.error("Lỗi đăng nhập:", error);
