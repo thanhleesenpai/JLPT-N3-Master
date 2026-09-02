@@ -1,4 +1,4 @@
-import { auth, signInWithPopup, googleProvider, onAuthStateChanged, signOut } from './firebase-config.js';
+import { auth, signInWithRedirect, googleProvider, onAuthStateChanged, signOut } from './firebase-config.js';
 import { loadDataFromFirestore, clearLocalDataOnLogout } from './storage.js';
 
 export function setupAuthUI() {
@@ -13,7 +13,7 @@ export function setupAuthUI() {
     try {
       btnLogin.textContent = 'Đang đăng nhập...';
       btnLogin.disabled = true;
-      await signInWithPopup(auth, googleProvider);
+      await signInWithRedirect(auth, googleProvider);
     } catch (error) {
       console.error("Lỗi đăng nhập:", error);
       alert("Đăng nhập thất bại: " + error.message);
