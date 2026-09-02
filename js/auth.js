@@ -1,5 +1,5 @@
 import { auth, signInWithPopup, googleProvider, onAuthStateChanged, signOut } from './firebase-config.js';
-import { loadDataFromFirestore } from './storage.js';
+import { loadDataFromFirestore, clearLocalDataOnLogout } from './storage.js';
 
 export function setupAuthUI() {
   const btnLogin = document.getElementById('btn-auth-login');
@@ -24,6 +24,7 @@ export function setupAuthUI() {
 
   btnLogout.addEventListener('click', async () => {
     try {
+      clearLocalDataOnLogout();
       await signOut(auth);
       window.location.reload();
     } catch (error) {

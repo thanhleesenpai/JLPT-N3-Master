@@ -60,6 +60,16 @@ function saveToLocal() {
   localStorage.setItem(STORAGE_KEYS.PROFICIENCY, JSON.stringify(cache.proficiency));
 }
 
+export function clearLocalDataOnLogout() {
+  localStorage.removeItem(STORAGE_KEYS.CUSTOM_WORDS);
+  localStorage.removeItem(STORAGE_KEYS.MASTERED_IDS);
+  localStorage.removeItem(STORAGE_KEYS.BOOKMARKED_IDS);
+  localStorage.removeItem(STORAGE_KEYS.USER_STATS);
+  localStorage.removeItem(STORAGE_KEYS.SETTINGS);
+  localStorage.removeItem(STORAGE_KEYS.PROFICIENCY);
+  initCacheFromLocal(); // Reset cache to empty defaults
+}
+
 function triggerSave() {
   // Luôn lưu local dự phòng
   saveToLocal();
@@ -139,8 +149,25 @@ export function deleteCustomWord(id) {
   triggerSave();
 }
 
-export function deleteCustomCategory(categoryName) {
-  cache.customWords = cache.customWords.filter(w => w.category !== categoryName);
+export function addCustomWordsBulk(wordsArray) {
+  const newWords = wordsArray.map(wordData => ({
+    id: 'user_' + Date.now() + Math.random().toString(36).substr(2, 5),
+    kanji: wordData.kanji.trim(),
+    hiragana: wordData.hiragana.trim(),
+    hanviet: wordData.hanviet.trim().toUpperCase(),
+    meaning: wordData.meaning.trim(),
+    category: wordData.category ? wordData.category.trim() : 'Từ mới thêm',
+    example_jp: wordData.example_jp ? wordData.example_jp.trim() : '',
+    example_vi: wordData.example_vi ? wordData.example_vi.trim() : ''
+  }));
+  
+  cache.customWords = [...newWords, ...cache.customWords];
+  triggerSave();
+  return newWords;
+}
+
+export function deleteCustomCategories(categoriesArray) {
+  cache.customWords = cache.customWords.filter(w => !categoriesArray.includes(w.category));
   triggerSave();
 }
 

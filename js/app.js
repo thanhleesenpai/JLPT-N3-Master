@@ -2,13 +2,14 @@
  * App Controller - Điểm khởi chạy & Gắn sự kiện cho toàn bộ ứng dụng JLPT N3
  */
 
-import { romajiToHiragana, attachRomajiInput } from './romaji.js?v=8';
-import { playCorrectSound, playIncorrectSound, playStreakSound, speakJapanese, setSoundEnabled, isSoundEnabled } from './audio.js?v=8';
-import { getSettings, saveSettings, toggleMasteredStatus, toggleBookmarkStatus, getMasteredIds, getBookmarkedIds, clearAllCustomWords, getProficiencyLevel, getProficiencyAll, deleteCustomCategory } from './storage.js?v=8';
-import { startQuiz, getCurrentQuestion, submitAnswer, nextQuestion, finishQuiz, getQuizState } from './quiz.js?v=8';
-import { initFlashcards, getCurrentCardData, flipCard, nextCard, prevCard, toggleCardMastered, toggleCardBookmark } from './flashcards.js?v=8';
-import { getCategories, getFilteredVocabulary, setDictionaryFilters, handleAddNewWord, importWordsFromJSON } from './dictionary.js?v=8';
-import { setupAuthUI } from './auth.js?v=8';
+import { romajiToHiragana, attachRomajiInput } from './romaji.js';
+import { playCorrectSound, playIncorrectSound, playStreakSound, speakJapanese, setSoundEnabled, isSoundEnabled } from './audio.js';
+import { getSettings, saveSettings, toggleMasteredStatus, toggleBookmarkStatus, getMasteredIds, getBookmarkedIds, clearAllCustomWords, getProficiencyLevel, getProficiencyAll, deleteCustomCategories, getCustomWords } from './storage.js';
+import { startQuiz, getCurrentQuestion, submitAnswer, nextQuestion, finishQuiz, getQuizState } from './quiz.js';
+import { initFlashcards, getCurrentCardData, flipCard, nextCard, prevCard, toggleCardMastered, toggleCardBookmark } from './flashcards.js';
+import { getCategories, getFilteredVocabulary, setDictionaryFilters, handleAddNewWord, importWordsFromJSON } from './dictionary.js';
+import { setupAuthUI } from './auth.js';
+import { initCommunity, openPublishModal } from './community.js';
 
 let isAnswerSubmitted = false;
 
@@ -27,6 +28,7 @@ function initApp() {
   updateAllCategoryDropdowns();
   startNewQuizSession();
   setupAuthUI();
+  initCommunity();
 
   // Lắng nghe sự kiện khi dữ liệu Firebase được tải xong để render lại UI
   window.addEventListener('jlptDataLoaded', () => {
@@ -890,26 +892,69 @@ function setupModalForms() {
     btnClearAllData.addEventListener('click', executeClear);
   }
 
-  const btnClearHeader = document.getElementById('btn-clear-header');
-  if (btnClearHeader) {
-    btnClearHeader.addEventListener('click', executeClear);
+  const btnManageData = document.getElementById('btn-manage-data');
+  const modalManageData = document.getElementById('modal-manage-data');
+  const btnCloseManage = document.getElementById('btn-close-manage');
+  const manageCategoryList = document.getElementById('manage-category-list');
+  const btnDeleteSelected = document.getElementById('btn-delete-selected');
+  const btnShareSelected = document.getElementById('btn-share-selected');
+  const btnClearAllManage = document.getElementById('btn-clear-all-data');
+
+  if (btnManageData) {
+    btnManageData.addEventListener('click', () => {
+      const customWords = getCustomWords();
+      const uniqueCategories = [...new Set(customWords.map(w => w.category))];
+      
+      if (uniqueCategories.length === 0) {
+        manageCategoryList.innerHTML = '<div style="color: var(--text-muted); text-align: center;">Bạn chưa thêm từ vựng/chương nào.</div>';
+      } else {
+        manageCategoryList.innerHTML = uniqueCategories.map(cat => `
+          <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <input type="checkbox" class="manage-cat-checkbox" value="${cat}">
+            <span>${cat}</span>
+            <span style="color: var(--text-muted); font-size: 0.8rem; margin-left: auto;">
+              (${customWords.filter(w => w.category === cat).length} từ)
+            </span>
+          </label>
+        `).join('');
+      }
+      modalManageData.classList.add('active');
+    });
   }
 
-  const btnDeleteCat = document.getElementById('btn-delete-category');
-  if (btnDeleteCat) {
-    btnDeleteCat.addEventListener('click', () => {
-      const catName = prompt('Nhập TÊN CHƯƠNG bạn muốn xóa (Lưu ý: Chỉ xóa các từ tự thêm, không xóa từ N3 gốc):');
-      if (catName !== null && catName.trim() !== '') {
-        if (confirm(`Bạn có chắc chắn muốn xóa TOÀN BỘ từ vựng thuộc chương "${catName}" không?`)) {
-          deleteCustomCategory(catName.trim());
-          alert(`Đã xóa thành công chương "${catName}"!`);
-          updateAllCategoryDropdowns();
-          renderDictionaryGrid();
-          initFlashcards('all');
-          renderFlashcard();
-          startNewQuizSession();
-        }
+  if (btnCloseManage) {
+    btnCloseManage.addEventListener('click', () => modalManageData.classList.remove('active'));
+  }
+
+  if (btnDeleteSelected) {
+    btnDeleteSelected.addEventListener('click', () => {
+      const checked = Array.from(document.querySelectorAll('.manage-cat-checkbox:checked')).map(cb => cb.value);
+      if (checked.length === 0) {
+        alert('Vui lòng chọn ít nhất 1 chương để xóa!');
+        return;
+      }
+      if (confirm(`Bạn có chắc muốn XÓA VĨNH VIỄN ${checked.length} chương đã chọn không?`)) {
+        deleteCustomCategories(checked);
+        alert('Đã xóa thành công!');
+        modalManageData.classList.remove('active');
+        updateAllCategoryDropdowns();
+        renderDictionaryGrid();
+        initFlashcards('all');
+        renderFlashcard();
+        startNewQuizSession();
       }
     });
+  }
+
+  if (btnShareSelected) {
+    btnShareSelected.addEventListener('click', () => {
+      const checked = Array.from(document.querySelectorAll('.manage-cat-checkbox:checked')).map(cb => cb.value);
+      openPublishModal(checked);
+    });
+  }
+
+  const btnClosePublish = document.getElementById('btn-close-publish');
+  if (btnClosePublish) {
+    btnClosePublish.addEventListener('click', () => document.getElementById('modal-publish').classList.remove('active'));
   }
 }
