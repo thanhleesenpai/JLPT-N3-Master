@@ -80,7 +80,7 @@ function triggerSave() {
     syncTimeout = setTimeout(async () => {
       try {
         await setDoc(doc(db, 'users', currentUserUid), cache);
-        console.log('Đã đồng bộ dữ liệu lên Firestore');
+        // Đồng bộ thành công
       } catch (err) {
         console.error('Lỗi đồng bộ Firestore:', err);
       }
@@ -105,10 +105,10 @@ export async function loadDataFromFirestore(uid) {
       
       // Đè xuống LocalStorage để đồng bộ 2 chiều
       saveToLocal();
-      console.log('Đã nạp dữ liệu từ Firestore thành công');
+      // Nạp dữ liệu thành công
     } else {
       // User mới -> Push dữ liệu Local hiện tại lên Firestore
-      console.log('Tạo dữ liệu Firestore lần đầu cho user mới');
+      // Tạo dữ liệu Firestore lần đầu cho user mới
       triggerSave();
     }
   } catch (err) {

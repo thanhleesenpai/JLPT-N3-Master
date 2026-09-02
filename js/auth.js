@@ -35,7 +35,7 @@ export function setupAuthUI() {
     // Bước 3: Gọi signInWithPopup - Firebase sẽ điều hướng cửa sổ đã mở tới trang Google
     signInWithPopup(auth, googleProvider)
       .then(result => {
-        console.log("Đăng nhập thành công:", result.user);
+        // Đăng nhập thành công - onAuthStateChanged sẽ xử lý tiếp
       })
       .catch(error => {
         console.error("Lỗi đăng nhập:", error);
