@@ -235,6 +235,7 @@ function setupQuizView() {
 
 function startNewQuizSession() {
   const modeSelect = document.getElementById('quiz-mode-select');
+  const wordCountSelect = document.getElementById('quiz-word-count');
   
   const allCb = document.getElementById('quiz-cat-all');
   const cbs = Array.from(document.querySelectorAll('.quiz-cat-cb'));
@@ -246,7 +247,10 @@ function startNewQuizSession() {
     if (categories.length === 0) categories = ['all'];
   }
 
-  startQuiz({ mode: mode, categories: categories });
+  const countValue = wordCountSelect ? wordCountSelect.value : 'all';
+  const count = countValue === 'all' ? undefined : parseInt(countValue, 10);
+
+  startQuiz({ mode: mode, categories: categories, count: count });
   isAnswerSubmitted = false;
 
   const feedbackBox = document.getElementById('quiz-feedback-box');

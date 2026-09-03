@@ -71,7 +71,8 @@ export function startQuiz(config = {}) {
     mode: mode,
     filterCategory: categories,
     startTime: Date.now(),
-    resolvedModes: []
+    resolvedModes: [],
+    profUpdatedIds: new Set() // Theo dõi từ đã cộng sao trong phiên này
   };
 
   return getCurrentQuestion();
@@ -201,7 +202,6 @@ export function submitAnswer(rawInput) {
     }
 
     // Debug log để kiểm tra khi có lỗi
-    console.log('[Quiz Debug] Input:', JSON.stringify(raw), '| Kanji:', JSON.stringify(kanjiTarget), '| Hiragana:', JSON.stringify(hiraTarget), '| Result:', isCorrect);
   }
 
   // Chế độ học cuốn chiếu: Trả lời sai bị ghim lại cuối hàng đợi
@@ -210,9 +210,10 @@ export function submitAnswer(rawInput) {
     quizState.resolvedModes.push(qData.mode);
   }
 
-  // Cập nhật độ thông thạo
-  if (word.id) {
+  // Cập nhật độ thông thạo (mỗi từ chỉ được tính 1 lần mỗi phiên)
+  if (word.id && !quizState.profUpdatedIds.has(word.id)) {
     updateProficiency(word.id, isCorrect);
+    quizState.profUpdatedIds.add(word.id);
   }
 
   if (isCorrect) {
