@@ -177,8 +177,28 @@ export function submitAnswer(rawInput) {
     isCorrect = normalizeText(raw) === normalizeText(word.meaning);
   } else {
     // Tách các đáp án có dấu ／ hoặc / thành mảng (ví dụ: 役立つ／役に立つ → ['役立つ', '役に立つ'])
-    const kanjiTargets = (word.kanji || '').split(/[／\/]/).map(s => s.trim()).filter(Boolean);
-    const hiraTargets = (word.hiragana || '').split(/[／\/]/).map(s => s.trim()).filter(Boolean);
+    let kanjiTargets = (word.kanji || '').split(/[／\/]/).map(s => s.trim()).filter(Boolean);
+    let hiraTargets = (word.hiragana || '').split(/[／\/]/).map(s => s.trim()).filter(Boolean);
+    
+    // Mở rộng đáp án với các phần trong ngoặc (ví dụ: 絶対（に） -> chấp nhận cả '絶対に' và '絶対')
+    const expandOptional = (targets) => {
+      const expanded = new Set();
+      targets.forEach(t => {
+        expanded.add(t); // Bản gốc
+        // Bỏ phần trong ngoặc tròn (cả góc tròn toàn/bán)
+        const withoutParen = t.replace(/[（\(].*?[）\)]/g, '').trim();
+        if (withoutParen && withoutParen !== t) expanded.add(withoutParen);
+        
+        // Hoặc giữ lại chữ trong ngoặc nhưng bỏ dấu ngoặc (ví dụ (に) -> に)
+        const withParenContentOnly = t.replace(/[（\(](.*?)[）\)]/g, '$1').trim();
+        if (withParenContentOnly && withParenContentOnly !== t) expanded.add(withParenContentOnly);
+      });
+      return Array.from(expanded);
+    };
+
+    kanjiTargets = expandOptional(kanjiTargets);
+    hiraTargets = expandOptional(hiraTargets);
+
     const allTargets = [...kanjiTargets, ...hiraTargets];
 
     // So sánh trực tiếp (không qua normalize) trước - quan trọng nhất cho Kanji!
