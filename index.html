@@ -178,9 +178,14 @@
           <div class="feedback-box" id="quiz-feedback-box">
             <div class="feedback-header">
               <span id="feedback-status-title">Chính Xác! 🎉</span>
-              <button class="icon-btn" id="btn-play-sound-feedback" style="width: 32px; height: 32px;" title="Nghe phát âm">
-                🔊
-              </button>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <button class="icon-btn" id="btn-edit-quiz-word" style="width: 32px; height: 32px; font-size: 0.85rem; display: none;" title="Sửa từ này">
+                  ✏️
+                </button>
+                <button class="icon-btn" id="btn-play-sound-feedback" style="width: 32px; height: 32px;" title="Nghe phát âm">
+                  🔊
+                </button>
+              </div>
             </div>
             <div class="feedback-detail" id="feedback-detail-body"></div>
             
@@ -211,7 +216,8 @@
         <!-- 3D Card -->
         <div class="flashcard-3d" id="flashcard-element">
           <!-- Front Face -->
-          <div class="card-face front">
+          <div class="card-face front" style="position: relative;">
+            <button class="icon-btn" id="btn-edit-fc-word" style="position: absolute; top: 1rem; right: 1rem; width: 32px; height: 32px; font-size: 0.85rem; display: none; z-index: 10;" title="Sửa từ này">✏️</button>
             <span class="card-hanviet-tag" id="fc-front-hanviet">HÁN VIỆT</span>
             <div class="card-kanji" id="fc-front-kanji">漢字</div>
             <div class="card-furigana" id="fc-front-hiragana">ひらがな</div>

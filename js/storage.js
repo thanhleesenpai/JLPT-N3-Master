@@ -149,6 +149,23 @@ export function deleteCustomWord(id) {
   triggerSave();
 }
 
+export function updateCustomWord(id, newData) {
+  const idx = cache.customWords.findIndex(w => w.id === id);
+  if (idx === -1) return null;
+  cache.customWords[idx] = {
+    ...cache.customWords[idx],
+    kanji: newData.kanji.trim(),
+    hiragana: newData.hiragana.trim(),
+    hanviet: newData.hanviet.trim().toUpperCase(),
+    meaning: newData.meaning.trim(),
+    category: newData.category ? newData.category.trim() : cache.customWords[idx].category,
+    example_jp: newData.example_jp ? newData.example_jp.trim() : '',
+    example_vi: newData.example_vi ? newData.example_vi.trim() : ''
+  };
+  triggerSave();
+  return cache.customWords[idx];
+}
+
 export function addCustomWordsBulk(wordsArray) {
   const newWords = wordsArray.map(wordData => ({
     id: 'user_' + Date.now() + Math.random().toString(36).substr(2, 5),
@@ -251,7 +268,14 @@ export function updateProficiency(id, isCorrect) {
     cache.proficiency[id].level = Math.min(5, cache.proficiency[id].level + 1);
   } else {
     cache.proficiency[id].wrong += 1;
-    cache.proficiency[id].level = Math.max(0, cache.proficiency[id].level - 1);
+    const currentLevel = cache.proficiency[id].level;
+    if (currentLevel >= 5) {
+      // Từ đã 5 sao mà sai → rớt về 3 sao (không an toàn)
+      cache.proficiency[id].level = 3;
+    } else {
+      // Phạt -2 sao, tối thiểu 0
+      cache.proficiency[id].level = Math.max(0, currentLevel - 2);
+    }
   }
   triggerSave();
   return cache.proficiency[id];

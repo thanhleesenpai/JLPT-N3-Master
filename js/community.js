@@ -1,5 +1,7 @@
-import { auth, db, collection, addDoc, getDocs, query, orderBy } from './firebase-config.js';
+import { auth, db, doc, collection, addDoc, getDocs, deleteDoc, query, orderBy } from './firebase-config.js';
 import { getCustomWords, addCustomWordsBulk } from './storage.js';
+
+const ADMIN_UID = import.meta.env.VITE_ADMIN_UID || '';
 
 const DOM = {
   tab: document.getElementById('pane-community'),
@@ -72,7 +74,6 @@ async function handlePublish() {
     return;
   }
 
-  // Xóa các id cũ để người tải về sẽ tạo id mới
   const cleanWords = wordsToPublish.map(w => ({
     kanji: w.kanji,
     hiragana: w.hiragana,
@@ -100,7 +101,6 @@ async function handlePublish() {
     DOM.modalPublish.classList.remove('active');
     DOM.modalManage.classList.remove('active');
     
-    // Sang tab cộng đồng xem
     document.querySelector('.nav-btn[data-tab="community"]').click();
   } catch (err) {
     console.error('Lỗi publish:', err);
@@ -126,6 +126,8 @@ async function loadPublicChapters() {
 
     let html = '';
     const docsData = [];
+    const currentUid = auth.currentUser ? auth.currentUser.uid : '';
+    const isAdmin = currentUid === ADMIN_UID;
 
     querySnapshot.forEach((docSnap) => {
       const data = docSnap.data();
@@ -133,21 +135,28 @@ async function loadPublicChapters() {
       docsData.push(data);
       
       const date = new Date(data.createdAt).toLocaleDateString('vi-VN');
+      const isOwner = data.authorId === currentUid;
+      const canDelete = isAdmin || isOwner;
       
       html += `
         <div class="vocab-card" style="display: flex; flex-direction: column; justify-content: space-between;">
           <div>
-            <div style="font-size: 0.8rem; color: var(--accent-gold); margin-bottom: 0.5rem;">Đóng góp bởi: ${data.authorName}</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <div style="font-size: 0.8rem; color: var(--accent-gold);">Đóng góp bởi: ${data.authorName}</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">📅 ${date}</div>
+            </div>
             <h3 style="color: var(--accent-cyan); margin-bottom: 0.5rem;">${data.title}</h3>
             <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.4;">${data.description || 'Không có mô tả.'}</p>
             <div style="display: inline-block; padding: 0.2rem 0.6rem; background: rgba(255,255,255,0.1); border-radius: 4px; font-size: 0.8rem; margin-bottom: 1.5rem;">
               📦 ${data.words ? data.words.length : 0} từ vựng
             </div>
           </div>
-          <button class="btn-primary btn-download-shared" data-id="${data.id}" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Tải về máy
-          </button>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn-primary btn-download-shared" data-id="${data.id}" style="flex: 1; display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
+              📥 Tải về máy
+            </button>
+            ${canDelete ? `<button class="btn-secondary btn-delete-shared" data-id="${data.id}" style="padding: 0.5rem 0.75rem; color: var(--accent-red); border-color: rgba(239,68,68,0.4);" title="${isAdmin ? 'Xóa (Admin)' : 'Xóa bài của tôi'}">🗑️</button>` : ''}
+          </div>
         </div>
       `;
     });
@@ -155,13 +164,26 @@ async function loadPublicChapters() {
     DOM.grid.innerHTML = html;
 
     // Gắn sự kiện tải về
-    const downloadBtns = DOM.grid.querySelectorAll('.btn-download-shared');
-    downloadBtns.forEach(btn => {
+    DOM.grid.querySelectorAll('.btn-download-shared').forEach(btn => {
       btn.addEventListener('click', (e) => {
+        const sharedData = docsData.find(d => d.id === e.currentTarget.dataset.id);
+        if (sharedData) handleDownloadShared(sharedData);
+      });
+    });
+
+    // Gắn sự kiện xóa
+    DOM.grid.querySelectorAll('.btn-delete-shared').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
         const id = e.currentTarget.dataset.id;
-        const sharedData = docsData.find(d => d.id === id);
-        if (sharedData) {
-          handleDownloadShared(sharedData);
+        if (confirm('Bạn có chắc chắn muốn xóa bài chia sẻ này không?')) {
+          try {
+            await deleteDoc(doc(db, "shared_chapters", id));
+            alert('Đã xóa thành công!');
+            loadPublicChapters();
+          } catch (err) {
+            console.error('Lỗi xóa:', err);
+            alert('Lỗi xóa: ' + err.message);
+          }
         }
       });
     });

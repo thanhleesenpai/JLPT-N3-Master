@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, addDoc, getDocs, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
 // Lấy biến môi trường trực tiếp từ Vite (Được nhúng tự động lúc build)
 const firebaseConfig = {
@@ -18,4 +18,4 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 
-export { auth, db, signInWithPopup, googleProvider, onAuthStateChanged, signOut, doc, setDoc, getDoc, onSnapshot, collection, addDoc, getDocs, query, orderBy };
+export { auth, db, signInWithPopup, googleProvider, onAuthStateChanged, signOut, doc, setDoc, getDoc, onSnapshot, collection, addDoc, getDocs, deleteDoc, query, orderBy };

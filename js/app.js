@@ -4,7 +4,7 @@
 
 import { romajiToHiragana, attachRomajiInput } from './romaji.js';
 import { playCorrectSound, playIncorrectSound, playStreakSound, speakJapanese, setSoundEnabled, isSoundEnabled } from './audio.js';
-import { getSettings, saveSettings, toggleMasteredStatus, toggleBookmarkStatus, getMasteredIds, getBookmarkedIds, clearAllCustomWords, getProficiencyLevel, getProficiencyAll, deleteCustomCategories, getCustomWords } from './storage.js';
+import { getSettings, saveSettings, toggleMasteredStatus, toggleBookmarkStatus, getMasteredIds, getBookmarkedIds, clearAllCustomWords, getProficiencyLevel, getProficiencyAll, deleteCustomCategories, getCustomWords, updateCustomWord, deleteCustomWord } from './storage.js';
 import { startQuiz, getCurrentQuestion, submitAnswer, nextQuestion, finishQuiz, getQuizState } from './quiz.js';
 import { initFlashcards, getCurrentCardData, flipCard, nextCard, prevCard, toggleCardMastered, toggleCardBookmark } from './flashcards.js';
 import { getCategories, getFilteredVocabulary, setDictionaryFilters, handleAddNewWord, importWordsFromJSON } from './dictionary.js';
@@ -12,6 +12,12 @@ import { setupAuthUI } from './auth.js';
 import { initCommunity, openPublishModal } from './community.js';
 
 let isAnswerSubmitted = false;
+
+function openEditWordModal(wordId) {
+  if (window._openEditWordModal) {
+    window._openEditWordModal(wordId);
+  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   initApp();
@@ -445,6 +451,19 @@ function handleQuizSubmitOrNext(choiceValue = null) {
     // Tự động đọc phát âm
     speakJapanese(res.word.kanji || res.word.hiragana);
 
+    const btnEditQuizWord = document.getElementById('btn-edit-quiz-word');
+    if (btnEditQuizWord) {
+      if (res.word.id && res.word.id.startsWith('user_')) {
+        btnEditQuizWord.style.display = 'inline-block';
+        btnEditQuizWord.onclick = () => {
+          openEditWordModal(res.word.id);
+        };
+      } else {
+        btnEditQuizWord.style.display = 'none';
+        btnEditQuizWord.onclick = null;
+      }
+    }
+
     btnSubmit.style.display = 'inline-flex';
     btnSubmit.textContent = 'Câu Tiếp Theo (Enter) ➔';
   } else {
@@ -565,6 +584,19 @@ function renderFlashcard() {
   }
 
   const w = data.word;
+  const btnEditFc = document.getElementById('btn-edit-fc-word');
+  if (btnEditFc) {
+    if (w.id && w.id.startsWith('user_')) {
+      btnEditFc.style.display = 'inline-block';
+      btnEditFc.onclick = (e) => {
+        e.stopPropagation(); // prevent card flip
+        openEditWordModal(w.id);
+      };
+    } else {
+      btnEditFc.style.display = 'none';
+      btnEditFc.onclick = null;
+    }
+  }
   document.getElementById('fc-front-kanji').textContent = w.kanji || w.hiragana;
   document.getElementById('fc-front-hiragana').textContent = w.kanji ? w.hiragana : '';
   document.getElementById('fc-front-hanviet').textContent = w.hanviet || 'N3';
@@ -676,6 +708,7 @@ function renderDictionaryGrid() {
     const isMastered = masteredIds.includes(item.id);
     const isBookmarked = bookmarkedIds.includes(item.id);
     const lvl = profs[item.id] ? profs[item.id].level : 0;
+    const isUserWord = item.id && item.id.startsWith('user_');
     
     // Render 5 stars based on lvl
     let starsHtml = '';
@@ -692,7 +725,11 @@ function renderDictionaryGrid() {
             <span class="vocab-hanviet">${item.hanviet || 'N3'}</span>
           </div>
 
-          <div style="display: flex; gap: 0.4rem;">
+          <div style="display: flex; gap: 0.4rem; align-items: center;">
+            ${isUserWord ? `
+              <button class="icon-btn btn-edit-word" data-id="${item.id}" title="Sửa từ này" style="width: 32px; height: 32px; font-size: 0.85rem;">✏️</button>
+              <button class="icon-btn btn-delete-word" data-id="${item.id}" title="Xóa từ này" style="width: 32px; height: 32px; font-size: 0.85rem; color: var(--accent-red);">🗑️</button>
+            ` : ''}
             <button class="icon-btn btn-speak-word" data-text="${item.kanji || item.hiragana}" title="Nghe đọc" style="width: 32px; height: 32px;">🔊</button>
             <button class="icon-btn btn-toggle-fav" data-id="${item.id}" title="Yêu thích" style="width: 32px; height: 32px; color: ${isBookmarked ? 'var(--accent-sakura)' : 'inherit'};">
               ${isBookmarked ? '♥' : '♡'}
@@ -744,6 +781,26 @@ function renderDictionaryGrid() {
       e.stopPropagation();
       toggleMasteredStatus(btn.dataset.id);
       renderDictionaryGrid();
+    });
+  });
+
+  // Bind Edit word
+  grid.querySelectorAll('.btn-edit-word').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openEditWordModal(btn.dataset.id);
+    });
+  });
+
+  // Bind Delete word
+  grid.querySelectorAll('.btn-delete-word').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (confirm('Bạn có chắc chắn muốn xóa từ này không?')) {
+        deleteCustomWord(btn.dataset.id);
+        renderDictionaryGrid();
+        updateAllCategoryDropdowns();
+      }
     });
   });
 }
@@ -798,14 +855,41 @@ function setupModalForms() {
   const btnOpenModal = document.getElementById('btn-add-modal');
   const btnCloseModal = document.getElementById('btn-close-modal');
   const formAddWord = document.getElementById('form-add-word');
+  const modalTitle = document.getElementById('modal-add-title');
+
+  let editingWordId = null; // null = Thêm mới, có giá trị = Đang sửa
 
   btnOpenModal.addEventListener('click', () => {
+    editingWordId = null;
+    formAddWord.reset();
+    if (modalTitle) modalTitle.textContent = '📝 Thêm Từ Vựng Mới';
     modalAdd.classList.add('active');
   });
 
   btnCloseModal.addEventListener('click', () => {
+    editingWordId = null;
     modalAdd.classList.remove('active');
   });
+
+  // Hàm mở modal ở chế độ Sửa (gọi từ bên ngoài)
+  window._openEditWordModal = function(wordId) {
+    const allWords = getCustomWords();
+    const word = allWords.find(w => w.id === wordId);
+    if (!word) return;
+
+    editingWordId = wordId;
+    if (modalTitle) modalTitle.textContent = '✏️ Sửa Từ Vựng';
+    
+    document.getElementById('add-kanji').value = word.kanji || '';
+    document.getElementById('add-hiragana').value = word.hiragana || '';
+    document.getElementById('add-hanviet').value = word.hanviet || '';
+    document.getElementById('add-meaning').value = word.meaning || '';
+    document.getElementById('add-category').value = word.category || '';
+    document.getElementById('add-example-jp').value = word.example_jp || '';
+    document.getElementById('add-example-vi').value = word.example_vi || '';
+    
+    modalAdd.classList.add('active');
+  };
 
   formAddWord.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -819,16 +903,32 @@ function setupModalForms() {
       example_vi: document.getElementById('add-example-vi').value
     };
 
-    const res = handleAddNewWord(data);
-    if (res.success) {
-      alert('🎉 Đã thêm từ vựng mới thành công!');
-      formAddWord.reset();
-      modalAdd.classList.remove('active');
-      updateAllCategoryDropdowns();
-      renderDictionaryGrid();
-      startNewQuizSession();
+    if (editingWordId) {
+      // Chế độ SỬA
+      const result = updateCustomWord(editingWordId, data);
+      if (result) {
+        alert('✅ Đã cập nhật từ vựng thành công!');
+        editingWordId = null;
+        formAddWord.reset();
+        modalAdd.classList.remove('active');
+        updateAllCategoryDropdowns();
+        renderDictionaryGrid();
+      } else {
+        alert('Không tìm thấy từ để cập nhật.');
+      }
     } else {
-      alert(res.error);
+      // Chế độ THÊM MỚI
+      const res = handleAddNewWord(data);
+      if (res.success) {
+        alert('🎉 Đã thêm từ vựng mới thành công!');
+        formAddWord.reset();
+        modalAdd.classList.remove('active');
+        updateAllCategoryDropdowns();
+        renderDictionaryGrid();
+        startNewQuizSession();
+      } else {
+        alert(res.error);
+      }
     }
   });
 

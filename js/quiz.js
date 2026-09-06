@@ -176,32 +176,29 @@ export function submitAnswer(rawInput) {
   if (qData.expectedType === 'choice') {
     isCorrect = normalizeText(raw) === normalizeText(word.meaning);
   } else {
-    // LUÔN chấp nhận cả Kanji LẪN Hiragana LẪN Romaji bất kể chế độ nào
-    const kanjiTarget = (word.kanji || '').trim();
-    const hiraTarget = (word.hiragana || '').trim();
+    // Tách các đáp án có dấu ／ hoặc / thành mảng (ví dụ: 役立つ／役に立つ → ['役立つ', '役に立つ'])
+    const kanjiTargets = (word.kanji || '').split(/[／\/]/).map(s => s.trim()).filter(Boolean);
+    const hiraTargets = (word.hiragana || '').split(/[／\/]/).map(s => s.trim()).filter(Boolean);
+    const allTargets = [...kanjiTargets, ...hiraTargets];
 
     // So sánh trực tiếp (không qua normalize) trước - quan trọng nhất cho Kanji!
-    if (kanjiTarget && raw === kanjiTarget) {
-      isCorrect = true;
-    } else if (hiraTarget && raw === hiraTarget) {
+    if (allTargets.some(t => raw === t)) {
       isCorrect = true;
     } else {
       // So sánh qua normalize
       const normRaw = normalizeText(raw);
       const normRawHira = normalizeHiragana(raw);
       const normConverted = normalizeHiragana(romajiToHiragana(raw));
-      const normKanji = normalizeText(kanjiTarget);
-      const normHira = normalizeHiragana(hiraTarget);
 
-      isCorrect = (normKanji && normRaw === normKanji) ||
-                  (normHira && normRaw === normHira) ||
-                  (normHira && normRawHira === normHira) ||
-                  (normHira && normConverted === normHira) ||
-                  (normKanji && normRawHira === normKanji) ||
-                  (normKanji && normConverted === normKanji);
+      isCorrect = allTargets.some(target => {
+        const normTarget = normalizeText(target);
+        const normTargetHira = normalizeHiragana(target);
+        return (normTarget && normRaw === normTarget) ||
+               (normTargetHira && normRaw === normTargetHira) ||
+               (normTargetHira && normRawHira === normTargetHira) ||
+               (normTargetHira && normConverted === normTargetHira);
+      });
     }
-
-    // Debug log để kiểm tra khi có lỗi
   }
 
   // Chế độ học cuốn chiếu: Trả lời sai bị ghim lại cuối hàng đợi
