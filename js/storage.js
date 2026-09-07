@@ -11,7 +11,8 @@ const STORAGE_KEYS = {
   BOOKMARKED_IDS: 'jlpt_n3_bookmarked_ids',
   USER_STATS: 'jlpt_n3_user_stats',
   SETTINGS: 'jlpt_n3_settings',
-  PROFICIENCY: 'jlpt_n3_proficiency'
+  PROFICIENCY: 'jlpt_n3_proficiency',
+  GRAMMAR_STATS: 'jlpt_n3_grammar_stats'
 };
 
 // ==========================================
@@ -25,7 +26,8 @@ let cache = {
   bookmarkedIds: [],
   userStats: { totalQuestions: 0, correctAnswers: 0, currentStreak: 0, bestStreak: 0, sessionsCompleted: 0 },
   settings: { romajiAutoConvert: false, soundEnabled: true, quizMode: 'meaning_to_japanese', quizCount: 10 },
-  proficiency: {}
+  proficiency: {},
+  grammarStats: {} // { "gr_abc123": { score: 10, mastered: false, streak: 2 } }
 };
 
 // Khởi tạo cache từ LocalStorage (Dùng khi chưa đăng nhập)
@@ -43,6 +45,7 @@ function initCacheFromLocal() {
   cache.userStats = getLocal(STORAGE_KEYS.USER_STATS, { totalQuestions: 0, correctAnswers: 0, currentStreak: 0, bestStreak: 0, sessionsCompleted: 0 });
   cache.settings = getLocal(STORAGE_KEYS.SETTINGS, { romajiAutoConvert: false, soundEnabled: true, quizMode: 'meaning_to_japanese', quizCount: 10 });
   cache.proficiency = getLocal(STORAGE_KEYS.PROFICIENCY, {});
+  cache.grammarStats = getLocal(STORAGE_KEYS.GRAMMAR_STATS, {});
 }
 initCacheFromLocal();
 
@@ -58,6 +61,7 @@ function saveToLocal() {
   localStorage.setItem(STORAGE_KEYS.USER_STATS, JSON.stringify(cache.userStats));
   localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(cache.settings));
   localStorage.setItem(STORAGE_KEYS.PROFICIENCY, JSON.stringify(cache.proficiency));
+  localStorage.setItem(STORAGE_KEYS.GRAMMAR_STATS, JSON.stringify(cache.grammarStats));
 }
 
 export function clearLocalDataOnLogout() {
@@ -67,6 +71,7 @@ export function clearLocalDataOnLogout() {
   localStorage.removeItem(STORAGE_KEYS.USER_STATS);
   localStorage.removeItem(STORAGE_KEYS.SETTINGS);
   localStorage.removeItem(STORAGE_KEYS.PROFICIENCY);
+  localStorage.removeItem(STORAGE_KEYS.GRAMMAR_STATS);
   initCacheFromLocal(); // Reset cache to empty defaults
 }
 
@@ -102,6 +107,7 @@ export async function loadDataFromFirestore(uid) {
       cache.userStats = data.userStats || cache.userStats;
       cache.settings = data.settings || cache.settings;
       cache.proficiency = data.proficiency || {};
+      cache.grammarStats = data.grammarStats || {};
       
       // Đè xuống LocalStorage để đồng bộ 2 chiều
       saveToLocal();
@@ -283,4 +289,38 @@ export function updateProficiency(id, isCorrect) {
 
 export function getProficiencyLevel(id) {
   return cache.proficiency[id] ? cache.proficiency[id].level : 0;
+}
+
+// ==========================================
+// THỐNG KÊ NGỮ PHÁP (GRAMMAR)
+// ==========================================
+export function getGrammarStats() {
+  return cache.grammarStats;
+}
+
+export function updateGrammarScore(grammarId, isCorrect, mode) {
+  if (!cache.grammarStats[grammarId]) {
+    cache.grammarStats[grammarId] = {
+      cloze: { attempts: 0, correct: 0 },
+      shadow: { attempts: 0, correct: 0 },
+      scramble: { attempts: 0, correct: 0 },
+      mastered: false
+    };
+  }
+
+  const stats = cache.grammarStats[grammarId];
+  if (stats[mode]) {
+    stats[mode].attempts += 1;
+    if (isCorrect) {
+      stats[mode].correct += 1;
+    }
+  }
+
+  // Tiêu chí Mastering: làm đúng 3 lần ở bất kỳ mode nào
+  if (stats.cloze.correct >= 3 || stats.shadow.correct >= 3 || stats.scramble.correct >= 3) {
+    stats.mastered = true;
+  }
+
+  triggerSave();
+  return stats;
 }

@@ -30,6 +30,10 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Từ Điển N3
         </button>
+        <button class="nav-btn" data-tab="grammar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Ngữ Pháp N3
+        </button>
         <button class="nav-btn" data-tab="community">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
           🌐 Cộng Đồng
@@ -322,6 +326,94 @@
 
       <div class="vocab-grid" id="community-grid">
         <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- ================= TAB: NGỮ PHÁP ================= -->
+    <section id="pane-grammar" class="tab-pane">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h2 style="font-size: 1.8rem; color: var(--accent-cyan); margin-bottom: 0.5rem;">Grammar Dojo 🥋</h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Học và luyện tập 101 cấu trúc ngữ pháp JLPT N3</p>
+        </div>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <div class="search-input-group" style="width: 250px;">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="grammar-search-input" class="search-input" placeholder="Tìm kiếm ngữ pháp...">
+          </div>
+          <button class="btn-primary" id="btn-grammar-practice" style="display: flex; align-items: center; gap: 0.5rem;">
+            ⚔️ Vào Dojo Luyện Tập
+          </button>
+        </div>
+      </div>
+
+      <!-- Grammar List View -->
+      <div class="vocab-grid" id="grammar-list-grid">
+        <!-- Rendered via JS -->
+      </div>
+
+      <!-- Grammar Practice View (Hidden by default) -->
+      <div id="grammar-practice-view" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <button class="btn-secondary" id="btn-grammar-back-list" style="padding: 0.4rem 0.8rem;">
+            ⬅️ Trở về danh sách
+          </button>
+          <div class="quiz-progress-wrapper" style="width: 50%; max-width: 400px; margin: 0;">
+            <div class="progress-text">
+              <span id="grammar-quiz-progress-label">Câu 1 / 10</span>
+              <span id="grammar-quiz-mode-label">Chế độ: Shadow Typing</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-bar" id="grammar-quiz-progress-bar"></div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <select id="grammar-practice-mode" class="filter-select">
+              <option value="shadow">⌨️ Shadow Typing (Gõ cả câu)</option>
+              <option value="cloze">💡 Điền khuyết (Cloze)</option>
+              <option value="scramble">🧩 Sắp xếp (Scramble)</option>
+            </select>
+            <button class="btn-primary" id="btn-start-grammar-quiz">Bắt Đầu</button>
+          </div>
+        </div>
+
+        <!-- Practice Card -->
+        <div class="prompt-card" id="grammar-quiz-card" style="display: none; min-height: 350px;">
+          <span class="question-tag" id="grammar-question-tag">JLPT N3 • NGỮ PHÁP</span>
+          
+          <div id="grammar-prompt-meaning" style="font-size: 1.1rem; color: var(--accent-gold); margin-bottom: 1rem; text-align: center; font-weight: 600;">
+            Ý nghĩa tiếng Việt...
+          </div>
+          
+          <!-- Dành cho Cloze & Shadow -->
+          <div id="grammar-prompt-jp" style="font-size: 1.6rem; font-weight: 700; color: #fff; text-align: center; margin-bottom: 2rem; line-height: 1.5; letter-spacing: 1px;">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Dành cho Scramble -->
+          <div id="grammar-scramble-container" style="display: none; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; min-height: 60px;">
+            <!-- Mảnh ghép render tại đây -->
+          </div>
+          <div id="grammar-scramble-slots" style="display: none; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1rem; min-height: 60px; padding: 1rem; background: var(--bg-input); border-radius: var(--radius-md); border: 2px dashed var(--border-color);">
+            <!-- Ô chứa mảnh ghép đã xếp -->
+          </div>
+
+          <div class="typing-box" id="grammar-typing-section">
+            <div class="typing-input-wrapper">
+              <input type="text" id="grammar-quiz-input" class="quiz-input" placeholder="Gõ câu trả lời..." autocomplete="off" spellcheck="false">
+            </div>
+          </div>
+
+          <!-- Feedback Box -->
+          <div class="feedback-box" id="grammar-feedback-box">
+            <div class="feedback-header">
+              <span id="grammar-feedback-title">Chính Xác! 🎉</span>
+            </div>
+            <div class="feedback-detail" id="grammar-feedback-detail">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 

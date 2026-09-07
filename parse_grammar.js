@@ -1,0 +1,750 @@
+const fs = require('fs');
+const path = require('path');
+
+const rawData = `ことにしている
+Ý nghĩa: THÓI QUEN DO TỰ MÌNH QĐỊNH
+(Vru, Vnai) + ことにしている
+
+健康のため、毎朝牛乳を飲むことにしている。
+
+
+ことになっている
+Ý nghĩa: TẬP QUÁN, QUY TẮC, DỰ ĐỊNH (xảy ra không lquan đến mđích của ng.nói)
+(Vru, Vnai) + ことになっている
+
+私のうちでは、１月２日に親せきが皆、集まることになっている。
+
+
+ようになる
+THÀNH THẠO LÀM VIỆC GÌ ĐÓ
+
+初めてスキーに行った。２時間ほどで滑れるようになった。
+
+
+ようにしている
+CỐ GẮNG ~ (tạo thói quen)
+
+わからない言葉はすぐに辞書で調べるようにしている。
+
+
+ようだ
+CÓ VẺ NHƯ ~,"DƯỜNG NHƯ"; "HÌNH NHƯ" -> Suy đoán không chắc chắn | Cách Dùng : 普通形 (Aナ→な・N→の）
+
+彼女は本当に何も知らないようだった。
+
+
+まるで Nの ようだ
+GIỐNG HỆT N
+山の上から見た景色、まるで絵のようだった
+
+
+ように
+＝ と
+
+XIN VUI LÒNG (please) = 下さい
+先生は学生にもっとよく勉強するように言った。
+
+MONG ƯỚC, HY VỌNG
+今年が良い年になりますように
+
+
+ようになっている
+Ý nghĩa: MÁY MÓC HOẠT ĐỘNG
+Liên kết: Vru; Vnai
+
+この自動販売機はレバーを押さないと、おつりが出ないようになっている。
+
+
+ような／ように
+Ý nghĩa: CHỈ RA VÍ DỤ
+Liên kết: [N, V shuushokukei
+
+私も早くリンさんのように、上手に日本語が話せるようになりたい。
+
+NHƯ LÀ
+この川の水は氷のように冷たい。
+
+
+みたいだ
+a. Ý nghĩa: PHỎNG ĐOÁN (mơ hồ) = ようだ
+Liên kết: 普通形. Adj na bỏ だ
+「星がたくさん出ている。あしたも晴れみたい」
+
+b. Ý nghĩa: SỰ SO SÁNH. Sự thực không phải thế nhưng có thể thấy/nghĩ rằng như thế = ようだ -> N4
+宝くじで１０００万円当たった。夢（を見ている）みたいだ。
+
+c. VÍ DỤ (=よう「な・に」)
+
+Chú ý:
+みたいだ giống với ようだ nhưng mang nghĩa không thân mật bằng.
+みたい dùng như tính từ đuôi na
+
+
+らしい
+DỰ ĐOÁN ＝よう＝みたい
+
+朝起きて見ると、道がぬれていた。夜の間に雨が降ったらしい。
+
+NGHE NÓI
+
+
+らしい
+CÓ VẺ NHƯ~, CHẮC LÀ~
+Ý nghĩa: đưa ra cảm NHẤN MẠNH về điều ~ , = にふさわしい
+Liên kết: N
+
+そのセーターの色、春らしくてすてきね
+
+
+つもり
+ĐỊNH... (lập kế hoạch)
+Liên kết: N の/Vta; Vru / Ai; Ana shuushokukei
+
+大学を卒業したら就職するつもりだ。進学するつもりはない。
+
+ĐÃ NGHĨ RẰNG ~ NHƯNG THỰC TẾ LÀ KHÔNG PHẢI VẬY.
+メールを送ったつもりだったが、届いていなかった。
+
+
+てくろ
+ĐI RA TỪ BÊN TRONG BẢN THÂN
+Vte
+
+悲しくて、涙が出てきた。
+怒りがわいてきた。
+いかり
+
+
+てほしい／もらいたい
+Ý nghĩa: CHỈ HY VỌNG, YÊU CẦU CỦA MÌNH ĐỐI VỚI NGƯỜI KHÁC
+Liên kết: V [te ・nai de]
+
+子どもには、皆に愛される人間になってほしいと思う。
+
+
+ば／たら／と。。。たい／
+のに／よかった など
+a. Ý nghĩa: hy vọng vào điều không thực tế/cảm thấy đáng tiếc
+もし生まれ変わることができるのなら、次は男（／女）に生まれたい。
+
+b. Ý nghĩa: đáng tiếc là không thể làm khác với hiện thực.
+もう少し時間があれば、全部できたのに。
+
+
+使役形を使った表現
+a. Ý nghĩa: sự cho phép, sự chấp thuận, sự khoan dung
+子どものころ、親にマンガを読ませてもらえなかった。
+
+b. Ý nghĩa: không định làm thế nhưng, tạo ra hậu quả xấu
+冷蔵庫に肉があるのを忘れていて、腐らせてしまった。
+
+
+使役形＋てもらう など
+c. Ý nghĩa: CHO PHÉP TÔI...
+「すみません、体調が悪いので、早く帰らせてください」
+
+d. Ý nghĩa: được làm giúp => cảm ơn
+「きょうはすばらしいお話を聞かせていただき、本当にありがとうございます」
+
+
+自動詞を使った表現
+このマンガはよく売れている。人気があるのだろう。
+
+
+のでは[ないだろうか／ないかと思う]
+Ý nghĩa: ý kiến, chủ trương
+Liên kết: N な/[V・Adj] thể shuushokukei
+
+彼は犯人ではないのではないかと思う。
+
+
+てはー〉ちゃ
+ではー〉じゃ
+「そんなにお酒を飲んじゃだめだよ」
+
+
+～んじゃない？／んじゃないかと思う
+Ý nghĩa: biểu hiện mang tính hội thoại của [～のではないだろうか]
+
+「山田さんへのプレゼント、何がいいと思う？」
+「山田さんは甘いものが好きだから、おいしいお菓子がいいんじゃない？」
+
+
+てしまうー〉ちゃう
+でしまうー〉じゃう
+「宿題、まだでしょ。早くやっちゃいなさい」
+
+
+ているー〉てる
+でいるー〉でる
+「あそこに座ってる人、だれ？」
+
+
+ておくー〉とく
+でおくー〉どく
+Hãy
+「来週までにこの本、読んどいてください」
+
+
+なければー〉なきゃ
+「もっと勉強しなきゃ、合格できないだろうな。」
+
+
+なくては（いけない）ー〉なくちゃ（いけない）
+なければ（ならない）ー〉なきゃ（ならない）
+「そろそろ帰らなくちゃ。遅くなると母が心配するから」
+
+
+から～ にかけて
+Ý nghĩa: GIỚI HẠN PHẠM VI (ko gian và thgian)
+から〜まで: thường về thgian
+N (から) N ( にかけて)
+
+このあたりでは、４月から５月にかけていろいろな花が咲く
+
+
+だらけ
+Ý nghĩa: toàn ~ (nghĩa TIÊU CỰC)
+Kết hợp: N
+
+ほこりだらけの部屋／泥だらけのくつ
+
+
+せいか
+Ý nghĩa: không thể chắc chắn nhưng, rất có thể nguyên nhân là ~
+気のせいか、最近父は元気がないようだ。
+
+
+おかげ
+Ý nghĩa: Do ~ -> kết quả TÍCH CỰC (thỉnh thoảng là tiêu cực)
+N, A, V / N shuushokukei～おかげ
+
+仕事が早く済んだのは、友だちが手伝ってくれたおかげだ。
+
+彼の言うことを信じたおかげでひどい日にあった。
+
+
+せい
+Ý nghĩa: do ~, kết quả TIÊU CỰC, khiển trách
+Liên kết: [N, V, A] danh từ thể shuushokukei～せい
+あの人のせいでみんなが迷惑している。
+
+
+について／つき
+Ý nghĩa: nói/viết/kiểm tra vv... về ~
+Liên kết: N について／つき
+両親と卒業後の進路について話し合った。
+
+
+とおり（に）／どおり（に）
+Ý nghĩa: trở nên đồng dạng với cái đó, giống với～
+Vru/Vta + (とおり)
+N + (どおり/のとおり)
+
+外国語だと、なかなか思ったとおりに話すことができない。
+例のとおりに書きなさい。
+
+
+に関し（て）
+Ý nghĩa: có quan hệ với ~
+N + に関し（て）
+議長は時間に関して厳しいので、絶対遅刻はできない。
+
+
+に比べ（て）
+Ý nghĩa: so sánh
+N + に比べ（て）
+「私は話すのに比べて書く力が弱いんです」
+
+
+に加え（て）
+Ý nghĩa: liên hệ, thêm vào
+N + に加え（て）
+今週はいつものテストに加えてレポート提出もあり、とても忙しい。
+
+
+たびに
+Ý nghĩa: cứ đến lúc đó ~
+Sử dụng mẫu này khi muốn diễn đạt ý : "mỗi lần làm gì đó thì lúc nào cũng / mỗi lần làm gì đó thì đều làm cùng 1 việc ...".
+N の/Vru + たびに
+辞書を引くたびに新しい発見がある。
+
+
+たとえ～ても
+Ý nghĩa: trường hợp ~ tạm thời nhưng ~Sử dụng mẫu này khi muốn diễn đạt ý : "Giả sử ... thì cũng". Dùng để đưa ra 1 ví dụ , 1 sự việc có thể có hoặc có thể xảy ra.
+Liên kết: （たとえ＋動詞・い形テ形＋も/な形・名詞＋でも）
+たとえ両親に反対されても、家を出て一人暮らしがしたい。
+
+1. たとえ大学に合格しても、都会で一人暮らしができるかなあ。ちょっと不安だ
+2. たとえ店員が「よくお似合いです」と言っても、私は気に入らないものは買わない
+
+
+って
+Ý nghĩa: từ dùng trong hội thoại Liên kết: 普通形
+「お母さん、お父さん、きょうは遅くなるって」
+
+
+くらい／ぐらい
+a/ Ý nghĩa: đại khái, ước lược
+Liên kết: A, V, N / N shuushokukei
+ここから駅まで１０分ぐらいだ。Koko kara eki made 10 fun gurai da.
+Từ đây đến nhà ga mất khoảng 10 phút.
+b/ Ý nghĩa: giải thích về mức độ
+もう動けないくらい疲れた。
+c/ Ý nghĩa: thể hiện mức độ thấp (dù)
+かぜくらいで仕事を休めない。
+
+
+...「くらいなら／ぐらいなら」～
+Ý nghĩa: thà ~ tốt hơn là ...
+Vru + くらいなら／ぐらいなら
+途中でやめるくらいなら、初めからやらないほうがいい。
+
+
+うちに
+Ý nghĩa: trong khi~（làm gì đó trước khi có sự thay đổi xảy ra） Dùng mẫu câu này khi muốn diễn đạt ý : " trong khi ... thì ". Thường được sử dụng khi muốn biểu hiện ý "Trong khi ... trở nên..." hoặc "Trước khi ... biến đổi thì làm ..." .,
+Liên kết: danh từ mệnh đề hóa / [Vnai; Vte.iru]～うちに
+あしたは母の日だ。母が寝ているうちに朝ごはんを作って驚かせよう。
+
+
+を中心に／として／にして
+Liên kết: danh từ
+今度の日本代表チームは主将の中村選手を中心によくまとまっている。
+
+
+をはじめ
+Ý nghĩa: chẳng hạn như là~(mang tính đại diện)
+N + をはじめ
+校長先生をはじめ、先生方には大変お世話になりました。
+
+
+に対し（て）
+Ý nghĩa: đối với ~; trước~
+Liên kết: N + に対し（て）
+先生は学生のどんな質問に対しても、ていねいに答えてくれる。
+
+
+において
+N＋において）
+Mẫu câu này có nghĩa là "tại..." ( ～で ). Diễn tả ý nghĩa nơi chốn, hiện trường , bối cảnh tiến hành việc gì đó. Mẫu câu này phát xuất từ động từ「於く」.
+災害時においては、冷静になることが何よりも大切だ。
+
+
+にわたって／わたり
+Ý nghĩa: biểu thị sự trải rộng trong phạm vi toàn thể mang tính thời gian, địa điểm, khoảng cách
+N+にわたって／わたり
+病院で食生活全般にわたる指導を受けた。
+
+
+にとって
+N +にとって
+Ý nghĩa của mẫu câu này là : "nhìn từ lập trường ai đó", "từ vị trí nào đó". Vế sau thường là đánh giá, nhận định.
+私にとって日本は、自分の夢を実現するための国だ。
+
+
+による/よって
+N によって
+"Vì..." , " do nguyên nhân...".Bởi ~
+あの空港はイタリア人によって設計された。
+
+
+によると
+Theo ~
+父の話によると、会社の経営状態が悪いらしい。
+
+
+に違いない
+にちがいない dùng trong câu khẳng định: đúng là, chắc chắn là, dùng để khẳng định một sự thật
+Liên kết: 普通形 + に違いない. Tuy nhiên, không được dùng だ khi chia A na về thể hiện tại
+夜になっても電気がつかない。きっと出かけているに違いない。
+
+
+とは／というのは
+Ý nghĩa: định nghĩa, thuyết minh
+Liên kết: N～とは／というのは
+あなたにとって仕事とは何でしょうか。
+
+
+(Vた)とたん（に）
+Ý nghĩa: Ngay sau ~
+* Cách dùng: V-た＋とたん
+疲れていたので、ベッドに入ったとたんに、眠ってしまった。
+
+
+につれ（て）
+Ý nghĩa: A thay đổi thì B cũng thay đổi - Cùng với việc...
+N; Vru + につれ（て）
+試験が近づくにつれて、だんだん心配になってきた。
+日本での生活が長くなるにつれ、友だちもできて楽しくなった。
+
+
+にしたがって／したがい
+diễn tả sự thay đổi dần dần, song hành của 2 sự việc
+(giống につれて ) - Cùng với việc
+N /Vru + にしたがって／したがい
+台風が近づくにしたがい、風雨はますます強まるでしょう。
+
+
+従う
+したがう - chiểu theo; căn cứ vào/men theo; dọc theo; theo/theo; vâng lời; phục tùng
+デパートが火事になったが、客は店員の指示に従って避難し、全員無事だった。
+
+
+最中
+さいちゅう - giữa; trong khi; đang (Ngay trong lúc đang làm việc gì đó)
+* Cách dùng: V-ている/ N-の]＋最中に
+考えている最中に、話しかけられて困った。
+
+試合の最中に、雨が降ってきた。
+
+
+(Vて)からでないと/ なければ。。。ない
+không phải là sau khi xxx thì không thể
+Liên kết: V て + からでないと/ なければ。。。ない
+実物を見てからでないと買うかどうかは決められない。
+
+
+(Vて)以来
+nghĩa là "kể từ khi... thì...". Diễn đạt ý sau khi ... thì có một trạng thái nào đó kéo dài suốt cho đến nay.
+Liên kết: Vて + 以来(irai)
+日本へ来て以来、忙しくてまだ一度も帰国していない。
+
+
+～一方だ
+（動詞辞書形＋一方だ）
+Dùng mẫu câu này khi muốn diễn đạt ý : "càng ngày càng trở nên...". Thường được sử dụng khi muốn thể hiện sự thay đổi liên tục không ngừng
+不況のせいで収入が減った。貯金も減る一方だ。
+
+
+しかない／ほかない／よりない
+／よりほかない／ほかしかたがない
+（動詞辞書形・する名詞＋しかない）
+"chỉ có...". Thể hiện ý chê ít ( như ở mẫu ví dụ 1), và ý "vì không có phương pháp nào khác, nên đành phải..." ( như ở mẫu ví dụ 2)
+①＊この仕事ができるのはAさんしかないと思う。
+
+2.この苦しさから逃れるには、ただ時が過ぎるのを待つよりないだろう。
+
+
+(は)もちろん/ もとより
+名詞＋はもちろん
+Mẫu câu 「AはもちろんB,C」có ý nghĩa là "A là đương nhiên rồi, không những vậy mà B, C cũng...".
+会社の経済が悪化して、ボーナスはもちろん給料も出ない状態だ。
+Kaisha no keizai ga akkashite, boonasu ha mochiron kyuuryou mo denai juutai da.Do tình hình kinh doanh của công ty xấu đi, đừng nói tới bonus mà ngay cả lương hàng tháng cũng không được cung cấp。
+* Chú ý: So với ［～はもちろん］thì ［～はもとより］là cách nói trang trọng hơn.
+
+
+ついでに
+Ý nghĩa: Nhân tiện; tiện thể (Lúc làm việc gì đó, lợi dụng cơ hội đó làm một việc khác)
+V-る/V-た /N-の ＋ついでに
+買い物のついでに本屋に寄った。
+
+
+ということだ
+[動・い形・な形・名]＋ということだ
+truyền đạt đến người nghe những điều mình đã nghe được,đọc được. Mẫu này có ý nghĩa gần giống 「～そうだ」( nghe nói ) ( mẫu 1), tuy nhiên, cũng có nghĩa là " chẳng phải ... sao ?", " chắc là...", " hãy...". Ngoài ra, ở ví dụ 2 mẫu câu nay có ý nghĩa là: " có nghĩa là như thế".
+事故の原因はまだわからないということです。
+
+天気予報によると今年は雨が多いだろうということです。
+
+2. ご意見がないということは賛成ということですね。
+
+
+ことはない
+* Ý nghĩa: Không cần phải làm ~. Mẫu này giống như mình đã học là ~なくてもいい đó.
+Ｖる＋ことはない
+1. 時間は十分あるから、急ぐことはない。
+
+
+こと
+（動詞辞書形＋こと／動詞ナイ形＋ないこと）(こと ở cuối câu)
+"Hãy...", được sử dụng khi muốn truyền đạt quy định, luật lệ. Mẫu câu「～ないこと」 có nghĩa là "không được làm...".
+あしたは８時までに来ること。時間に遅れないこと。
+
+レポートは今週中に提出のこと。
+
+
+ないことはない / もない
+không phải là không
+Liên kết: [A, V] thể ない (ことはない／もない
+なっとうは、食べないことはないが、あまり好きではない。
+
+
+～もの（もん）
+（普通形＋もの）
+"Vì ... ". Mẫu này được sử dụng ở cuối câu để diễn đạt những lý do cá nhân và được sử dụng trong những cuộc hội thoại với những người thân quen. Đây là cách nói mà phụ nữ và trẻ em thường dùng.
+「まだ子どもだもの、少しぐらいの失敗は大目に見てやらなくちゃ」
+
+
+ものだから/もので
+（名詞修飾型＋ものだから）＊名詞は「＋なものだから」になる
+Thực sự là vì...". Mẫu này thường được sử dụng khi người nói muốn trình bày nội dung mà mình cho là đặc biệt, là khác thường. Mẫu câu này thường được sử dụng nhiều để biện hộ cho bản thân
+「父が病気なものですから、いろいろとお金が必要なんです」
+
+
+ものか
+Ý nghĩa: nhất định không làm thế (cảm giác phủ định mạnh) (dùng trong văn nói). Liên kết: N な , V, A / N shuushokukei
+あんなまずい店、二度と行くものか。
+
+
+(Vた)ところ
+Sử dụng mẫu này khi muốn diễn đạt ý : "sau khi làm...thì...". Cảm giác như biết, học được , nhận thức được điều gì đó mới.
+調べてみたところ、意外な事実がわかった。
+
+
+～ところに/／へ／を／で
+Ý nghĩa: giai đoạn của [hoàn cảnh, thời điểm, hành vi]
+Liên kết: A, V, N/ N shuushokukei)
+家を出ようとしたところに電話がかかってきた。
+
+
+ところだった
+....suýt chút nữa thì....(Ý nghĩa: chỉ chút nữa thôi là được nhưng đáng tiếc là không thể được _tốt hoặc xấu_)
+出かけるとき急いでいたので、もう少しでさいふを忘れるところだった。
+
+
+ほど
+Liên kết: [N / V ] N shuushokukei)
+1. Ý nghĩa: đại khái, ước lược = くらい
+うちから学校まで３０分ほどで行ける。
+2. Ý nghĩa: giải thích mức độ = くらい
+夜も眠れないほど悩んだ。
+3. Ý nghĩa: <～ほど。。。はない> là ~ nhất
+彼女ほど優しい人はいない。
+
+
+ば。。ほど
+（動詞・い形容詞バ形＋ば＋辞書形＋ほど／な形容詞＋なら（ば）＋な形＋なほど／名詞＋であれば＋名詞＋であるほど）
+Ở dạng "AばAほどB" thì mẫu này diễn tả việc "nếu lặp đi lặp lại A nhiều lần thì dần dần sẽ trở nên B". Ngoài ra, trong trường hợp A là tính từ thì mẫu này thể hiện ý : "mức độ A càng cao thì mức độ B cũng càng cao".
+外国語はだれでも、練習すればするほど上手になる。
+
+将来のことを考えれば考えるほど不安になる。
+
+
+～など／なんか／なんて ([なんか] [なんて] chỉ dùng trong văn nói)
+1. Ý nghĩa: ví dụ (giải thích)
+Liên kết: N / Vru. Tuy nhiên, なんか chỉ đứng sau danh từ.
+2. Ý nghĩa: xem nhẹ, khinh miệt (khiêm nhường khi sử dụng với bản thân)
+Liên kết: N / Vru / V て
+「スケートなんて簡単だよ。ぼくなんか、３０分ぐらいで滑れるようになったよ」
+
+
+などと（なんて）言う／思う など
+彼が犯人だなんて信じられない。
+Tôi không thể tin được rằng anh ấy lại là thủ phạm.
+子どもが親に暴力をふるうなど、昔は考えられなかった。
+
+
+からには
+Ý nghĩa: vì .......(đương nhiên -> nghĩa vụ, ý chí, hy vọng, yêu cầu, mệnh lệnh, quyết định, dự đoán)
+Liên kết: thể thường
+「やると決めたからには最後までがんばるつもりです」
+
+
+きる
+V + きる
+làm hết、làm đến cùng
+読みきる本、飲みきるお茶
+全員力を出し切って戦ったが、試合には負けてしまった。
+
+2. Ý nghĩa: làm ~ với sự tự tin mạnh
+「あなたならできる」と母は言い切った。
+
+
+思い切る(từ bỏ, bỏ cuộc, quyết định ~)
+別れた恋人のことが思い切れない。（あきらめられない）
+
+
+ぎみ
+Ý nghĩa: hơi....(có khuynh hướng hơi tiêu cực)
+Liên kết: N / V masu (stem)
+このところ忙しくて寝不足ぎみだ。
+
+
+がち
+（動詞マス形・名詞＋がち）
+Ý nghĩa của mẫu câu này là " thường / nhiều ~ ). Thường sử dụng cho các việc xấu , không tốt.
+年のせいか、母は最近病気がちだ。
+
+朝７時台、８時台の電車は遅れがちだ。
+
+曇りがち ( mây hoài); 留守がち ( vắng hoài); 休みがち (Nghỉ hoài); ありがち (Gặp hoài); おこりがち (Nóng nảy hoài); 遅れがち (Trễ hoài); ～しがち (Làm hoài).
+
+
+向き/ に適している (Ni tekishite iru)
+～むき - dành cho～; thích hợp với～
+このあたりは雨が少ないので、米作りには不向きだ。
+
+
+向く
+彼女は子ども好きだから、保育士に向いていると思う。
+
+
+向け
+(N＋向)
+ý nghĩa "dành cho đối tượng ~", "chế tạo đặc biệt để ~".
+①日曜日の朝は、子供向けの番組が多い
+Ý nghĩa: <~に向けて> hướng tới mục tiêu ~
+来週のスピーチコンテストに向けて、毎日１時間以上練習している。
+
+
+を通じ（て）／通し（て）
+Liên kết: danh từ
+1. Ý nghĩa: là trung gian, là cách thức, bằng cách ~
+子どもは学校の勉強だけではなく、いろいろな経験を通して成長していく。
+
+
+っぱい
+Ý nghĩa: có cảm giác của ~, rất ~
+Liên kết: N / V masu (stem) / A イ
+ほこりっぽい部屋
+
+
+とともに
+〔V, ・Ai , N＋とともに／な形・名詞＋であるとともに〕
+Mẫu câu này có nghĩa là "cùng với ~" (mẫu 1). Hơn nữa, ở hình thức「AとともにB」, mẫu câu này có nghĩa là "đồng thời với A, B cũng" ( mẫu 2, 3), hoặc "A thay đổi, thì B cũng thay đổi theo" (4).
+①子供のころ、夏はいつも家族とともに、山や海を旅行したものだ。
+③ずっとなりたかった教師になれて、うれしいとともに、うまくできるか不安も感じる。
+④車の台数が増加するとともに、大気汚染もひどくなった。
+
+
+にともなって／ともない
+Ý nghĩa: B cũng xảy ra cùng lúc với A
+Liên kết: N / Vru
+会社の倒産にともなって、多くの社員が失業した。
+
+
+に決まっている
+普通形 ＋にきまっているTuy nhiên, không được dùng だ khi chia tính từ đuôi na về thể hiện tại.
+Mẫu câu này biểu hiện tâm trạng của người nói : tuyệt đối là~ ,không có khả năng nào khác~ Rất thường được sử dụng trong đàm thoại.
+そんなのうそに決まっている。信じられない」
+
+
+～っけ
+"Đã làm chưa nhỉ ...?".
+Ý nghĩa: sử dụng trong văn nói. Diễn tải đang nhớ ra, nhớ lại và muốn xác nhận lại một việc gì đó
+* Cách dùng: 普通形 + っけ. Tuy nhiên dạng ~でしたっけ hoặc ~ましたっけ cũng được sử dụng.
+そうだ。今日はお母さんの誕生日だっけ。
+
+Ý nghĩa: hồi tưởng về quá khứ (độc thoại)
+こどものころ、よくこの公園で遊んだっけ。
+
+
+ようがない
+No way to...（Vます）Liên kêt: V masu (stem)
+とても悲しそうだったので、慰めようがなかった。
+
+
+はず
+はず - Chắc chắn , nên như thế
+「何度も説明したのだから、皆さんもうできるはずですよ」
+
+
+はずがない (đương nhiên không ~ (phủ định mạnh)
+＝わけがない
+まじめなチャンさんがカンニングなんかするはずがない。
+
+
+はずだ
+1. Liên kết:N / danh từ mệnh đề hóa
+a. Ý nghĩa: hiểu lí do và tán thành = わけだ
+ドアが開かないはずだ。かぎが違っていた。
+
+b. Ý nghĩa: khẳng định, dự định trở nên khác với kết quả.
+日本へ来れば日本語なんかすぐに話せるようになると思っていた。こんなはずではなかった。
+
+2. Liên kết: V た
+Ý nghĩa: kí ức là ~ nhưng hiện thực không phải như thế
+自転車をとられた。かぎはかけておいたはずなのだが。
+
+
+わけ (訳）
+1. Ý nghĩa: lí do, sự tình
+「遅れてすみません。でも、これにはわけがあるんです」
+
+2. Ý nghĩa: dấu hiệu
+子どもを殺した犯人はわけのわからないことを叫んでいた。
+
+3. Ý nghĩa: <わけはない> không có gì rắc rối, đơn giản
+易しい問題だったので、わけなくできた。
+
+
+わけだ
+Ý nghĩa: Vì có lý do ~ nên muốn nói~ như thế là đương nhiên.
+* Cấu trúc: 普通形+ わけだ. Tuy nhiên A"na" thì không chuyển thành "da" mà giữ nguyên "na".
+ジョンさんは、お母さんが日本人で す から、日本語が上手なわけです。
+
+* 1.2. Ý nghĩa: Do quá trình, nên muốn nói sự việc trở nên thế. Tức là ~, là thế
+パーセントの値引きというと、１ 万 円の物は 9500円になるわけですね。
+
+
+わけがない
+Ý nghĩa: đương nhiên không ~ (phủ định mạnh) = はずがない
+普通形 + わけがない. Tuy nhiên A "na" thì không chuyển thành "da" mà giữ nguyên "na". N không gắn "da" mà thêm の
+この問題はまだ習っていないのだから、できるわけがない。
+
+
+わけではない
+Ý nghĩa: không phải luôn luôn; Không nhất thiết là ~, không phải là ~普通形+ わけではない. Tuy nhiên A "na" thì không chuyển thành "da" mà giữ nguyên "na"
+生活に困っているわけではないが、貯金する余裕はない。
+
+お金がたくさんあれば幸せというわけではないだろう。
+
+
+わけにはいかない
+Ý nghĩa: Có lý do nên ~ không làm được
+* Cấu trúc: Vる＋わけにはいかない
+1.絶対にほかの人に言わないと約束し たので、話すわけにはいかない
+
+Ý nghĩa: Phải làm ~
+* Cấu trúc: Vない＋わけにはいかない
+あした試験があるので、勉強しないわけにはいきません。`;
+
+const outputPath = path.join(__dirname, 'js', 'grammar_data.js');
+
+const blocks = rawData.split(/\n{3,}/);
+
+const isExample = (line) => {
+  if (line.includes('。') || line.includes('「')) return true;
+  if (/^[A-Za-z0-9]/.test(line)) return false;
+  if (line.startsWith('Ý nghĩa') || line.startsWith('Liên kết') || line.startsWith('Cách dùng') || line.startsWith('N ') || line.startsWith('V ') || line.startsWith('a. ') || line.startsWith('b. ') || line.startsWith('c. ')) return false;
+  
+  const hasJapanese = /[\u3040-\u309f\u30a0-\u30ff\u4e00-\u9faf]/.test(line);
+  if (hasJapanese && line.length > 5 && !line.includes('Ý nghĩa')) {
+    return true;
+  }
+  return false;
+};
+
+const parsed = blocks.map(block => {
+  const lines = block.trim().split('\n').map(l => l.trim()).filter(Boolean);
+  if (lines.length === 0) return null;
+  
+  const grammar = lines[0];
+  let meaning = [];
+  let examples = [];
+  
+  for (let i = 1; i < lines.length; i++) {
+    const line = lines[i];
+    if (isExample(line)) {
+      examples.push(line);
+    } else {
+      meaning.push(line);
+    }
+  }
+  
+  return {
+    id: 'gr_' + Math.random().toString(36).substr(2, 9),
+    grammar: grammar,
+    meaning: meaning.join('\n'),
+    examples: examples
+  };
+}).filter(Boolean);
+
+const outputJS = `/**
+ * Dữ liệu Ngữ pháp N3 tự động parse từ file nguphap
+ */
+export const N3_GRAMMAR_DATA = ${JSON.stringify(parsed, null, 2)};
+`;
+
+fs.writeFileSync(outputPath, outputJS, 'utf8');
+console.log(`Parsed ${parsed.length} grammar points.`);

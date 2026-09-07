@@ -10,6 +10,8 @@ import { initFlashcards, getCurrentCardData, flipCard, nextCard, prevCard, toggl
 import { getCategories, getFilteredVocabulary, setDictionaryFilters, handleAddNewWord, importWordsFromJSON } from './dictionary.js';
 import { setupAuthUI } from './auth.js';
 import { initCommunity, openPublishModal } from './community.js';
+import { initGrammarTab } from './grammar.js';
+import { initGrammarPractice } from './grammar_practice.js';
 
 let isAnswerSubmitted = false;
 
@@ -35,12 +37,16 @@ function initApp() {
   startNewQuizSession();
   setupAuthUI();
   initCommunity();
+  
+  initGrammarTab();
+  initGrammarPractice();
 
   // Lắng nghe sự kiện khi dữ liệu Firebase được tải xong để render lại UI
   window.addEventListener('jlptDataLoaded', () => {
     updateAllCategoryDropdowns();
     startNewQuizSession();
     renderDictionaryGrid();
+    initGrammarTab();
   });
 }
 
