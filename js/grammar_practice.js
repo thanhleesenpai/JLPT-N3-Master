@@ -1,5 +1,6 @@
 import { N3_GRAMMAR_DATA } from './grammar_data.js';
 import { updateGrammarScore } from './storage.js';
+import { attachRomajiInput } from './romaji.js';
 
 let practiceQueue = [];
 let currentIndex = 0;
@@ -27,6 +28,9 @@ const feedbackDetail = document.getElementById('grammar-feedback-detail');
 const progressLabel = document.getElementById('grammar-quiz-progress-label');
 const progressBar = document.getElementById('grammar-quiz-progress-bar');
 const modeLabel = document.getElementById('grammar-quiz-mode-label');
+const btnSubmit = document.getElementById('btn-grammar-submit');
+const btnToggleRomaji = document.getElementById('btn-grammar-toggle-romaji');
+const romajiStatus = document.getElementById('grammar-romaji-status');
 
 export function initGrammarPractice() {
   if (!btnPractice) return;
@@ -51,6 +55,31 @@ export function initGrammarPractice() {
       submitAnswer();
     }
   });
+
+  if (btnSubmit) {
+    btnSubmit.addEventListener('click', () => {
+      submitAnswer();
+    });
+  }
+
+  // Khởi tạo Romaji mặc định là Tắt cho Ngữ Pháp vì dễ trùng chữ, nhưng nếu thích thì Bật
+  quizInput.dataset.romajiMode = 'true';
+  attachRomajiInput(quizInput);
+
+  if (btnToggleRomaji) {
+    btnToggleRomaji.addEventListener('click', () => {
+      const isRomaji = quizInput.dataset.romajiMode !== 'false';
+      const newMode = !isRomaji;
+      quizInput.dataset.romajiMode = newMode;
+      btnToggleRomaji.textContent = newMode ? 'Tắt Romaji Auto' : 'Bật Romaji Auto';
+      
+      romajiStatus.innerHTML = newMode 
+        ? '<span style="display:inline-block; width:8px; height:8px; background:var(--accent-green); border-radius:50%;"></span> Romaji Auto-Convert: Bật'
+        : '<span style="display:inline-block; width:8px; height:8px; background:var(--text-muted); border-radius:50%;"></span> Romaji Auto-Convert: Tắt (Dùng IME hệ điều hành)';
+      
+      quizInput.focus();
+    });
+  }
 }
 
 function startPractice() {
@@ -114,7 +143,11 @@ function loadNextQuestion() {
     typingSection.style.display = 'block';
     
     // Câu ví dụ mờ
+    const actionsBlock = document.getElementById('grammar-quiz-actions');
+    if (actionsBlock) actionsBlock.style.display = 'flex';
     promptJp.innerHTML = `<span style="opacity: 0.3">${exampleSentence}</span>`;
+    quizInput.style.display = 'block';
+    if (btnSubmit) btnSubmit.style.display = 'block';
     quizInput.focus();
     
   } else if (currentMode === 'cloze') {
@@ -136,11 +169,17 @@ function loadNextQuestion() {
       clozeSentence = `<span style="opacity: 0.5">${exampleSentence}</span><br><br><span style="font-size: 1rem; color: var(--accent-pink);">Gõ: ${currentQuestion.grammar}</span>`;
     }
     
+    const actionsBlock = document.getElementById('grammar-quiz-actions');
+    if (actionsBlock) actionsBlock.style.display = 'flex';
     promptJp.innerHTML = clozeSentence;
+    quizInput.style.display = 'block';
+    if (btnSubmit) btnSubmit.style.display = 'block';
     quizInput.focus();
     
   } else if (currentMode === 'scramble') {
     typingSection.style.display = 'none';
+    const actionsBlock = document.getElementById('grammar-quiz-actions');
+    if (actionsBlock) actionsBlock.style.display = 'none';
     promptJp.innerHTML = '';
     scrambleContainer.style.display = 'flex';
     scrambleSlots.style.display = 'flex';

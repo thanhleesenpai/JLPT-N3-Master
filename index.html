@@ -399,9 +399,24 @@
           </div>
 
           <div class="typing-box" id="grammar-typing-section">
+            <div class="input-helper-bar">
+              <div class="romaji-badge" id="grammar-romaji-status">
+                <span style="display:inline-block; width:8px; height:8px; background:var(--accent-green); border-radius:50%;"></span>
+                Romaji Auto-Convert: Bật
+              </div>
+              <button class="input-mode-toggle" id="btn-grammar-toggle-romaji">
+                Tắt Romaji Auto
+              </button>
+            </div>
             <div class="typing-input-wrapper">
               <input type="text" id="grammar-quiz-input" class="quiz-input" placeholder="Gõ câu trả lời..." autocomplete="off" spellcheck="false">
             </div>
+          </div>
+
+          <div class="quiz-actions" id="grammar-quiz-actions">
+            <button class="btn-primary" id="btn-grammar-submit" style="width: 100%;">
+              Xác Nhận (Enter) ↵
+            </button>
           </div>
 
           <!-- Feedback Box -->
