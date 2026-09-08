@@ -66,6 +66,8 @@ function renderGrammarList(searchQuery = '') {
       </div>`;
     }
 
+    let meaningText = (g.meaning || '').replace(/\n/g, '<br>');
+
     let structureHtml = g.structure ? `
       <div style="font-size: 0.82rem; color: var(--accent-cyan); background: rgba(6, 182, 212, 0.12); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: 6px; padding: 3px 8px; margin: 0.35rem 0 0.45rem 0; display: inline-block; font-weight: 600;">
         🧩 Cấu trúc: ${g.structure}
