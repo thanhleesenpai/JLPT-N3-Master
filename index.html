@@ -112,8 +112,18 @@
           </div>
         </div>
 
+        <!-- Mobile Setup Toggle Header -->
+        <div class="mobile-setup-bar">
+          <button class="mobile-toggle-btn" id="btn-toggle-quiz-setup">
+            ⚙️ Tùy chỉnh bài tập <span class="toggle-icon">▼</span>
+          </button>
+          <button class="btn-secondary btn-mobile-restart" id="btn-restart-quiz-mobile">
+            🔄 Bài Mới
+          </button>
+        </div>
+
         <!-- Quiz Control Settings Bar -->
-        <div class="quiz-settings-bar">
+        <div class="quiz-settings-bar" id="quiz-settings-bar">
           <div class="quiz-settings-group">
             <div class="dropdown-wrapper">
               <button id="quiz-category-btn" class="filter-select quiz-cat-trigger">
@@ -125,10 +135,10 @@
               </div>
             </div>
             <select id="quiz-mode-select" class="filter-select">
-              <option value="meaning_to_japanese">Nghĩa ➔ Gõ Tiếng Nhật (Kanji/Hiragana)</option>
-              <option value="kanji_to_hiragana">Chữ Kanji ➔ Gõ Hiragana</option>
-              <option value="kanji_to_multiple_choice">Chữ Kanji ➔ Chọn 1/4 Đáp án Nghĩa</option>
-              <option value="mixed">Hỗn hợp tất cả dạng trên</option>
+              <option value="meaning_to_japanese">Nghĩa ➔ Gõ Tiếng Nhật</option>
+              <option value="kanji_to_hiragana">Kanji ➔ Gõ Hiragana</option>
+              <option value="kanji_to_multiple_choice">Kanji ➔ Trắc nghiệm</option>
+              <option value="mixed">🔀 Hỗn hợp các dạng</option>
             </select>
           </div>
 
@@ -376,7 +386,10 @@
             <button class="btn-secondary" id="btn-grammar-back-list">
               ⬅️ Danh Sách
             </button>
-            <div class="practice-bar-controls">
+            <button class="mobile-toggle-btn" id="btn-toggle-grammar-setup">
+              ⚙️ Tùy chỉnh <span class="toggle-icon">▼</span>
+            </button>
+            <div class="practice-bar-controls" id="grammar-practice-controls">
               <select id="grammar-practice-mode" class="filter-select">
                 <option value="shadow">⌨️ Shadow Typing (Gõ câu)</option>
                 <option value="cloze">💡 Cloze (Điền khuyết)</option>

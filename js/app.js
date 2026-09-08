@@ -146,6 +146,29 @@ function setupQuizView() {
   const btnRestart = document.getElementById('btn-restart-quiz');
   const modeSelect = document.getElementById('quiz-mode-select');
   const feedbackAudioBtn = document.getElementById('btn-play-sound-feedback');
+  const btnToggleQuizSetup = document.getElementById('btn-toggle-quiz-setup');
+  const quizSettingsBar = document.getElementById('quiz-settings-bar');
+  const btnRestartMobile = document.getElementById('btn-restart-quiz-mobile');
+
+  if (btnToggleQuizSetup && quizSettingsBar) {
+    btnToggleQuizSetup.addEventListener('click', () => {
+      quizSettingsBar.classList.toggle('is-open');
+      const isOpen = quizSettingsBar.classList.contains('is-open');
+      const arrow = btnToggleQuizSetup.querySelector('.toggle-icon');
+      if (arrow) arrow.textContent = isOpen ? '▲' : '▼';
+    });
+  }
+
+  if (btnRestartMobile) {
+    btnRestartMobile.addEventListener('click', () => {
+      startNewQuizSession();
+      if (quizSettingsBar) quizSettingsBar.classList.remove('is-open');
+      if (btnToggleQuizSetup) {
+        const arrow = btnToggleQuizSetup.querySelector('.toggle-icon');
+        if (arrow) arrow.textContent = '▼';
+      }
+    });
+  }
 
   // Gắn bộ tự động chuyển đổi Romaji sang Hiragana thời gian thực
   attachRomajiInput(quizInput);

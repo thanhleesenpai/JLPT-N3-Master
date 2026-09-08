@@ -86,6 +86,18 @@ export function initGrammarPractice() {
     btnSubmit.addEventListener('click', () => handleSubmitOrNext());
   }
 
+  const btnToggleGrammarSetup = getEl('btn-toggle-grammar-setup');
+  const grammarControls = getEl('grammar-practice-controls');
+
+  if (btnToggleGrammarSetup && grammarControls) {
+    btnToggleGrammarSetup.addEventListener('click', () => {
+      grammarControls.classList.toggle('is-open');
+      const isOpen = grammarControls.classList.contains('is-open');
+      const arrow = btnToggleGrammarSetup.querySelector('.toggle-icon');
+      if (arrow) arrow.textContent = isOpen ? '▲' : '▼';
+    });
+  }
+
   if (btnToggleRomaji) {
     btnToggleRomaji.addEventListener('click', () => {
       const qInput = getEl('grammar-quiz-input');
@@ -383,6 +395,14 @@ function startPractice() {
   const countSelect = getEl('grammar-practice-count');
   const quizCard = getEl('grammar-quiz-card');
   const modeLabel = getEl('grammar-quiz-mode-label');
+  const grammarControls = getEl('grammar-practice-controls');
+  const btnToggleGrammarSetup = getEl('btn-toggle-grammar-setup');
+
+  if (grammarControls) grammarControls.classList.remove('is-open');
+  if (btnToggleGrammarSetup) {
+    const arrow = btnToggleGrammarSetup.querySelector('.toggle-icon');
+    if (arrow) arrow.textContent = '▼';
+  }
 
   currentMode = modeSelect ? modeSelect.value : 'shadow';
   const countVal = countSelect ? countSelect.value : '10';
