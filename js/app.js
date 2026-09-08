@@ -159,10 +159,10 @@ function setupQuizView() {
     quizInput.dataset.romajiMode = romajiEnabled ? 'true' : 'false';
     const badge = document.getElementById('romaji-status-badge');
     if (romajiEnabled) {
-      badge.innerHTML = `<span style="display:inline-block; width:8px; height:8px; background:var(--accent-cyan); border-radius:50%;"></span> Romaji Auto-Convert: Bật (gõ <i>taberu</i> ➔ <i>たべる</i>)`;
-      btnToggleRomaji.textContent = 'Đổi sang IME Gốc';
+      badge.innerHTML = `<span style="display:inline-block; width:8px; height:8px; background:var(--accent-cyan); border-radius:50%;"></span> Romaji: Bật (<i>taberu</i> ➔ <i>たべる</i>)`;
+      btnToggleRomaji.textContent = 'Tắt Romaji Auto';
     } else {
-      badge.innerHTML = `<span style="display:inline-block; width:8px; height:8px; background:var(--text-muted); border-radius:50%;"></span> Romaji Auto-Convert: Tắt (Dùng IME tiếng Nhật hệ điều hành)`;
+      badge.innerHTML = `<span style="display:inline-block; width:8px; height:8px; background:var(--text-muted); border-radius:50%;"></span> Romaji: Tắt (Dùng IME HĐH)`;
       btnToggleRomaji.textContent = 'Bật Romaji Auto';
     }
   });

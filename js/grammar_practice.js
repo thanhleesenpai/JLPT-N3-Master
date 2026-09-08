@@ -98,8 +98,8 @@ export function initGrammarPractice() {
       btnToggleRomaji.textContent = newMode ? 'Tắt Romaji Auto' : 'Bật Romaji Auto';
       if (romajiStatus) {
         romajiStatus.innerHTML = newMode
-          ? '<span style="display:inline-block; width:8px; height:8px; background:var(--accent-green); border-radius:50%;"></span> Romaji Auto-Convert: Bật'
-          : '<span style="display:inline-block; width:8px; height:8px; background:var(--text-muted); border-radius:50%;"></span> Romaji Auto-Convert: Tắt (Dùng IME hệ điều hành)';
+          ? '<span style="display:inline-block; width:8px; height:8px; background:var(--accent-green); border-radius:50%;"></span> Romaji: Bật'
+          : '<span style="display:inline-block; width:8px; height:8px; background:var(--text-muted); border-radius:50%;"></span> Romaji: Tắt (Dùng IME HĐH)';
       }
       qInput.focus();
     });
