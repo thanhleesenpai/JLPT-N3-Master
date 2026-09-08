@@ -40,6 +40,8 @@ export function initGrammarPractice() {
 
   if (btnPractice) {
     btnPractice.addEventListener('click', () => {
+      const headerBar = document.querySelector('.grammar-header-bar');
+      if (headerBar) headerBar.style.display = 'none';
       if (viewList) viewList.style.display = 'none';
       if (viewPractice) viewPractice.style.display = 'block';
       startPractice();
@@ -48,6 +50,8 @@ export function initGrammarPractice() {
 
   if (btnBack) {
     btnBack.addEventListener('click', () => {
+      const headerBar = document.querySelector('.grammar-header-bar');
+      if (headerBar) headerBar.style.display = 'flex';
       if (viewPractice) viewPractice.style.display = 'none';
       if (viewList) viewList.style.display = 'grid';
       grammarPracticeActive = false;
