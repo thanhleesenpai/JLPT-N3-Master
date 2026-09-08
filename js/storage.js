@@ -9,6 +9,7 @@ const STORAGE_KEYS = {
   CUSTOM_WORDS: 'jlpt_n3_custom_words',
   MASTERED_IDS: 'jlpt_n3_mastered_ids',
   BOOKMARKED_IDS: 'jlpt_n3_bookmarked_ids',
+  DELETED_IDS: 'jlpt_n3_deleted_ids',
   USER_STATS: 'jlpt_n3_user_stats',
   SETTINGS: 'jlpt_n3_settings',
   PROFICIENCY: 'jlpt_n3_proficiency',
@@ -24,6 +25,7 @@ let cache = {
   customWords: [],
   masteredIds: [],
   bookmarkedIds: [],
+  deletedIds: [],
   userStats: { totalQuestions: 0, correctAnswers: 0, currentStreak: 0, bestStreak: 0, sessionsCompleted: 0 },
   settings: { romajiAutoConvert: false, soundEnabled: true, quizMode: 'meaning_to_japanese', quizCount: 10 },
   proficiency: {},
@@ -42,6 +44,7 @@ function initCacheFromLocal() {
   cache.customWords = getLocal(STORAGE_KEYS.CUSTOM_WORDS, []);
   cache.masteredIds = getLocal(STORAGE_KEYS.MASTERED_IDS, []);
   cache.bookmarkedIds = getLocal(STORAGE_KEYS.BOOKMARKED_IDS, []);
+  cache.deletedIds = getLocal(STORAGE_KEYS.DELETED_IDS, []);
   cache.userStats = getLocal(STORAGE_KEYS.USER_STATS, { totalQuestions: 0, correctAnswers: 0, currentStreak: 0, bestStreak: 0, sessionsCompleted: 0 });
   cache.settings = getLocal(STORAGE_KEYS.SETTINGS, { romajiAutoConvert: false, soundEnabled: true, quizMode: 'meaning_to_japanese', quizCount: 10 });
   cache.proficiency = getLocal(STORAGE_KEYS.PROFICIENCY, {});
@@ -58,6 +61,7 @@ function saveToLocal() {
   localStorage.setItem(STORAGE_KEYS.CUSTOM_WORDS, JSON.stringify(cache.customWords));
   localStorage.setItem(STORAGE_KEYS.MASTERED_IDS, JSON.stringify(cache.masteredIds));
   localStorage.setItem(STORAGE_KEYS.BOOKMARKED_IDS, JSON.stringify(cache.bookmarkedIds));
+  localStorage.setItem(STORAGE_KEYS.DELETED_IDS, JSON.stringify(cache.deletedIds));
   localStorage.setItem(STORAGE_KEYS.USER_STATS, JSON.stringify(cache.userStats));
   localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(cache.settings));
   localStorage.setItem(STORAGE_KEYS.PROFICIENCY, JSON.stringify(cache.proficiency));
@@ -68,6 +72,7 @@ export function clearLocalDataOnLogout() {
   localStorage.removeItem(STORAGE_KEYS.CUSTOM_WORDS);
   localStorage.removeItem(STORAGE_KEYS.MASTERED_IDS);
   localStorage.removeItem(STORAGE_KEYS.BOOKMARKED_IDS);
+  localStorage.removeItem(STORAGE_KEYS.DELETED_IDS);
   localStorage.removeItem(STORAGE_KEYS.USER_STATS);
   localStorage.removeItem(STORAGE_KEYS.SETTINGS);
   localStorage.removeItem(STORAGE_KEYS.PROFICIENCY);
@@ -104,6 +109,7 @@ export async function loadDataFromFirestore(uid) {
       cache.customWords = data.customWords || [];
       cache.masteredIds = data.masteredIds || [];
       cache.bookmarkedIds = data.bookmarkedIds || [];
+      cache.deletedIds = data.deletedIds || [];
       cache.userStats = data.userStats || cache.userStats;
       cache.settings = data.settings || cache.settings;
       cache.proficiency = data.proficiency || {};
@@ -127,7 +133,12 @@ export async function loadDataFromFirestore(uid) {
 // ==========================================
 
 export function getAllVocabulary() {
-  return [...INITIAL_N3_VOCABULARY, ...cache.customWords];
+  const combined = [...INITIAL_N3_VOCABULARY, ...cache.customWords];
+  if (!cache.deletedIds || cache.deletedIds.length === 0) {
+    return combined;
+  }
+  const deletedSet = new Set(cache.deletedIds);
+  return combined.filter(w => !deletedSet.has(w.id));
 }
 
 export function getCustomWords() {
@@ -151,6 +162,11 @@ export function addCustomWord(wordData) {
 }
 
 export function deleteCustomWord(id) {
+  if (!id) return;
+  if (!cache.deletedIds) cache.deletedIds = [];
+  if (!cache.deletedIds.includes(id)) {
+    cache.deletedIds.push(id);
+  }
   cache.customWords = cache.customWords.filter(w => w.id !== id);
   triggerSave();
 }
@@ -301,26 +317,31 @@ export function getGrammarStats() {
 export function updateGrammarScore(grammarId, isCorrect, mode) {
   if (!cache.grammarStats[grammarId]) {
     cache.grammarStats[grammarId] = {
-      cloze: { attempts: 0, correct: 0 },
-      shadow: { attempts: 0, correct: 0 },
-      scramble: { attempts: 0, correct: 0 },
-      mastered: false
+      correct: 0,
+      wrong: 0,
+      level: 0  // 0-5 sao, giống hệt proficiency từ vựng
     };
   }
 
   const stats = cache.grammarStats[grammarId];
-  if (stats[mode]) {
-    stats[mode].attempts += 1;
-    if (isCorrect) {
-      stats[mode].correct += 1;
+  if (isCorrect) {
+    stats.correct += 1;
+    stats.level = Math.min(5, stats.level + 1);
+  } else {
+    stats.wrong += 1;
+    if (stats.level >= 5) {
+      // 5 sao mà sai → rớt về 3 sao
+      stats.level = 3;
+    } else {
+      // Phạt -2 sao, tối thiểu 0
+      stats.level = Math.max(0, stats.level - 2);
     }
-  }
-
-  // Tiêu chí Mastering: làm đúng 3 lần ở bất kỳ mode nào
-  if (stats.cloze.correct >= 3 || stats.shadow.correct >= 3 || stats.scramble.correct >= 3) {
-    stats.mastered = true;
   }
 
   triggerSave();
   return stats;
+}
+
+export function getGrammarLevel(id) {
+  return cache.grammarStats[id] ? cache.grammarStats[id].level : 0;
 }

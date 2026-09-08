@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initApp() {
   setupNavigation();
+  setupQuickMenu();
   setupSoundToggle();
   setupQuizView();
   setupFlashcardView();
@@ -61,10 +62,16 @@ function setupNavigation() {
     btn.addEventListener('click', () => {
       const targetTab = btn.dataset.tab;
 
-      navBtns.forEach(b => b.classList.remove('active'));
+      navBtns.forEach(b => {
+        if (b.dataset.tab === targetTab) {
+          b.classList.add('active');
+        } else {
+          b.classList.remove('active');
+        }
+      });
+
       tabPanes.forEach(p => p.classList.remove('active'));
 
-      btn.classList.add('active');
       const pane = document.getElementById(`pane-${targetTab}`);
       if (pane) pane.classList.add('active');
 
@@ -77,6 +84,30 @@ function setupNavigation() {
         const input = document.getElementById('quiz-input');
         if (input) input.focus();
       }
+    });
+  });
+}
+
+function setupQuickMenu() {
+  const btnTrigger = document.getElementById('btn-quick-menu');
+  const dropdown = document.getElementById('quick-menu-dropdown');
+
+  if (!btnTrigger || !dropdown) return;
+
+  btnTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle('active');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target) && !btnTrigger.contains(e.target)) {
+      dropdown.classList.remove('active');
+    }
+  });
+
+  dropdown.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', () => {
+      dropdown.classList.remove('active');
     });
   });
 }
@@ -734,8 +765,8 @@ function renderDictionaryGrid() {
           <div style="display: flex; gap: 0.4rem; align-items: center;">
             ${isUserWord ? `
               <button class="icon-btn btn-edit-word" data-id="${item.id}" title="Sửa từ này" style="width: 32px; height: 32px; font-size: 0.85rem;">✏️</button>
-              <button class="icon-btn btn-delete-word" data-id="${item.id}" title="Xóa từ này" style="width: 32px; height: 32px; font-size: 0.85rem; color: var(--accent-red);">🗑️</button>
             ` : ''}
+            <button class="icon-btn btn-delete-word" data-id="${item.id}" title="Xóa từ này" style="width: 32px; height: 32px; font-size: 0.85rem; color: var(--accent-red);">🗑️</button>
             <button class="icon-btn btn-speak-word" data-text="${item.kanji || item.hiragana}" title="Nghe đọc" style="width: 32px; height: 32px;">🔊</button>
             <button class="icon-btn btn-toggle-fav" data-id="${item.id}" title="Yêu thích" style="width: 32px; height: 32px; color: ${isBookmarked ? 'var(--accent-sakura)' : 'inherit'};">
               ${isBookmarked ? '♥' : '♡'}
