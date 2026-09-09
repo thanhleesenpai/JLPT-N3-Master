@@ -21,7 +21,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "私のうちでは、正月には親せきが皆集まることになっている。",
-        "reading": "わたしのうちでは、しょうがつにしんせきがみなあつまることになっている。",
+        "reading": "わたしのうちでは、しょうがつにはしんせきがみなあつまることになっている。",
         "furigana": "<ruby>私<rt>わたし</rt></ruby>のうちでは、<ruby>正月<rt>しょうがつ</rt></ruby>には<ruby>親<rt>しん</rt></ruby>せきが<ruby>皆<rt>みな</rt></ruby><ruby>集<rt>あつ</rt></ruby>まることになっている。",
         "meaning": "Ở nhà tôi, vào dịp Tết theo quy định mọi họ hàng đều tập trung đông đủ."
       }
@@ -35,7 +35,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "初めてスキーに行って、２時間ほどで滑れるようになった。",
-        "reading": "はじめてすきーにいって、にじかんほどですべれるようになった。",
+        "reading": "はじめてスキーにいって、２じかんほどですべれるようになった。",
         "furigana": "<ruby>初<rt>はじ</rt></ruby>めてスキーに<ruby>行<rt>い</rt></ruby>って、２<ruby>時間<rt>じかん</rt></ruby>ほどで<ruby>滑<rt>すべ</rt></ruby>れるようになった。",
         "target": "ようになった",
         "meaning": "Lần đầu tiên tôi đi trượt tuyết, sau khoảng 2 tiếng thì tôi đã có thể trượt được."
@@ -112,7 +112,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "この自動販売機はレバーを押さないと、おつりが出ないようになっている。",
-        "reading": "このじどうはんばいきはればーをおさないと、おつりがでないようになっている。",
+        "reading": "このじどうはんばいきはレバーをおさないと、おつりがでないようになっている。",
         "furigana": "この<ruby>自動販売機<rt>じどうはんばいき</rt></ruby>はレバーを<ruby>押<rt>お</rt></ruby>さないと、おつりが<ruby>出<rt>で</rt></ruby>ないようになっている。",
         "meaning": "Cây bán hàng tự động này nếu không gạt cần thì tiền thừa sẽ không ra."
       }
@@ -126,14 +126,14 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "私も早くリンさんのように、上手に日本語が話せるようになりたい。",
-        "reading": "私も早くリンさんのように、上手に日本語が話せるようになりたい。",
-        "furigana": "<ruby>私<rt>わたし</rt></ruby>も<ruby>早<rt>はや</rt></ruby>くリンさんのように、<ruby>上手<rt>じょうず</rt></ruby>に<ruby>日本<rt>にほん</rt></ruby>語<rt>にほんご</rt></ruby>が<ruby>話<rt>はな</rt></ruby>せるようになりたい。",
+        "reading": "わたしもはやくリンさんのように、じょうずににほんごがはなせるようになりたい。",
+        "furigana": "<ruby>私<rt>わたし</rt></ruby>も<ruby>早<rt>はや</rt></ruby>くリンさんのように、<ruby>上手<rt>じょうず</rt></ruby>に<ruby>日本語<rt>にほんご</rt></ruby>が<ruby>話<rt>はな</rt></ruby>せるようになりたい。",
         "meaning": "Tôi cũng muốn sớm nói tiếng Nhật giỏi như bạn Linh."
       },
       {
-        "jp": "この川の水は氷のように冷たい。",
-        "reading": "このかわのみずはこおりのようにつめたい。",
-        "furigana": "この<ruby>川<rt>かわ</rt></ruby>の<ruby>水<rt>みず</rt></ruby>は<ruby>氷<rt>こおり</rt></ruby>のように<ruby>冷<rt>つめ</rt></ruby>たい。",
+        "jp": "この川の水は氷 ように冷たい。",
+        "reading": "このかわのみずはこおり ようにつめたい。",
+        "furigana": "この<ruby>川<rt>かわ</rt></ruby>の<ruby>水<rt>みず</rt></ruby>は<ruby>氷<rt>こおり</rt></ruby> ように<ruby>冷<rt>つめ</rt></ruby>たい。",
         "meaning": "Nước của dòng sông này lạnh ngắt như băng vậy."
       }
     ]
@@ -146,13 +146,13 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "星がたくさん出ている。あしたも晴れみたいだ。",
-        "reading": "星がたくさん出ている。あしたも晴れみたいだ。",
+        "reading": "ほしがたくさんでている。あしたもはれみたいだ。",
         "furigana": "<ruby>星<rt>ほし</rt></ruby>がたくさん<ruby>出<rt>で</rt></ruby>ている。あしたも<ruby>晴<rt>は</rt></ruby>れみたいだ。",
         "meaning": "Trời nhiều sao quá. Có vẻ ngày mai cũng sẽ nắng đấy."
       },
       {
-        "jp": "宝くじで１０００万円当たった。夢を見ているみたいだ。",
-        "reading": "宝くじで１０００万円当たった。夢を見ているみたいだ。",
+        "jp": "宝くじで１０００万円当った。夢を見ているみたいだ。",
+        "reading": "たからくじで１０００まんえんあたった。ゆめをみているみたいだ。",
         "furigana": "<ruby>宝<rt>たから</rt></ruby>くじで１０００<ruby>万円<rt>まんえん</rt></ruby><ruby>当<rt>あた</rt></ruby>った。<ruby>夢<rt>ゆめ</rt></ruby>を<ruby>見<rt>み</rt></ruby>ているみたいだ。",
         "meaning": "Tôi trúng số 10 triệu yên. Cứ như là một giấc mơ vậy."
       }
@@ -166,7 +166,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "朝起きて見ると、道がぬれていた。夜の間に雨が降ったらしい。",
-        "reading": "朝起きて見ると、道がぬれていた。夜の間に雨が降ったらしい。",
+        "reading": "あさおきてみると、みちがぬれていた。よるのあいだにあめがふったらしい。",
         "furigana": "<ruby>朝<rt>あさ</rt></ruby><ruby>起<rt>お</rt></ruby>きて<ruby>見<rt>み</rt></ruby>ると、<ruby>道<rt>みち</rt></ruby>がぬれていた。<ruby>夜<rt>よる</rt></ruby>の<ruby>間<rt>あいだ</rt></ruby>に<ruby>雨<rt>あめ</rt></ruby>が<ruby>降<rt>ふ</rt></ruby>ったらしい。",
         "meaning": "Sáng dậy nhìn ra ngoài thấy đường ướt nhẹp. Có vẻ đêm qua trời đã mưa."
       }
@@ -180,7 +180,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "そのセーターの色、春らしくてすてきね。",
-        "reading": "そのセーターの色、春らしくてすてきね。",
+        "reading": "そのセーターのいろ、はるらしくてすてきね。",
         "furigana": "そのセーターの<ruby>色<rt>いろ</rt></ruby>、<ruby>春<rt>はる</rt></ruby>らしくてすてきね。",
         "target": "春らしくて",
         "meaning": "Màu của chiếc áo len đó tươi tắn đúng chất mùa xuân, đẹp quá nhỉ."
@@ -195,13 +195,13 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "大学を卒業したら就職するつもりだ。",
-        "reading": "大学を卒業したら就職するつもりだ。",
+        "reading": "だいがくをそつぎょうしたらしゅうしょくするつもりだ。",
         "furigana": "<ruby>大学<rt>だいがく</rt></ruby>を<ruby>卒業<rt>そつぎょう</rt></ruby>したら<ruby>就職<rt>しゅうしょく</rt></ruby>するつもりだ。",
         "meaning": "Tốt nghiệp đại học xong tôi định sẽ đi làm luôn."
       },
       {
         "jp": "メールを送ったつもりだったが、届いていなかった。",
-        "reading": "メールを送ったつもりだったが、届いていなかった。",
+        "reading": "メールをおくったつもりだったが、とどいていなかった。",
         "furigana": "メールを<ruby>送<rt>おく</rt></ruby>ったつもりだったが、<ruby>届<rt>とど</rt></ruby>いていなかった。",
         "meaning": "Tôi ngỡ là mình đã gửi email rồi nhưng hóa ra lại chưa đến."
       }
@@ -215,14 +215,14 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "悲しくて、涙が出てきた。",
-        "reading": "悲しくて、涙が出てきた。",
+        "reading": "かなしくて、なみだがでてきた。",
         "furigana": "<ruby>悲<rt>かな</rt></ruby>しくて、<ruby>涙<rt>なみだ</rt></ruby>が<ruby>出<rt>で</rt></ruby>てきた。",
         "target": "出てきた",
         "meaning": "Vì quá buồn nên nước mắt tôi tự nhiên trào ra."
       },
       {
         "jp": "怒りがわいてきた。",
-        "reading": "怒りがわいてきた。",
+        "reading": "いかりがわいてきた。",
         "furigana": "<ruby>怒<rt>いか</rt></ruby>りがわいてきた。",
         "meaning": "Cơn giận dữ bỗng dưng bùng cháy lên trong tôi."
       }
@@ -236,7 +236,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "子どもには、皆に愛される人間になってほしいと思う。",
-        "reading": "子どもには、皆に愛される人間になってほしいと思う。",
+        "reading": "こどもには、みなにあいされるにんげんになってほしいとおもう。",
         "furigana": "<ruby>子<rt>こ</rt></ruby>どもには、<ruby>皆<rt>みな</rt></ruby>に<ruby>愛<rt>あい</rt></ruby>される<ruby>人間<rt>にんげん</rt></ruby>になってほしいと<ruby>思<rt>おも</rt></ruby>う。",
         "meaning": "Đối với con cái, tôi muốn con trở thành một người được tất cả mọi người yêu thương."
       }
@@ -249,15 +249,15 @@ export const N3_GRAMMAR_DATA = [
     "meaning": "Giá mà... thì tốt / Tiếc nuối thực tại",
     "examples": [
       {
-        "jp": "もし生まれ変わることができるのなら、次は男に生まれたい。",
-        "reading": "もし生まれ変わることができるのなら、次は男に生まれたい。",
+        "jp": "もし生れ変わることができるのなら、次は男に生れたい。",
+        "reading": "もしうまれかわることができるのなら、つぎはおとこにうまれたい。",
         "furigana": "もし<ruby>生<rt>うま</rt></ruby>れ<ruby>変<rt>か</rt></ruby>わることができるのなら、<ruby>次<rt>つぎ</rt></ruby>は<ruby>男<rt>おとこ</rt></ruby>に<ruby>生<rt>うま</rt></ruby>れたい。",
         "target": "のなら",
         "meaning": "Nếu như có thể được sinh ra một lần nữa, tôi muốn lần tới mình được làm con trai."
       },
       {
         "jp": "もう少し時間があれば、全部できたのに。",
-        "reading": "もう少し時間があれば、全部できたのに。",
+        "reading": "もうすこしじかんがあれば、ぜんぶできたのに。",
         "furigana": "もう<ruby>少<rt>すこ</rt></ruby>し<ruby>時間<rt>じかん</rt></ruby>があれば、<ruby>全部<rt>ぜんぶ</rt></ruby>できたのに。",
         "meaning": "Giá mà có thêm chút thời gian nữa thôi thì tôi đã làm xong tất cả rồi."
       }
@@ -271,14 +271,14 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "子どものころ、親にマンガを読ませてもらえなかった。",
-        "reading": "子どものころ、親にマンガを読ませてもらえなかった。",
+        "reading": "こどものころ、おやにマンガをよませてもらえなかった。",
         "furigana": "<ruby>子<rt>こ</rt></ruby>どものころ、<ruby>親<rt>おや</rt></ruby>にマンガを<ruby>読<rt>よ</rt></ruby>ませてもらえなかった。",
         "target": "読ませて",
         "meaning": "Hồi còn nhỏ, tôi không được bố mẹ cho phép đọc truyện tranh."
       },
       {
         "jp": "冷蔵庫に肉があるのを忘れていて、腐らせてしまった。",
-        "reading": "冷蔵庫に肉があるのを忘れていて、腐らせてしまった。",
+        "reading": "れいぞうこににくがあるのをわすれていて、くさらせてしまった。",
         "furigana": "<ruby>冷蔵庫<rt>れいぞうこ</rt></ruby>に<ruby>肉<rt>にく</rt></ruby>があるのを<ruby>忘<rt>わす</rt></ruby>れていて、<ruby>腐<rt>くさ</rt></ruby>らせてしまった。",
         "meaning": "Tôi quên mất là có thịt trong tủ lạnh nên đã lỡ làm nó bị hỏng mất."
       }
@@ -292,14 +292,14 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "すみません、体調が悪いので、早く帰らせてください。",
-        "reading": "すみません、体調が悪いので、早く帰らせてください。",
+        "reading": "すみません、たいちょうがわるいので、はやくかえらせてください。",
         "furigana": "すみません、<ruby>体調<rt>たいちょう</rt></ruby>が<ruby>悪<rt>わる</rt></ruby>いので、<ruby>早<rt>はや</rt></ruby>く<ruby>帰<rt>かえ</rt></ruby>らせてください。",
         "target": "帰らせてください",
         "meaning": "Xin lỗi, vì cảm thấy không được khỏe nên xin phép cho tôi được về sớm."
       },
       {
         "jp": "きょうはすばらしいお話を聞かせていただき、本当にありがとうございます。",
-        "reading": "きょうはすばらしいお話を聞かせていただき、本当にありがとうございます。",
+        "reading": "きょうはすばらしいおはなしをきかせていただき、ほんとうにありがとうございます。",
         "furigana": "きょうはすばらしいお<ruby>話<rt>はなし</rt></ruby>を<ruby>聞<rt>き</rt></ruby>かせていただき、<ruby>本当<rt>ほんとう</rt></ruby>にありがとうございます。",
         "meaning": "Hôm nay được lắng nghe những lời chia sẻ tuyệt vời từ thầy/cô, em xin chân thành cảm ơn."
       }
@@ -313,7 +313,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "このマンガはよく売れている。人気があるのだろう。",
-        "reading": "このマンガはよく売れている。人気があるのだろう。",
+        "reading": "このマンガはよくうれている。にんきがあるのだろう。",
         "furigana": "このマンガはよく<ruby>売<rt>う</rt></ruby>れている。<ruby>人気<rt>にんき</rt></ruby>があるのだろう。",
         "target": "売れている",
         "meaning": "Cuốn truyện tranh này bán rất chạy. Có lẽ là do rất được ưa chuộng."
@@ -328,7 +328,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "彼は犯人ではないのではないかと思う。",
-        "reading": "彼は犯人ではないのではないかと思う。",
+        "reading": "かれははんにんではないのではないかとおもう。",
         "furigana": "<ruby>彼<rt>かれ</rt></ruby>は<ruby>犯人<rt>はんにん</rt></ruby>ではないのではないかと<ruby>思<rt>おも</rt></ruby>う。",
         "target": "ではないかと思う",
         "meaning": "Tôi nghĩ rằng chẳng phải anh ta không phải là thủ phạm hay sao."
@@ -343,8 +343,8 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "そんなにお酒を飲んじゃだめだよ。",
-        "reading": "そんなにお酒を飲んじゃだめだよ。",
-        "furigana": "そんなにお<ruby>酒<rt>さけ</rt></ruby>を飲んじゃだめだよ。",
+        "reading": "そんなにおさけをのんじゃだめだよ。",
+        "furigana": "そんなにお<ruby>酒<rt>さけ</rt></ruby>を<ruby>飲<rt>の</rt></ruby>んじゃだめだよ。",
         "target": "飲んじゃ",
         "meaning": "Không được uống nhiều rượu như thế đâu đấy."
       }
@@ -358,7 +358,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "山田さんは甘いものが好きだから、おいしいお菓子がいいんじゃない？",
-        "reading": "山田さんは甘いものが好きだから、おいしいお菓子がいいんじゃない？",
+        "reading": "やまださんはあまいものがすきだから、おいしいおかしがいいんじゃない？",
         "furigana": "<ruby>山田<rt>やまだ</rt></ruby>さんは<ruby>甘<rt>あま</rt></ruby>いものが<ruby>好<rt>す</rt></ruby>きだから、おいしいお<ruby>菓子<rt>かし</rt></ruby>がいいんじゃない？",
         "meaning": "Vì anh Yamada thích đồ ngọt nên chẳng phải mua bánh kẹo ngon là hợp lý nhất sao?"
       }
@@ -372,7 +372,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "宿題、まだでしょ。早くやっちゃいなさい。",
-        "reading": "宿題、まだでしょ。早くやっちゃいなさい。",
+        "reading": "しゅくだい、まだでしょ。はやくやっちゃいなさい。",
         "furigana": "<ruby>宿題<rt>しゅくだい</rt></ruby>、まだでしょ。<ruby>早<rt>はや</rt></ruby>くやっちゃいなさい。",
         "target": "やっちゃい",
         "meaning": "Bài tập về nhà chưa làm đúng không? Mau làm xong nhanh đi chứ."
@@ -387,7 +387,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "あそこに座ってる人、だれ？",
-        "reading": "あそこに座ってる人、だれ？",
+        "reading": "あそこにすわってるひと、だれ？",
         "furigana": "あそこに<ruby>座<rt>すわ</rt></ruby>ってる<ruby>人<rt>ひと</rt></ruby>、だれ？",
         "meaning": "Người đang ngồi ở đằng kia là ai vậy?"
       }
@@ -401,7 +401,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "来週までにこの本、読んどいてください。",
-        "reading": "来週までにこの本、読んどいてください。",
+        "reading": "らいしゅうまでにこのほん、よんどいてください。",
         "furigana": "<ruby>来週<rt>らいしゅう</rt></ruby>までにこの<ruby>本<rt>ほん</rt></ruby>、<ruby>読<rt>よ</rt></ruby>んどいてください。",
         "target": "読んどいて",
         "meaning": "Từ giờ đến tuần sau xin hãy đọc sẵn cuốn sách này nhé."
@@ -416,7 +416,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "もっと勉強しなきゃ、合格できないだろうな。",
-        "reading": "もっと勉強しなきゃ、合格できないだろうな。",
+        "reading": "もっとべんきょうしなきゃ、ごうかくできないだろうな。",
         "furigana": "もっと<ruby>勉強<rt>べんきょう</rt></ruby>しなきゃ、<ruby>合格<rt>ごうかく</rt></ruby>できないだろうな。",
         "meaning": "Phải học chăm hơn nữa thôi, chứ không thì chắc chả đỗ nổi mất."
       }
@@ -444,7 +444,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "このあたりでは、４月から５月にかけていろいろな花が咲く。",
-        "reading": "このあたりでは、４月から５月にかけていろいろな花が咲く。",
+        "reading": "このあたりでは、４がつから５がつにかけていろいろなはながさく。",
         "furigana": "このあたりでは、４<ruby>月<rt>がつ</rt></ruby>から５<ruby>月<rt>がつ</rt></ruby>にかけていろいろな<ruby>花<rt>はな</rt></ruby>が<ruby>咲<rt>さ</rt></ruby>く。",
         "meaning": "Ở vùng này, khoảng từ tháng 4 đến tháng 5 có rất nhiều loại hoa đua nở."
       }
@@ -458,7 +458,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "この部屋はほこりだらけで、足の踏み場もない。",
-        "reading": "この部屋はほこりだらけで、足の踏み場もない。",
+        "reading": "このへやはほこりだらけで、あしのふみばもない。",
         "furigana": "この<ruby>部屋<rt>へや</rt></ruby>はほこりだらけで、<ruby>足<rt>あし</rt></ruby>の<ruby>踏<rt>ふ</rt></ruby>み<ruby>場<rt>ば</rt></ruby>もない。",
         "meaning": "Căn phòng này đầy bụi bẩn, đến chỗ đặt chân cũng không có."
       }
@@ -472,7 +472,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "気のせいか、最近父は元気がないようだ。",
-        "reading": "気のせいか、最近父は元気がないようだ。",
+        "reading": "きのせいか、さいきんちちはげんきがないようだ。",
         "furigana": "<ruby>気<rt>き</rt></ruby>のせいか、<ruby>最近<rt>さいきん</rt></ruby><ruby>父<rt>ちち</rt></ruby>は<ruby>元気<rt>げんき</rt></ruby>がないようだ。",
         "meaning": "Không biết có phải do cảm giác không mà dạo này thấy bố hình như hơi mệt mỏi."
       }
@@ -486,7 +486,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "仕事が早く済んだのは、友だちが手伝ってくれたおかげだ。",
-        "reading": "仕事が早く済んだのは、友だちが手伝ってくれたおかげだ。",
+        "reading": "しごとがはやくすんだのは、ともだちがてつだってくれたおかげだ。",
         "furigana": "<ruby>仕事<rt>しごと</rt></ruby>が<ruby>早<rt>はや</rt></ruby>く<ruby>済<rt>す</rt></ruby>んだのは、<ruby>友<rt>とも</rt></ruby>だちが<ruby>手伝<rt>てつだ</rt></ruby>ってくれたおかげだ。",
         "meaning": "Công việc hoàn thành sớm được là nhờ có bạn bè hỗ trợ giúp đỡ."
       }
@@ -500,7 +500,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "あの人のせいでみんなが迷惑している。",
-        "reading": "あの人のせいでみんなが迷惑している。",
+        "reading": "あのひとのせいでみんながめいわくしている。",
         "furigana": "あの<ruby>人<rt>ひと</rt></ruby>のせいでみんなが<ruby>迷惑<rt>めいわく</rt></ruby>している。",
         "meaning": "Tại người đó mà tất cả mọi người đều bị phiền phức."
       }
@@ -514,7 +514,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "両親と卒業後の進路について話し合った。",
-        "reading": "両親と卒業後の進路について話し合った。",
+        "reading": "りょうしんとそつぎょうごのしんろについてはなしあった。",
         "furigana": "<ruby>両親<rt>りょうしん</rt></ruby>と<ruby>卒業後<rt>そつぎょうご</rt></ruby>の<ruby>進路<rt>しんろ</rt></ruby>について<ruby>話<rt>はな</rt></ruby>し<ruby>合<rt>あ</rt></ruby>った。",
         "meaning": "Tôi đã thảo luận với cha mẹ về định hướng tương lai sau khi tốt nghiệp."
       }
@@ -528,7 +528,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "外国語だと、なかなか思ったとおりに話すことができない。",
-        "reading": "外国語だと、なかなか思ったとおりに話すことができない。",
+        "reading": "がいこくごだと、なかなかおもったとおりにはなしすことができない。",
         "furigana": "<ruby>外国語<rt>がいこくご</rt></ruby>だと、なかなか<ruby>思<rt>おも</rt></ruby>ったとおりに<ruby>話<rt>はなし</rt></ruby>すことができない。",
         "meaning": "Là tiếng nước ngoài nên mãi mà không thể nói đúng theo ý mình muốn."
       }
@@ -542,7 +542,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "議長は時間に関して厳しいので、絶対遅刻はできない。",
-        "reading": "議長は時間に関して厳しいので、絶対遅刻はできない。",
+        "reading": "ぎちょうはじかんにかんしてきびしいので、ぜったいちこくはできない。",
         "furigana": "<ruby>議長<rt>ぎちょう</rt></ruby>は<ruby>時間<rt>じかん</rt></ruby>に<ruby>関<rt>かん</rt></ruby>して<ruby>厳<rt>きび</rt></ruby>しいので、<ruby>絶対<rt>ぜったい</rt></ruby><ruby>遅刻<rt>ちこく</rt></ruby>はできない。",
         "meaning": "Chủ tọa rất nghiêm khắc về mặt thời gian nên tuyệt đối không được đi muộn."
       }
@@ -556,7 +556,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "私は話すのに比べて書く力が弱いんです。",
-        "reading": "私は話すのに比べて書く力が弱いんです。",
+        "reading": "わたしははなしすのにくらべてかくちからがよわいんです。",
         "furigana": "<ruby>私<rt>わたし</rt></ruby>は<ruby>話<rt>はなし</rt></ruby>すのに<ruby>比<rt>くら</rt></ruby>べて<ruby>書<rt>か</rt></ruby>く<ruby>力<rt>ちから</rt></ruby>が<ruby>弱<rt>よわ</rt></ruby>いんです。",
         "meaning": "So với kỹ năng nói thì năng lực viết của tôi yếu hơn hẳn."
       }
@@ -570,7 +570,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "今週はいつものテストに加えてレポート提出もあり、とても忙しい。",
-        "reading": "今週はいつものテストに加えてレポート提出もあり、とても忙しい。",
+        "reading": "こんしゅうはいつものテストにくわえてレポートていしゅつもあり、とてもいそがしい。",
         "furigana": "<ruby>今週<rt>こんしゅう</rt></ruby>はいつものテストに<ruby>加<rt>くわ</rt></ruby>えてレポート<ruby>提出<rt>ていしゅつ</rt></ruby>もあり、とても<ruby>忙<rt>いそが</rt></ruby>しい。",
         "meaning": "Tuần này ngoài bài kiểm tra thường lệ ra lại cộng thêm nộp báo cáo nữa nên rất bận."
       }
@@ -584,7 +584,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "辞書を引くたびに新しい発見がある。",
-        "reading": "辞書を引くたびに新しい発見がある。",
+        "reading": "じしょをひくたびにあたしいはっけんがある。",
         "furigana": "<ruby>辞書<rt>じしょ</rt></ruby>を<ruby>引<rt>ひ</rt></ruby>くたびに<ruby>新<rt>あた</rt></ruby>しい<ruby>発見<rt>はっけん</rt></ruby>がある。",
         "meaning": "Mỗi lần tra từ điển tôi lại phát hiện ra thêm những điều mới mẻ."
       }
@@ -598,7 +598,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "たとえ両親に反対されても、家を出て一人暮らしがしたい。",
-        "reading": "たとえ両親に反対されても、家を出て一人暮らしがしたい。",
+        "reading": "たとえりょうしんにはんたいされても、いえをでてひとりぐらしがしたい。",
         "furigana": "たとえ<ruby>両親<rt>りょうしん</rt></ruby>に<ruby>反対<rt>はんたい</rt></ruby>されても、<ruby>家<rt>いえ</rt></ruby>を<ruby>出<rt>で</rt></ruby>て<ruby>一人暮<rt>ひとりぐ</rt></ruby>らしがしたい。",
         "meaning": "Cho dù bị bố mẹ phản đối đi nữa, tôi vẫn muốn chuyển ra ngoài sống một mình."
       }
@@ -612,7 +612,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "お母さん、お父さん、きょうは遅くなるって。",
-        "reading": "お母さん、お父さん、きょうは遅くなるって。",
+        "reading": "おかあさん、おとうさん、きょうはおそくなるって。",
         "furigana": "お<ruby>母<rt>かあ</rt></ruby>さん、お<ruby>父<rt>とう</rt></ruby>さん、きょうは<ruby>遅<rt>おそ</rt></ruby>くなるって。",
         "meaning": "Mẹ ơi, bố bảo hôm nay bố sẽ về muộn đấy."
       }
@@ -626,13 +626,13 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "ここから駅まで１０分ぐらいだ。",
-        "reading": "ここから駅まで１０分ぐらいだ。",
+        "reading": "ここからえきまで１０ぷんぐらいだ。",
         "furigana": "ここから<ruby>駅<rt>えき</rt></ruby>まで１０<ruby>分<rt>ぷん</rt></ruby>ぐらいだ。",
         "meaning": "Từ đây đến nhà ga mất tầm khoảng 10 phút."
       },
       {
         "jp": "もう動けないくらい疲れた。",
-        "reading": "もう動けないくらい疲れた。",
+        "reading": "もううごけないくらいつかれた。",
         "furigana": "もう<ruby>動<rt>うご</rt></ruby>けないくらい<ruby>疲<rt>つか</rt></ruby>れた。",
         "meaning": "Tôi mệt đến mức không thể nào cử động nổi nữa."
       }
@@ -646,7 +646,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "途中でやめるくらいなら、初めからやらないほうがいい。",
-        "reading": "途中でやめるくらいなら、初めからやらないほうがいい。",
+        "reading": "とちゅうでやめるくらいなら、はじめめからやらないほうがいい。",
         "furigana": "<ruby>途中<rt>とちゅう</rt></ruby>でやめるくらいなら、<ruby>初<rt>はじめ</rt></ruby>めからやらないほうがいい。",
         "meaning": "Thà không làm ngay từ đầu còn hơn là bỏ dở giữa chừng."
       }
@@ -660,7 +660,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "母が寝ているうちに朝ごはんを作って驚かせよう。",
-        "reading": "母が寝ているうちに朝ごはんを作って驚かせよう。",
+        "reading": "ははがねているうちにあさごはんをつくっておどろかせよう。",
         "furigana": "<ruby>母<rt>はは</rt></ruby>が<ruby>寝<rt>ね</rt></ruby>ているうちに<ruby>朝<rt>あさ</rt></ruby>ごはんを<ruby>作<rt>つく</rt></ruby>って<ruby>驚<rt>おどろ</rt></ruby>かせよう。",
         "meaning": "Tranh thủ lúc mẹ đang ngủ, mình sẽ nấu bữa sáng để làm mẹ bất ngờ."
       }
@@ -674,8 +674,8 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "今度の日本代表チームは主将の中村選手を中心によくまとまっている。",
-        "reading": "今度の日本代表チームは主将の中村選手を中心によくまとまっている。",
-        "furigana": "<ruby>今度<rt>こんど</rt></ruby>の<ruby>日本<rt>にほん</rt></ruby>代表<rt>にほんだいひょう</rt></ruby>チームは<ruby>主将<rt>しゅしょう</rt></ruby>の<ruby>中村<rt>なかむら</rt></ruby><ruby>選手<rt>せんしゅ</rt></ruby>を<ruby>中心<rt>ちゅうしん</rt></ruby>によくまとまっている。",
+        "reading": "こんどのにほんだいひょうチームはしゅしょうのなかむらせんしゅをちゅうしんによくまとまっている。",
+        "furigana": "<ruby>今度<rt>こんど</rt></ruby>の<ruby>日本<rt>にほん</rt></ruby><ruby>代表<rt>だいひょう</rt></ruby>チームは<ruby>主将<rt>しゅしょう</rt></ruby>の<ruby>中村<rt>なかむら</rt></ruby><ruby>選手<rt>せんしゅ</rt></ruby>を<ruby>中心<rt>ちゅうしん</rt></ruby>によくまとまっている。",
         "meaning": "Đội tuyển đại diện Nhật Bản lần này đoàn kết rất tốt xoay quanh đội trưởng Nakamura."
       }
     ]
@@ -688,7 +688,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "校長先生をはじめ、先生方には大変お世話になりました。",
-        "reading": "校長先生をはじめ、先生方には大変お世話になりました。",
+        "reading": "こうちょうせんせいをはじめ、せんせいがたにはたいへんおせわになりました。",
         "furigana": "<ruby>校長先生<rt>こうちょうせんせい</rt></ruby>をはじめ、<ruby>先生方<rt>せんせいがた</rt></ruby>には<ruby>大変<rt>たいへん</rt></ruby>お<ruby>世話<rt>せわ</rt></ruby>になりました。",
         "meaning": "Tôi xin chân thành cảm ơn sự giúp đỡ của quý thầy cô, trước hết là thầy Hiệu trưởng."
       }
@@ -702,7 +702,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "先生は学生のどんな質問に対しても、ていねいに答えてくれる。",
-        "reading": "先生は学生のどんな質問に対しても、ていねいに答えてくれる。",
+        "reading": "せんせいはがくせいのどんなしつもんにたいしても、ていねいにこたえてくれる。",
         "furigana": "<ruby>先生<rt>せんせい</rt></ruby>は<ruby>学生<rt>がくせい</rt></ruby>のどんな<ruby>質問<rt>しつもん</rt></ruby>に<ruby>対<rt>たい</rt></ruby>しても、ていねいに<ruby>答<rt>こた</rt></ruby>えてくれる。",
         "meaning": "Thầy giáo đối với bất kỳ câu hỏi nào của học sinh cũng đều nhiệt tình giải đáp."
       }
@@ -716,7 +716,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "災害時においては、冷静になることが何よりも大切だ。",
-        "reading": "災害時においては、冷静になることが何よりも大切だ。",
+        "reading": "さいがいじにおいては、れいせいになることがなによりもたいせつだ。",
         "furigana": "<ruby>災害時<rt>さいがいじ</rt></ruby>においては、<ruby>冷静<rt>れいせい</rt></ruby>になることが<ruby>何<rt>なに</rt></ruby>よりも<ruby>大切<rt>たいせつ</rt></ruby>だ。",
         "meaning": "Trong hoàn cảnh thiên tai thảm họa, bình tĩnh là điều quan trọng hơn tất cả."
       }
@@ -730,7 +730,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "病院で食生活全般にわたる指導を受けた。",
-        "reading": "病院で食生活全般にわたる指導を受けた。",
+        "reading": "びょういんでしょくせいかつぜんぱんにわたるしどうをうけた。",
         "furigana": "<ruby>病院<rt>びょういん</rt></ruby>で<ruby>食生活<rt>しょくせいかつ</rt></ruby><ruby>全般<rt>ぜんぱん</rt></ruby>にわたる<ruby>指導<rt>しどう</rt></ruby>を<ruby>受<rt>う</rt></ruby>けた。",
         "target": "にわたる",
         "meaning": "Tôi đã nhận được hướng dẫn chi tiết kéo dài trên toàn bộ chế độ ăn uống tại bệnh viện."
@@ -745,7 +745,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "私にとって日本は、自分の夢を実現するための国だ。",
-        "reading": "私にとって日本は、自分の夢を実現するための国だ。",
+        "reading": "わたしにとってにほんは、じぶんのゆめをじつげんするためのくにだ。",
         "furigana": "<ruby>私<rt>わたし</rt></ruby>にとって<ruby>日本<rt>にほん</rt></ruby>は、<ruby>自分<rt>じぶん</rt></ruby>の<ruby>夢<rt>ゆめ</rt></ruby>を<ruby>実現<rt>じつげん</rt></ruby>するための<ruby>国<rt>くに</rt></ruby>だ。",
         "meaning": "Đối với tôi, Nhật Bản là đất nước để tôi thực hiện giấc mơ của mình."
       }
@@ -759,7 +759,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "あの空港はイタリア人によって設計された。",
-        "reading": "あの空港はイタリア人によって設計された。",
+        "reading": "あのくうこうはイタリアひとによってせっけいされた。",
         "furigana": "あの<ruby>空港<rt>くうこう</rt></ruby>はイタリア<ruby>人<rt>ひと</rt></ruby>によって<ruby>設計<rt>せっけい</rt></ruby>された。",
         "meaning": "Sân bay đó được thiết kế bởi một kiến trúc sư người Ý."
       }
@@ -773,7 +773,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "父の話によると、会社の経営状態が悪いらしい。",
-        "reading": "父の話によると、会社の経営状態が悪いらしい。",
+        "reading": "ちちのはなしによると、かいしゃのけいえいじょうたいがわるいらしい。",
         "furigana": "<ruby>父<rt>ちち</rt></ruby>の<ruby>話<rt>はなし</rt></ruby>によると、<ruby>会社<rt>かいしゃ</rt></ruby>の<ruby>経営状態<rt>けいえいじょうたい</rt></ruby>が<ruby>悪<rt>わる</rt></ruby>いらしい。",
         "meaning": "Theo lời bố tôi kể thì có vẻ tình hình kinh doanh của công ty đang gặp khó khăn."
       }
@@ -787,8 +787,8 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "夜になっても電気がつかない。きっと出かけているに違いない。",
-        "reading": "夜になっても電気がつかない。きっと出かけているに違いない。",
-        "furigana": "<ruby>夜<rt>よる</rt></ruby>になっても<ruby>電気<rt>でんき</rt></ruby>がつかない。きっと<ruby>出<rt>で</rt></ruby>かけているに違いない。",
+        "reading": "よるになってもでんきがつかない。きっとでかけているにちがいない。",
+        "furigana": "<ruby>夜<rt>よる</rt></ruby>になっても<ruby>電気<rt>でんき</rt></ruby>がつかない。きっと<ruby>出<rt>で</rt></ruby>かけているに<ruby>違<rt>ちが</rt></ruby>いない。",
         "meaning": "Trời tối rồi mà đèn vẫn không bật. Chắc chắn là họ đã đi ra ngoài rồi."
       }
     ]
@@ -801,7 +801,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "あなたにとって仕事とは何でしょうか。",
-        "reading": "あなたにとって仕事とは何でしょうか。",
+        "reading": "あなたにとってしごととはなにでしょうか。",
         "furigana": "あなたにとって<ruby>仕事<rt>しごと</rt></ruby>とは<ruby>何<rt>なに</rt></ruby>でしょうか。",
         "meaning": "Đối với bạn, công việc có nghĩa là gì?"
       }
@@ -815,7 +815,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "疲れていたので、ベッドに入ったとたんに、眠ってしまった。",
-        "reading": "疲れていたので、ベッドに入ったとたんに、眠ってしまった。",
+        "reading": "つかれていたので、ベッドにはいったとたんに、ねむってしまった。",
         "furigana": "<ruby>疲<rt>つか</rt></ruby>れていたので、ベッドに<ruby>入<rt>はい</rt></ruby>ったとたんに、<ruby>眠<rt>ねむ</rt></ruby>ってしまった。",
         "meaning": "Vì quá mệt mỏi nên vừa mới leo lên giường là tôi đã ngủ thiếp đi ngay."
       }
@@ -829,7 +829,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "試験が近づくにつれて、だんだん心配になってきた。",
-        "reading": "試験が近づくにつれて、だんだん心配になってきた。",
+        "reading": "しけんがちかづくにつれて、だんだんしんぱいになってきた。",
         "furigana": "<ruby>試験<rt>しけん</rt></ruby>が<ruby>近<rt>ちか</rt></ruby>づくにつれて、だんだん<ruby>心配<rt>しんぱい</rt></ruby>になってきた。",
         "meaning": "Kỳ thi càng đến gần thì tôi lại càng cảm thấy lo lắng hơn."
       }
@@ -857,7 +857,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "客は店員の指示に従って避難し、全員無事だった。",
-        "reading": "客は店員の指示に従って避難し、全員無事だった。",
+        "reading": "きゃくはてんいんのしじにしたってひなんし、ぜんいんぶじだった。",
         "furigana": "<ruby>客<rt>きゃく</rt></ruby>は<ruby>店員<rt>てんいん</rt></ruby>の<ruby>指示<rt>しじ</rt></ruby>に<ruby>従<rt>した</rt></ruby>って<ruby>避難<rt>ひなん</rt></ruby>し、<ruby>全員<rt>ぜんいん</rt></ruby><ruby>無事<rt>ぶじ</rt></ruby>だった。",
         "target": "に従って",
         "meaning": "Hành khách di tản theo đúng hướng dẫn của nhân viên và tất cả đều an toàn."
@@ -872,7 +872,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "考えている最中に、話しかけられて困った。",
-        "reading": "考えている最中に、話しかけられて困った。",
+        "reading": "かんがえているさいちゅうに、はなししかけられてこまった。",
         "furigana": "<ruby>考<rt>かんが</rt></ruby>えている<ruby>最中<rt>さいちゅう</rt></ruby>に、<ruby>話<rt>はなし</rt></ruby>しかけられて<ruby>困<rt>こま</rt></ruby>った。",
         "meaning": "Đang lúc tập trung suy nghĩ thì bị bắt chuyện làm tôi rất khó chịu."
       }
@@ -886,7 +886,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "実物を見てからでないと買うかどうかは決められない。",
-        "reading": "実物を見てからでないと買うかどうかは決められない。",
+        "reading": "じつぶつをみてからでないとかうかどうかはきめられない。",
         "furigana": "<ruby>実物<rt>じつぶつ</rt></ruby>を<ruby>見<rt>み</rt></ruby>てからでないと<ruby>買<rt>か</rt></ruby>うかどうかは<ruby>決<rt>き</rt></ruby>められない。",
         "meaning": "Nếu chưa xem tận mắt hiện vật thì không thể quyết định có mua hay không."
       }
@@ -900,8 +900,8 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "日本へ来て以来、忙しくてまだ一度も帰国していない。",
-        "reading": "日本へ来て以来、忙しくてまだ一度も帰国していない。",
-        "furigana": "<ruby>日本<rt>にほん</rt></ruby>へ来て<ruby>以来<rt>いらい</rt></ruby>、忙しくてまだ<ruby>一度<rt>いちど</rt></ruby>も<ruby>帰国<rt>きこく</rt></ruby>していない。",
+        "reading": "にほんへきていらい、いそがしくてまだいちどもきこくしていない。",
+        "furigana": "<ruby>日本<rt>にほん</rt></ruby>へ<ruby>来<rt>き</rt></ruby>て<ruby>以来<rt>いらい</rt></ruby>、<ruby>忙<rt>いそが</rt></ruby>しくてまだ<ruby>一度<rt>いちど</rt></ruby>も<ruby>帰国<rt>きこく</rt></ruby>していない。",
         "meaning": "Kể từ khi sang Nhật đến nay, vì bận rộn nên tôi vẫn chưa về nước lần nào."
       }
     ]
@@ -914,7 +914,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "不況のせいで収入が減った。貯金も減る一方だ。",
-        "reading": "不況のせいで収入が減った。貯金も減る一方だ。",
+        "reading": "ふきょうのせいでしゅうにゅうがへった。ちょきんもへるいっぽうだ。",
         "furigana": "<ruby>不況<rt>ふきょう</rt></ruby>のせいで<ruby>収入<rt>しゅうにゅう</rt></ruby>が<ruby>減<rt>へ</rt></ruby>った。<ruby>貯金<rt>ちょきん</rt></ruby>も<ruby>減<rt>へ</rt></ruby>る<ruby>一方<rt>いっぽう</rt></ruby>だ。",
         "meaning": "Do suy thoái kinh tế nên thu nhập bị giảm. Tiền tiết kiệm cũng cứ thế liên tục giảm đi."
       }
@@ -928,7 +928,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "この苦しさから逃れるには、ただ時が過ぎるのを待つよりないだろう。",
-        "reading": "この苦しさから逃れるには、ただ時が過ぎるのを待つよりないだろう。",
+        "reading": "このくるしさからのがれるには、ただときがすぎるのをまつよりないだろう。",
         "furigana": "この<ruby>苦<rt>くる</rt></ruby>しさから<ruby>逃<rt>のが</rt></ruby>れるには、ただ<ruby>時<rt>とき</rt></ruby>が<ruby>過<rt>す</rt></ruby>ぎるのを<ruby>待<rt>ま</rt></ruby>つよりないだろう。",
         "target": "よりない",
         "meaning": "Để thoát khỏi nỗi đau đớn này, chẳng còn cách nào khác ngoài việc kiên nhẫn chờ thời gian trôi qua."
@@ -943,7 +943,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "会社の経済が悪化して、ボーナスはもちろん給料も出ない状態だ。",
-        "reading": "会社の経済が悪化して、ボーナスはもちろん給料も出ない状態だ。",
+        "reading": "かいしゃのけいざいがあっかして、ボーナスはもちろんきゅうりょうもでないじょうたいだ。",
         "furigana": "<ruby>会社<rt>かいしゃ</rt></ruby>の<ruby>経済<rt>けいざい</rt></ruby>が<ruby>悪化<rt>あっか</rt></ruby>して、ボーナスはもちろん<ruby>給料<rt>きゅうりょう</rt></ruby>も<ruby>出<rt>で</rt></ruby>ない<ruby>状態<rt>じょうたい</rt></ruby>だ。",
         "meaning": "Kinh tế công ty sa sút, tiền thưởng đã đành mà đến cả lương cũng chẳng được phát."
       }
@@ -957,7 +957,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "買い物のついでに本屋に寄った。",
-        "reading": "買い物のついでに本屋に寄った。",
+        "reading": "かいいもののついでにほんやによった。",
         "furigana": "<ruby>買<rt>かい</rt></ruby>い<ruby>物<rt>もの</rt></ruby>のついでに<ruby>本屋<rt>ほんや</rt></ruby>に<ruby>寄<rt>よ</rt></ruby>った。",
         "meaning": "Nhân tiện đi mua sắm, tôi đã ghé qua hiệu sách."
       }
@@ -971,7 +971,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "天気予報によると今年は雨が多いだろうということです。",
-        "reading": "天気予報によると今年は雨が多いだろうということです。",
+        "reading": "てんきよほうによるとことしはあめがおおいだろうということです。",
         "furigana": "<ruby>天気予報<rt>てんきよほう</rt></ruby>によると<ruby>今年<rt>ことし</rt></ruby>は<ruby>雨<rt>あめ</rt></ruby>が<ruby>多<rt>おお</rt></ruby>いだろうということです。",
         "target": "ということです",
         "meaning": "Theo dự báo thời tiết thì nghe nói năm nay mưa sẽ rất nhiều."
@@ -986,8 +986,8 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "時間は十分あるから、急ぐことはない。",
-        "reading": "時間は十分あるから、急ぐことはない。",
-        "furigana": "<ruby>時間<rt>じかん</rt></ruby>は十<ruby>分<rt>ぷん</rt></ruby>あるから、<ruby>急<rt>いそ</rt></ruby>ぐことはない。",
+        "reading": "じかんはじゅうぶんあるから、いそぐことはない。",
+        "furigana": "<ruby>時間<rt>じかん</rt></ruby>は<ruby>十分<rt>じゅうぶん</rt></ruby>あるから、<ruby>急<rt>いそ</rt></ruby>ぐことはない。",
         "meaning": "Thời gian còn dư dả lắm nên không cần phải vội vã đâu."
       }
     ]
@@ -1000,8 +1000,8 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "あしたは８時までに来ること。時間に遅れないこと。",
-        "reading": "あしたは８時までに来ること。時間に遅れないこと。",
-        "furigana": "あしたは８<ruby>時<rt>とき</rt></ruby>までに来ること。<ruby>時間<rt>じかん</rt></ruby>に<ruby>遅<rt>おく</rt></ruby>れないこと。",
+        "reading": "あしたは８じまでにくること。じかんにおくれないこと。",
+        "furigana": "あしたは８<ruby>時<rt>じ</rt></ruby>までに<ruby>来<rt>く</rt></ruby>ること。<ruby>時間<rt>じかん</rt></ruby>に<ruby>遅<rt>おく</rt></ruby>れないこと。",
         "meaning": "Ngày mai hãy đến trước 8 giờ. Tuyệt đối không được trễ giờ."
       }
     ]
@@ -1014,7 +1014,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "納豆は、食べないことはないが、あまり好きではない。",
-        "reading": "納豆は、食べないことはないが、あまり好きではない。",
+        "reading": "なっとうは、たべないことはないが、あまりすきではない。",
         "furigana": "<ruby>納豆<rt>なっとう</rt></ruby>は、<ruby>食<rt>た</rt></ruby>べないことはないが、あまり<ruby>好<rt>す</rt></ruby>きではない。",
         "meaning": "Natto không phải là tôi không ăn được, nhưng thực sự không thích lắm."
       }
@@ -1028,7 +1028,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "まだ子どもだもの、少しぐらいの失敗は大目に見てやらなくちゃ。",
-        "reading": "まだ子どもだもの、少しぐらいの失敗は大目に見てやらなくちゃ。",
+        "reading": "まだこどもだもの、すこしぐらいのしっぱいはおおめにみてやらなくちゃ。",
         "furigana": "まだ<ruby>子<rt>こ</rt></ruby>どもだもの、<ruby>少<rt>すこ</rt></ruby>しぐらいの<ruby>失敗<rt>しっぱい</rt></ruby>は<ruby>大目<rt>おおめ</rt></ruby>に<ruby>見<rt>み</rt></ruby>てやらなくちゃ。",
         "meaning": "Vì nó vẫn còn là trẻ con mà, thất bại một chút thì cũng nên rộng lượng tha thứ."
       }
@@ -1042,7 +1042,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "父が病気なものですから、いろいろとお金が必要なんです。",
-        "reading": "父が病気なものですから、いろいろとお金が必要なんです。",
+        "reading": "ちちがびょうきなものですから、いろいろとおかねがひつようなんです。",
         "furigana": "<ruby>父<rt>ちち</rt></ruby>が<ruby>病気<rt>びょうき</rt></ruby>なものですから、いろいろとお<ruby>金<rt>かね</rt></ruby>が<ruby>必要<rt>ひつよう</rt></ruby>なんです。",
         "meaning": "Vì bố tôi bị bệnh nên cần rất nhiều khoản chi phí."
       }
@@ -1056,8 +1056,8 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "あんなまずい店、二度と行くものか。",
-        "reading": "あんなまずい店、二度と行くものか。",
-        "furigana": "あんなまずい<ruby>店<rt>みせ</rt></ruby>、<ruby>二度<rt>にど</rt></ruby>と行くものか。",
+        "reading": "あんなまずいみせ、にどといくものか。",
+        "furigana": "あんなまずい<ruby>店<rt>みせ</rt></ruby>、<ruby>二度<rt>にど</rt></ruby>と<ruby>行<rt>い</rt></ruby>くものか。",
         "meaning": "Cái quán dở tệ như thế, tuyệt đối tôi sẽ không bao giờ quay lại lần thứ hai."
       }
     ]
@@ -1070,7 +1070,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "調べてみたところ、意外な事実がわかった。",
-        "reading": "調べてみたところ、意外な事実がわかった。",
+        "reading": "しらべてみたところ、いがいなじじつがわかった。",
         "furigana": "<ruby>調<rt>しら</rt></ruby>べてみたところ、<ruby>意外<rt>いがい</rt></ruby>な<ruby>事実<rt>じじつ</rt></ruby>がわかった。",
         "meaning": "Sau khi thử tìm hiểu thì tôi đã phát hiện ra một sự thật rất bất ngờ."
       }
@@ -1084,7 +1084,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "家を出ようとしたところに電話がかかってきた。",
-        "reading": "家を出ようとしたところに電話がかかってきた。",
+        "reading": "いえをでようとしたところにでんわがかかってきた。",
         "furigana": "<ruby>家<rt>いえ</rt></ruby>を<ruby>出<rt>で</rt></ruby>ようとしたところに<ruby>電話<rt>でんわ</rt></ruby>がかかってきた。",
         "meaning": "Đúng lúc tôi chuẩn bị bước ra khỏi nhà thì điện thoại reo lên."
       }
@@ -1098,7 +1098,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "出かけるとき急いでいたので、もう少しで財布を忘れるところだった。",
-        "reading": "出かけるとき急いでいたので、もう少しで財布を忘れるところだった。",
+        "reading": "でかけるときいそいでいたので、もうすこしでさいふをわすれるところだった。",
         "furigana": "<ruby>出<rt>で</rt></ruby>かけるとき<ruby>急<rt>いそ</rt></ruby>いでいたので、もう<ruby>少<rt>すこ</rt></ruby>しで<ruby>財布<rt>さいふ</rt></ruby>を<ruby>忘<rt>わす</rt></ruby>れるところだった。",
         "meaning": "Lúc đi vì quá vội vàng nên tôi suýt chút nữa là quên mất ví tiền."
       }
@@ -1112,13 +1112,13 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "うちから学校まで３０分ほどで行ける。",
-        "reading": "うちから学校まで３０分ほどで行ける。",
-        "furigana": "うちから<ruby>学校<rt>がっこう</rt></ruby>まで３０<ruby>分<rt>ぷん</rt></ruby>ほどで行ける。",
+        "reading": "うちからがっこうまで３０ふんほどでいける。",
+        "furigana": "うちから<ruby>学校<rt>がっこう</rt></ruby>まで３０<ruby>分<rt>ふん</rt></ruby>ほどで<ruby>行<rt>い</rt></ruby>ける。",
         "meaning": "Từ nhà tôi đến trường đi mất tầm khoảng 30 phút."
       },
       {
         "jp": "夜も眠れないほど悩んだ。",
-        "reading": "夜も眠れないほど悩んだ。",
+        "reading": "よるもねむれないほどなやんだ。",
         "furigana": "<ruby>夜<rt>よる</rt></ruby>も<ruby>眠<rt>ねむ</rt></ruby>れないほど<ruby>悩<rt>なや</rt></ruby>んだ。",
         "meaning": "Tôi đã trăn trở suy nghĩ đến mức đêm cũng không tài nào ngủ được."
       }
@@ -1132,7 +1132,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "外国語はだれでも、練習すればするほど上手になる。",
-        "reading": "外国語はだれでも、練習すればするほど上手になる。",
+        "reading": "がいこくごはだれでも、れんしゅうすればするほどじょうずになる。",
         "furigana": "<ruby>外国語<rt>がいこくご</rt></ruby>はだれでも、<ruby>練習<rt>れんしゅう</rt></ruby>すればするほど<ruby>上手<rt>じょうず</rt></ruby>になる。",
         "meaning": "Ngoại ngữ thì bất kỳ ai càng chăm luyện tập thì sẽ càng giỏi lên."
       }
@@ -1146,7 +1146,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "スケートなんて簡単だよ。ぼくなんか３０分ぐらいで滑れるようになったよ。",
-        "reading": "スケートなんて簡単だよ。ぼくなんか３０分ぐらいで滑れるようになったよ。",
+        "reading": "スケートなんてかんたんだよ。ぼくなんか３０ぷんぐらいですべれるようになったよ。",
         "furigana": "スケートなんて<ruby>簡単<rt>かんたん</rt></ruby>だよ。ぼくなんか３０<ruby>分<rt>ぷん</rt></ruby>ぐらいで<ruby>滑<rt>すべ</rt></ruby>れるようになったよ。",
         "meaning": "Trượt băng mấy cái thứ đó dễ ợt mà. Mấy đứa như tớ trượt tầm 30 phút là biết trượt luôn rồi."
       }
@@ -1160,7 +1160,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "彼が犯人だなんて信じられない。",
-        "reading": "彼が犯人だなんて信じられない。",
+        "reading": "かれがはんにんだなんてしんじられない。",
         "furigana": "<ruby>彼<rt>かれ</rt></ruby>が<ruby>犯人<rt>はんにん</rt></ruby>だなんて<ruby>信<rt>しん</rt></ruby>じられない。",
         "meaning": "Thật không thể tin nổi chuyện anh ta lại chính là thủ phạm."
       }
@@ -1174,7 +1174,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "やると決めたからには最後までがんばるつもりです。",
-        "reading": "やると決めたからには最後までがんばるつもりです。",
+        "reading": "やるときめたからにはさいごまでがんばるつもりです。",
         "furigana": "やると<ruby>決<rt>き</rt></ruby>めたからには<ruby>最後<rt>さいご</rt></ruby>までがんばるつもりです。",
         "meaning": "Một khi đã quyết định làm thì tôi định sẽ cố gắng nỗ lực đến cùng."
       }
@@ -1188,7 +1188,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "全員力を出し切って戦ったが、試合には負けてしまった。",
-        "reading": "全員力を出し切って戦ったが、試合には負けてしまった。",
+        "reading": "ぜんいんちからをだしきってたたかったが、しあいにはまけてしまった。",
         "furigana": "<ruby>全員<rt>ぜんいん</rt></ruby><ruby>力<rt>ちから</rt></ruby>を<ruby>出<rt>だ</rt></ruby>し<ruby>切<rt>き</rt></ruby>って<ruby>戦<rt>たたか</rt></ruby>ったが、<ruby>試合<rt>しあい</rt></ruby>には<ruby>負<rt>ま</rt></ruby>けてしまった。",
         "target": "出し切って",
         "meaning": "Tất cả mọi người đều đã dốc hết sức thi đấu nhưng rốt cuộc vẫn thua trận."
@@ -1203,7 +1203,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "別れた恋人のことが思い切れない。",
-        "reading": "別れた恋人のことが思い切れない。",
+        "reading": "わかれたこいびとのことがおもいきれない。",
         "furigana": "<ruby>別<rt>わか</rt></ruby>れた<ruby>恋人<rt>こいびと</rt></ruby>のことが<ruby>思<rt>おも</rt></ruby>い<ruby>切<rt>き</rt></ruby>れない。",
         "target": "思い切れない",
         "meaning": "Tôi vẫn chưa thể nào dứt bỏ hẳn tình cảm với người yêu cũ."
@@ -1218,8 +1218,8 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "このところ忙しくて寝不足ぎみだ。",
-        "reading": "このところ忙しくて寝不足ぎみだ。",
-        "furigana": "このところ忙しくて<ruby>寝不足<rt>ねぶそく</rt></ruby>ぎみだ。",
+        "reading": "このところいそがしくてねぶそくぎみだ。",
+        "furigana": "このところ<ruby>忙<rt>いそが</rt></ruby>しくて<ruby>寝不足<rt>ねぶそく</rt></ruby>ぎみだ。",
         "meaning": "Dạo này bận rộn quá nên tôi có cảm giác hơi bị thiếu ngủ."
       }
     ]
@@ -1232,7 +1232,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "年のせいか、母は最近病気がちだ。",
-        "reading": "年のせいか、母は最近病気がちだ。",
+        "reading": "としのせいか、はははさいきんびょうきがちだ。",
         "furigana": "<ruby>年<rt>とし</rt></ruby>のせいか、<ruby>母<rt>はは</rt></ruby>は<ruby>最近<rt>さいきん</rt></ruby><ruby>病気<rt>びょうき</rt></ruby>がちだ。",
         "meaning": "Có lẽ do tuổi tác nên dạo này mẹ tôi hay bị ốm đau."
       }
@@ -1246,7 +1246,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "このあたりは雨が少ないので、米作りには不向きだ。",
-        "reading": "このあたりは雨が少ないので、米作りには不向きだ。",
+        "reading": "このあたりはあめがすこないので、こめづくりにはふむきだ。",
         "furigana": "このあたりは<ruby>雨<rt>あめ</rt></ruby>が<ruby>少<rt>すこ</rt></ruby>ないので、<ruby>米作<rt>こめづく</rt></ruby>りには<ruby>不向き<rt>ふむき</rt></ruby>だ。",
         "meaning": "Khu vực này mưa ít nên không phù hợp cho việc trồng lúa."
       }
@@ -1260,7 +1260,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "彼女は子ども好きだから、保育士に向いていると思う。",
-        "reading": "彼女は子ども好きだから、保育士に向いていると思う。",
+        "reading": "かのじょはこどもすきだから、ほいくしにむいているとおもう。",
         "furigana": "<ruby>彼女<rt>かのじょ</rt></ruby>は<ruby>子<rt>こ</rt></ruby>ども<ruby>好<rt>す</rt></ruby>きだから、<ruby>保育士<rt>ほいくし</rt></ruby>に<ruby>向<rt>む</rt></ruby>いていると<ruby>思<rt>おも</rt></ruby>う。",
         "target": "向いている",
         "meaning": "Cô ấy rất yêu trẻ con nên tôi nghĩ rất hợp với nghề bảo mẫu."
@@ -1275,7 +1275,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "日曜日の朝は、子供向けの番組が多い。",
-        "reading": "日曜日の朝は、子供向けの番組が多い。",
+        "reading": "にちようびのあさは、こどもむけのばんぐみがおおい。",
         "furigana": "<ruby>日曜日<rt>にちようび</rt></ruby>の<ruby>朝<rt>あさ</rt></ruby>は、<ruby>子供<rt>こども</rt></ruby><ruby>向<rt>む</rt></ruby>けの<ruby>番組<rt>ばんぐみ</rt></ruby>が<ruby>多<rt>おお</rt></ruby>い。",
         "meaning": "Sáng Chủ Nhật có rất nhiều chương trình dành riêng cho trẻ em."
       }
@@ -1289,7 +1289,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "子どもは学校の勉強だけではなく、いろいろな経験を通して成長していく。",
-        "reading": "子どもは学校の勉強だけではなく、いろいろな経験を通して成長していく。",
+        "reading": "こどもはがっこうのべんきょうだけではなく、いろいろなけいけんをとおしてせいちょうしていく。",
         "furigana": "<ruby>子<rt>こ</rt></ruby>どもは<ruby>学校<rt>がっこう</rt></ruby>の<ruby>勉強<rt>べんきょう</rt></ruby>だけではなく、いろいろな<ruby>経験<rt>けいけん</rt></ruby>を<ruby>通<rt>とお</rt></ruby>して<ruby>成長<rt>せいちょう</rt></ruby>していく。",
         "meaning": "Trẻ em không chỉ học ở trường mà còn trưởng thành thông qua nhiều trải nghiệm khác nhau."
       }
@@ -1303,7 +1303,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "この部屋はほこりっぽくて、息が苦しい。",
-        "reading": "この部屋はほこりっぽくて、息が苦しい。",
+        "reading": "このへやはほこりっぽくて、いきがくるしい。",
         "furigana": "この<ruby>部屋<rt>へや</rt></ruby>はほこりっぽくて、<ruby>息<rt>いき</rt></ruby>が<ruby>苦<rt>くる</rt></ruby>しい。",
         "target": "ほこりっぽくて",
         "meaning": "Căn phòng này cảm giác đầy bụi bẩn khiến tôi thấy ngột ngạt khó thở."
@@ -1318,7 +1318,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "車の台数が増加するとともに、大気汚染もひどくなった。",
-        "reading": "車の台数が増加するとともに、大気汚染もひどくなった。",
+        "reading": "くるまのだいすうがぞうかするとともに、たいきおせんもひどくなった。",
         "furigana": "<ruby>車<rt>くるま</rt></ruby>の<ruby>台数<rt>だいすう</rt></ruby>が<ruby>増加<rt>ぞうか</rt></ruby>するとともに、<ruby>大気汚染<rt>たいきおせん</rt></ruby>もひどくなった。",
         "meaning": "Cùng với sự gia tăng số lượng xe ô tô thì ô nhiễm không khí cũng trở nên nghiêm trọng hơn."
       }
@@ -1332,7 +1332,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "会社の倒産にともなって、多くの社員が失業した。",
-        "reading": "会社の倒産にともなって、多くの社員が失業した。",
+        "reading": "かいしゃのとうさんにともなって、おおくのしゃいんがしつぎょうした。",
         "furigana": "<ruby>会社<rt>かいしゃ</rt></ruby>の<ruby>倒産<rt>とうさん</rt></ruby>にともなって、<ruby>多<rt>おお</rt></ruby>くの<ruby>社員<rt>しゃいん</rt></ruby>が<ruby>失業<rt>しつぎょう</rt></ruby>した。",
         "meaning": "Kéo theo sự phá sản của công ty, rất nhiều nhân viên đã bị mất việc làm."
       }
@@ -1346,7 +1346,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "そんなのうそに決まっている。信じられない。",
-        "reading": "そんなのうそに決まっている。信じられない。",
+        "reading": "そんなのうそにきまっている。しんじられない。",
         "furigana": "そんなのうそに<ruby>決<rt>き</rt></ruby>まっている。<ruby>信<rt>しん</rt></ruby>じられない。",
         "meaning": "Chuyện đó chắc chắn là dối trá rồi. Không thể tin được."
       }
@@ -1360,7 +1360,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "そうだ。今日はお母さんの誕生日だっけ。",
-        "reading": "そうだ。今日はお母さんの誕生日だっけ。",
+        "reading": "そうだ。きょうはおかあさんのたんじょうびだっけ。",
         "furigana": "そうだ。<ruby>今日<rt>きょう</rt></ruby>はお<ruby>母<rt>かあ</rt></ruby>さんの<ruby>誕生日<rt>たんじょうび</rt></ruby>だっけ。",
         "meaning": "Đúng rồi nhỉ. Hôm nay có phải là sinh nhật của mẹ không ta?"
       }
@@ -1374,7 +1374,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "とても悲しそうだったので、慰めようがなかった。",
-        "reading": "とても悲しそうだったので、慰めようがなかった。",
+        "reading": "とてもかなしそうだったので、なぐさめようがなかった。",
         "furigana": "とても<ruby>悲<rt>かな</rt></ruby>しそうだったので、<ruby>慰<rt>なぐさ</rt></ruby>めようがなかった。",
         "target": "ようがなかった",
         "meaning": "Trông cô ấy buồn bã quá nên tôi chẳng biết làm cách nào để an ủi nổi."
@@ -1389,8 +1389,8 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "何度も説明したのだから、皆さんもうできるはずですよ。",
-        "reading": "何度も説明したのだから、皆さんもうできるはずですよ。",
-        "furigana": "<ruby>何<rt>なに</rt></ruby>度も<ruby>説明<rt>せつめい</rt></ruby>したのだから、<ruby>皆<rt>みな</rt></ruby>さんもうできるはずですよ。",
+        "reading": "なんどもせつめいしたのだから、みなさんもうできるはずですよ。",
+        "furigana": "<ruby>何<rt>なん</rt></ruby><ruby>度<rt>ど</rt></ruby>も<ruby>説明<rt>せつめい</rt></ruby>したのだから、<ruby>皆<rt>みな</rt></ruby>さんもうできるはずですよ。",
         "meaning": "Vì tôi đã giải thích nhiều lần rồi nên chắc chắn mọi người đều đã làm được rồi."
       }
     ]
@@ -1417,8 +1417,8 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "ドアが開かないはずだ。かぎが違っていた。",
-        "reading": "ドアが開かないはずだ。かぎが違っていた。",
-        "furigana": "ドアが開かないはずだ。かぎが<ruby>違<rt>ちが</rt></ruby>っていた。",
+        "reading": "ドアがあかないはずだ。かぎがちがっていた。",
+        "furigana": "ドアが<ruby>開<rt>あ</rt></ruby>かないはずだ。かぎが<ruby>違<rt>ちが</rt></ruby>っていた。",
         "meaning": "Hèn chi cửa không mở được. Hóa ra là dùng nhầm chìa khóa."
       }
     ]
@@ -1431,7 +1431,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "遅れてすみません。でも、これにはわけがあるんです。",
-        "reading": "遅れてすみません。でも、これにはわけがあるんです。",
+        "reading": "おくれてすみません。でも、これにはわけがあるんです。",
         "furigana": "<ruby>遅<rt>おく</rt></ruby>れてすみません。でも、これにはわけがあるんです。",
         "meaning": "Xin lỗi vì tôi đến muộn. Nhưng chuyện này thực sự là có lý do cả."
       }
@@ -1445,8 +1445,8 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "ジョンさんは、お母さんが日本人ですから、日本語が上手なわけです。",
-        "reading": "ジョンさんは、お母さんが日本人ですから、日本語が上手なわけです。",
-        "furigana": "ジョンさんは、お<ruby>母<rt>かあ</rt></ruby>さんが<ruby>日本<rt>にほん</rt></ruby><ruby>人<rt>にほんじん</rt></ruby>ですから、<ruby>日本<rt>にほん</rt></ruby>語<rt>にほんご</rt></ruby>が<ruby>上手<rt>じょうず</rt></ruby>なわけです。",
+        "reading": "ジョンさんは、おかあさんがにほんじんですから、にほんごがじょうずなわけです。",
+        "furigana": "ジョンさんは、お<ruby>母<rt>かあ</rt></ruby>さんが<ruby>日本<rt>にほん</rt></ruby><ruby>人<rt>じん</rt></ruby>ですから、<ruby>日本語<rt>にほんご</rt></ruby>が<ruby>上手<rt>じょうず</rt></ruby>なわけです。",
         "target": "わけです",
         "meaning": "Mẹ của John là người Nhật, thảo nào cậu ấy nói tiếng Nhật giỏi như vậy."
       }
@@ -1460,7 +1460,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "この問題はまだ習っていないのだから、できるわけがない。",
-        "reading": "この問題はまだ習っていないのだから、できるわけがない。",
+        "reading": "このもんだいはまだならっていないのだから、できるわけがない。",
         "furigana": "この<ruby>問題<rt>もんだい</rt></ruby>はまだ<ruby>習<rt>なら</rt></ruby>っていないのだから、できるわけがない。",
         "meaning": "Bài toán này còn chưa được học thì đương nhiên làm sao mà làm được chứ."
       }
@@ -1474,8 +1474,8 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "生活に困っているわけではないが、貯金する余裕はない。",
-        "reading": "生活に困っているわけではないが、貯金する余裕はない。",
-        "furigana": "生活に<ruby>困<rt>こま</rt></ruby>っているわけではないが、<ruby>貯金<rt>ちょきん</rt></ruby>する<ruby>余裕<rt>よゆう</rt></ruby>はない。",
+        "reading": "せいかつにこまっているわけではないが、ちょきんするよゆうはない。",
+        "furigana": "<ruby>生活<rt>せいかつ</rt></ruby>に<ruby>困<rt>こま</rt></ruby>っているわけではないが、<ruby>貯金<rt>ちょきん</rt></ruby>する<ruby>余裕<rt>よゆう</rt></ruby>はない。",
         "meaning": "Không hẳn là cuộc sống gặp khó khăn nhưng tôi cũng không có tiền dư để tiết kiệm."
       }
     ]
@@ -1488,7 +1488,7 @@ export const N3_GRAMMAR_DATA = [
     "examples": [
       {
         "jp": "あした試験があるので、今夜は遊んでいるわけにはいかない。",
-        "reading": "あした試験があるので、今夜は遊んでいるわけにはいかない。",
+        "reading": "あしたしけんがあるので、こんやはあそんでいるわけにはいかない。",
         "furigana": "あした<ruby>試験<rt>しけん</rt></ruby>があるので、<ruby>今夜<rt>こんや</rt></ruby>は<ruby>遊<rt>あそ</rt></ruby>んでいるわけにはいかない。",
         "meaning": "Ngày mai có bài thi rồi nên đêm nay không thể nào ngồi chơi đùa được."
       }
