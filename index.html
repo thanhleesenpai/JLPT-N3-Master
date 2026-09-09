@@ -56,6 +56,9 @@
           </button>
           
           <div class="quick-menu-dropdown" id="quick-menu-dropdown">
+            <button class="menu-item" id="btn-stats-modal">
+              <span>📊 Thống Kê Học Tập</span>
+            </button>
             <button class="menu-item" id="btn-add-modal">
               <span>➕ Thêm Từ Vựng Mới</span>
             </button>
@@ -609,6 +612,95 @@
         <button type="button" class="btn-secondary" id="btn-clear-all-data" style="flex: 1; color: var(--accent-red); border-color: rgba(239,68,68,0.4);">
           🗑️ Xóa Sạch Toàn Bộ
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Learning Statistics Modal -->
+  <div class="modal-overlay" id="modal-learning-stats">
+    <div class="modal-card stats-modal-card" style="max-width: 650px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div>
+          <h2 style="font-size: 1.35rem; color: var(--accent-cyan); margin-bottom: 0.15rem;">📊 Thống Kê Học Tập</h2>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">Tổng hợp tiến trình luyện tập trong ngày & phân nhánh trình độ</p>
+        </div>
+        <button class="icon-btn" id="btn-close-stats" style="width: 32px; height: 32px;">✕</button>
+      </div>
+
+      <!-- Today's Highlights Card -->
+      <div class="stats-section-box" style="margin-bottom: 1.25rem;">
+        <h3 class="stats-section-title">📅 Tiến Trình Hôm Nay (<span id="stats-today-date">Hôm nay</span>)</h3>
+        <div class="stats-grid-today">
+          <div class="stat-card-today primary">
+            <div class="stat-val" id="stat-today-words">0</div>
+            <div class="stat-lbl">Từ vựng đã học / ôn</div>
+          </div>
+          <div class="stat-card-today accent">
+            <div class="stat-val" id="stat-today-questions">0</div>
+            <div class="stat-lbl">Tổng số lượt gõ câu hỏi</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 0.75rem;">
+          <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem;">
+            ⭐ Từ Vựng Tăng Sao Hôm Nay:
+          </div>
+          <div class="star-gain-pills">
+            <div class="gain-pill star1">
+              <span class="star-label">★ (1 Sao)</span>
+              <span class="gain-count" id="stat-today-star1">+0</span>
+            </div>
+            <div class="gain-pill star2">
+              <span class="star-label">★★ (2 Sao)</span>
+              <span class="gain-count" id="stat-today-star2">+0</span>
+            </div>
+            <div class="gain-pill star3">
+              <span class="star-label">★★★+ (3-5 Sao)</span>
+              <span class="gain-count" id="stat-today-star3plus">+0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Star Distribution Section -->
+      <div class="stats-section-box" style="margin-bottom: 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+          <h3 class="stats-section-title" style="margin-bottom: 0;">🌟 Phân Nhánh Trình Độ Từ Vựng</h3>
+          <span style="font-size: 0.8rem; font-weight: 600; color: var(--accent-gold);" id="stats-total-vocab-count">Tổng: 0 từ</span>
+        </div>
+
+        <!-- Stacked Distribution Bar -->
+        <div class="stacked-bar-track" id="stats-stacked-bar">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Level Cards Grid -->
+        <div class="level-cards-grid" id="stats-level-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Overall Performance -->
+      <div class="stats-section-box">
+        <h3 class="stats-section-title">🚀 Thành Tích & Hiệu Suất Tổng Thể</h3>
+        <div class="overall-stats-grid">
+          <div class="overall-card">
+            <div class="lbl">Tỷ Lệ Trả Lời Đúng</div>
+            <div class="val" id="stats-accuracy-val">0%</div>
+          </div>
+          <div class="overall-card">
+            <div class="lbl">Chuỗi Đúng Cao Nhất</div>
+            <div class="val" id="stats-best-streak-val">0 🔥</div>
+          </div>
+          <div class="overall-card">
+            <div class="lbl">Tổng Số Câu Đã Gõ</div>
+            <div class="val" id="stats-total-q-val">0</div>
+          </div>
+          <div class="overall-card">
+            <div class="lbl">Phiên Luyện Hoàn Thành</div>
+            <div class="val" id="stats-sessions-val">0</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

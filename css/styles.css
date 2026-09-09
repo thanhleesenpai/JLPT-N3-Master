@@ -1611,3 +1611,188 @@ ruby rt {
   }
 }
 
+/* ==========================================================================
+   STATISTICS DASHBOARD STYLES
+   ========================================================================== */
+.stats-modal-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-modal);
+}
+
+.stats-section-box {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+}
+
+.stats-section-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  margin-bottom: 0.65rem;
+}
+
+.stats-grid-today {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.stat-card-today {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.stat-card-today.primary {
+  border-color: rgba(6, 182, 212, 0.35);
+  background: rgba(6, 182, 212, 0.08);
+}
+
+.stat-card-today.accent {
+  border-color: rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.stat-card-today .stat-val {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.stat-card-today .stat-lbl {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.star-gain-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.gain-pill {
+  flex: 1;
+  min-width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+}
+
+.gain-pill.star1 {
+  border-color: rgba(56, 189, 248, 0.3);
+  color: var(--accent-cyan);
+}
+
+.gain-pill.star2 {
+  border-color: rgba(245, 158, 11, 0.3);
+  color: var(--accent-gold);
+}
+
+.gain-pill.star3 {
+  border-color: rgba(16, 185, 129, 0.3);
+  color: var(--accent-green);
+}
+
+.gain-pill .gain-count {
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.1rem 0.45rem;
+  border-radius: 6px;
+}
+
+.stacked-bar-track {
+  display: flex;
+  height: 12px;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: 0.85rem;
+}
+
+.stacked-bar-segment {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.level-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+@media (max-width: 580px) {
+  .level-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.level-stat-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.5rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.level-stat-card .lvl-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.level-stat-card .lvl-count {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.level-stat-card .lvl-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.overall-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.overall-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.5rem 0.65rem;
+}
+
+.overall-card .lbl {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.overall-card .val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  margin-top: 0.15rem;
+}
+

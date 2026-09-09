@@ -264,11 +264,53 @@ export function toggleBookmarkStatus(id) {
   return cache.bookmarkedIds.includes(id);
 }
 
+function getTodayDateString() {
+  const d = new Date();
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function ensureDailyStatsReset() {
+  if (!cache.userStats) {
+    cache.userStats = { totalQuestions: 0, correctAnswers: 0, currentStreak: 0, bestStreak: 0, sessionsCompleted: 0 };
+  }
+  const todayStr = getTodayDateString();
+  if (!cache.userStats.daily || cache.userStats.daily.todayDate !== todayStr) {
+    cache.userStats.daily = {
+      todayDate: todayStr,
+      todayWordsStudied: [],
+      todayQuestions: 0,
+      todayStarGain: { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 }
+    };
+  }
+}
+
 export function getUserStats() {
+  ensureDailyStatsReset();
   return cache.userStats;
 }
 
+export function getDailyStats() {
+  ensureDailyStatsReset();
+  return cache.userStats.daily;
+}
+
+export function recordWordStudied(wordId) {
+  ensureDailyStatsReset();
+  if (wordId !== undefined && wordId !== null) {
+    const strId = String(wordId);
+    if (!cache.userStats.daily.todayWordsStudied.includes(strId)) {
+      cache.userStats.daily.todayWordsStudied.push(strId);
+    }
+  }
+  cache.userStats.daily.todayQuestions += 1;
+  triggerSave();
+}
+
 export function recordQuizResult(isCorrect) {
+  ensureDailyStatsReset();
   cache.userStats.totalQuestions++;
   if (isCorrect) {
     cache.userStats.correctAnswers++;
@@ -284,6 +326,7 @@ export function recordQuizResult(isCorrect) {
 }
 
 export function incrementSessionCount() {
+  ensureDailyStatsReset();
   cache.userStats.sessionsCompleted++;
   triggerSave();
 }
@@ -303,12 +346,23 @@ export function getProficiencyAll() {
 }
 
 export function updateProficiency(id, isCorrect) {
+  ensureDailyStatsReset();
   if (!cache.proficiency[id]) {
     cache.proficiency[id] = { correct: 0, wrong: 0, level: 0 };
   }
+  const oldLevel = cache.proficiency[id].level;
   if (isCorrect) {
     cache.proficiency[id].correct += 1;
     cache.proficiency[id].level = Math.min(5, cache.proficiency[id].level + 1);
+    const newLevel = cache.proficiency[id].level;
+    if (newLevel > oldLevel) {
+      const key = String(newLevel);
+      if (cache.userStats.daily.todayStarGain[key] !== undefined) {
+        cache.userStats.daily.todayStarGain[key] += 1;
+      } else {
+        cache.userStats.daily.todayStarGain[key] = 1;
+      }
+    }
   } else {
     cache.proficiency[id].wrong += 1;
     const currentLevel = cache.proficiency[id].level;
@@ -326,6 +380,16 @@ export function updateProficiency(id, isCorrect) {
 
 export function getProficiencyLevel(id) {
   return cache.proficiency[id] ? cache.proficiency[id].level : 0;
+}
+
+export function getStarDistribution() {
+  const allVocab = getAllVocabulary();
+  const counts = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, total: allVocab.length };
+  allVocab.forEach(w => {
+    const lvl = getProficiencyLevel(w.id);
+    counts[lvl] = (counts[lvl] || 0) + 1;
+  });
+  return counts;
 }
 
 // ==========================================

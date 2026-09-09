@@ -4,7 +4,7 @@
 
 import { romajiToHiragana, attachRomajiInput } from './romaji.js';
 import { playCorrectSound, playIncorrectSound, playStreakSound, speakJapanese, setSoundEnabled, isSoundEnabled } from './audio.js';
-import { getSettings, saveSettings, toggleMasteredStatus, toggleBookmarkStatus, getMasteredIds, getBookmarkedIds, clearAllCustomWords, getProficiencyLevel, getProficiencyAll, deleteCustomCategories, getCustomWords, updateCustomWord, deleteCustomWord } from './storage.js';
+import { getSettings, saveSettings, toggleMasteredStatus, toggleBookmarkStatus, getMasteredIds, getBookmarkedIds, clearAllCustomWords, getProficiencyLevel, getProficiencyAll, deleteCustomCategories, getCustomWords, updateCustomWord, deleteCustomWord, getDailyStats, recordWordStudied, getStarDistribution, getUserStats, getAllVocabulary } from './storage.js';
 import { startQuiz, getCurrentQuestion, submitAnswer, nextQuestion, finishQuiz, getQuizState } from './quiz.js';
 import { initFlashcards, getCurrentCardData, flipCard, nextCard, prevCard, toggleCardMastered, toggleCardBookmark } from './flashcards.js';
 import { getCategories, getFilteredVocabulary, setDictionaryFilters, handleAddNewWord, importWordsFromJSON } from './dictionary.js';
@@ -449,6 +449,10 @@ function handleQuizSubmitOrNext(choiceValue = null) {
 
     const res = submitAnswer(val);
     if (!res) return;
+
+    if (res.word && res.word.id !== undefined) {
+      recordWordStudied(res.word.id);
+    }
 
     isAnswerSubmitted = true;
     if (quizInput) quizInput.disabled = true;
@@ -931,6 +935,24 @@ function setupModalForms() {
     modalAdd.classList.remove('active');
   });
 
+  // Modal Thống Kê Học Tập
+  const modalStats = document.getElementById('modal-learning-stats');
+  const btnOpenStats = document.getElementById('btn-stats-modal');
+  const btnCloseStats = document.getElementById('btn-close-stats');
+
+  if (btnOpenStats && modalStats) {
+    btnOpenStats.addEventListener('click', () => {
+      renderLearningStatsModal();
+      modalStats.classList.add('active');
+    });
+  }
+
+  if (btnCloseStats && modalStats) {
+    btnCloseStats.addEventListener('click', () => {
+      modalStats.classList.remove('active');
+    });
+  }
+
   // Hàm mở modal ở chế độ Sửa (gọi từ bên ngoài)
   window._openEditWordModal = function(wordId) {
     if (wordId === undefined || wordId === null) return;
@@ -1125,4 +1147,108 @@ function setupModalForms() {
   if (btnClosePublish) {
     btnClosePublish.addEventListener('click', () => document.getElementById('modal-publish').classList.remove('active'));
   }
+}
+
+/* ==========================================================================
+   LEARNING STATISTICS DASHBOARD RENDERER
+   ========================================================================== */
+function renderLearningStatsModal() {
+  const daily = getDailyStats();
+  const dist = getStarDistribution();
+  const userStats = getUserStats();
+
+  // 1. Date string formatted in Vietnamese
+  const todayDateEl = document.getElementById('stats-today-date');
+  if (todayDateEl) {
+    const d = new Date();
+    const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+    const dateStr = `${days[d.getDay()]}, ${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+    todayDateEl.textContent = dateStr;
+  }
+
+  // 2. Today's stats
+  const wordsStudiedEl = document.getElementById('stat-today-words');
+  const questionsEl = document.getElementById('stat-today-questions');
+  const star1El = document.getElementById('stat-today-star1');
+  const star2El = document.getElementById('stat-today-star2');
+  const star3plusEl = document.getElementById('stat-today-star3plus');
+
+  if (wordsStudiedEl) wordsStudiedEl.textContent = daily.todayWordsStudied ? daily.todayWordsStudied.length : 0;
+  if (questionsEl) questionsEl.textContent = daily.todayQuestions || 0;
+  if (star1El) star1El.textContent = `+${daily.todayStarGain ? (daily.todayStarGain['1'] || 0) : 0}`;
+  if (star2El) star2El.textContent = `+${daily.todayStarGain ? (daily.todayStarGain['2'] || 0) : 0}`;
+  if (star3plusEl) {
+    const s3 = daily.todayStarGain ? (daily.todayStarGain['3'] || 0) : 0;
+    const s4 = daily.todayStarGain ? (daily.todayStarGain['4'] || 0) : 0;
+    const s5 = daily.todayStarGain ? (daily.todayStarGain['5'] || 0) : 0;
+    star3plusEl.textContent = `+${s3 + s4 + s5}`;
+  }
+
+  // 3. Star Distribution Breakdown
+  const totalVocab = dist.total || 1;
+  const totalVocabEl = document.getElementById('stats-total-vocab-count');
+  if (totalVocabEl) totalVocabEl.textContent = `Tổng: ${dist.total} từ`;
+
+  const stackedBar = document.getElementById('stats-stacked-bar');
+  if (stackedBar) {
+    const colors = {
+      0: '#475569',
+      1: '#06b6d4',
+      2: '#f59e0b',
+      3: '#a855f7',
+      4: '#3b82f6',
+      5: '#10b981'
+    };
+    let barHtml = '';
+    for (let i = 0; i <= 5; i++) {
+      const count = dist[i] || 0;
+      const pct = (count / totalVocab) * 100;
+      if (pct > 0) {
+        barHtml += `<div class="stacked-bar-segment" style="width: ${pct}%; background: ${colors[i]};" title="${i}★: ${count} từ (${Math.round(pct)}%)"></div>`;
+      }
+    }
+    stackedBar.innerHTML = barHtml || `<div class="stacked-bar-segment" style="width: 100%; background: #475569;"></div>`;
+  }
+
+  const levelGrid = document.getElementById('stats-level-grid');
+  if (levelGrid) {
+    const levelConfigs = [
+      { lvl: 0, title: '0★ Chưa Học', desc: 'Mới khởi tạo', color: '#94a3b8' },
+      { lvl: 1, title: '★ 1 Sao', desc: 'Mới nhận diện', color: '#06b6d4' },
+      { lvl: 2, title: '★★ 2 Sao', desc: 'Đã thuộc sơ cấp', color: '#f59e0b' },
+      { lvl: 3, title: '★★★ 3 Sao', desc: 'Thuộc khá tốt', color: '#a855f7' },
+      { lvl: 4, title: '★★★★ 4 Sao', desc: 'Phản xạ nhanh', color: '#3b82f6' },
+      { lvl: 5, title: '★★★★★ 5 Sao', desc: 'Thuộc lòng (Mastered)', color: '#10b981' }
+    ];
+
+    levelGrid.innerHTML = levelConfigs.map(c => {
+      const cnt = dist[c.lvl] || 0;
+      const pct = Math.round((cnt / totalVocab) * 100);
+      return `
+        <div class="level-stat-card">
+          <div class="lvl-head">
+            <span style="color: ${c.color};">${c.title}</span>
+            <span style="font-size: 0.72rem; color: var(--text-muted);">${pct}%</span>
+          </div>
+          <div class="lvl-count" style="color: ${c.color};">${cnt} <span style="font-size: 0.75rem; font-weight: normal; color: var(--text-secondary);">từ</span></div>
+          <div class="lvl-desc">${c.desc}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // 4. Overall performance
+  const accValEl = document.getElementById('stats-accuracy-val');
+  const streakValEl = document.getElementById('stats-best-streak-val');
+  const totalQValEl = document.getElementById('stats-total-q-val');
+  const sessionsValEl = document.getElementById('stats-sessions-val');
+
+  const totalAns = userStats.totalQuestions || 0;
+  const correctAns = userStats.correctAnswers || 0;
+  const accRate = totalAns > 0 ? Math.round((correctAns / totalAns) * 100) : 0;
+
+  if (accValEl) accValEl.textContent = `${accRate}%`;
+  if (streakValEl) streakValEl.textContent = `${userStats.bestStreak || 0} 🔥`;
+  if (totalQValEl) totalQValEl.textContent = totalAns;
+  if (sessionsValEl) sessionsValEl.textContent = userStats.sessionsCompleted || 0;
 }
