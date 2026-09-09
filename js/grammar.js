@@ -25,9 +25,19 @@ function renderGrammarList(searchQuery = '') {
   const filtered = grammarData.filter(g => {
     if (!searchQuery) return true;
     const q = searchQuery.toLowerCase();
-    return g.grammar.toLowerCase().includes(q) || 
-           g.meaning.toLowerCase().includes(q) || 
-           (g.examples && g.examples.some(ex => ex.toLowerCase().includes(q)));
+    const matchGrammar = g.grammar && g.grammar.toLowerCase().includes(q);
+    const matchMeaning = g.meaning && g.meaning.toLowerCase().includes(q);
+    const matchStructure = g.structure && g.structure.toLowerCase().includes(q);
+    const matchExamples = g.examples && g.examples.some(ex => {
+      if (typeof ex === 'string') return ex.toLowerCase().includes(q);
+      if (typeof ex === 'object' && ex !== null) {
+        return (ex.jp && ex.jp.toLowerCase().includes(q)) ||
+               (ex.reading && ex.reading.toLowerCase().includes(q)) ||
+               (ex.meaning && ex.meaning.toLowerCase().includes(q));
+      }
+      return false;
+    });
+    return matchGrammar || matchMeaning || matchStructure || matchExamples;
   });
 
   if (filtered.length === 0) {

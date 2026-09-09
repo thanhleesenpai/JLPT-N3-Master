@@ -249,16 +249,17 @@ export const N3_GRAMMAR_DATA = [
     "meaning": "Giá mà... thì tốt / Tiếc nuối thực tại",
     "examples": [
       {
-        "jp": "もし生れ変わることができるのなら、次は男に生れたい。",
-        "reading": "もしうまれかわることができるのなら、つぎはおとこにうまれたい。",
-        "furigana": "もし<ruby>生<rt>うま</rt></ruby>れ<ruby>変<rt>か</rt></ruby>わることができるのなら、<ruby>次<rt>つぎ</rt></ruby>は<ruby>男<rt>おとこ</rt></ruby>に<ruby>生<rt>うま</rt></ruby>れたい。",
-        "target": "のなら",
+        "jp": "もし生まれ変われるとしたら、次は男になりたい。",
+        "reading": "もしうまれかわれるとしたら、つぎはおとこになりたい。",
+        "furigana": "もし<ruby>生<rt>うま</rt></ruby>れ<ruby>変<rt>か</rt></ruby>われるとしたら、<ruby>次<rt>つぎ</rt></ruby>は<ruby>男<rt>おとこ</rt></ruby>になりたい。",
+        "target": "としたら",
         "meaning": "Nếu như có thể được sinh ra một lần nữa, tôi muốn lần tới mình được làm con trai."
       },
       {
         "jp": "もう少し時間があれば、全部できたのに。",
         "reading": "もうすこしじかんがあれば、ぜんぶできたのに。",
         "furigana": "もう<ruby>少<rt>すこ</rt></ruby>し<ruby>時間<rt>じかん</rt></ruby>があれば、<ruby>全部<rt>ぜんぶ</rt></ruby>できたのに。",
+        "target": "あれば",
         "meaning": "Giá mà có thêm chút thời gian nữa thôi thì tôi đã làm xong tất cả rồi."
       }
     ]
@@ -307,7 +308,7 @@ export const N3_GRAMMAR_DATA = [
   },
   {
     "id": "gr_k8dp4n0fi",
-    "grammar": "V-自動詞 ＋ ている (Trạng thái tự động từ)",
+    "grammar": "V-自動詞(tự động từ)＋ ている",
     "structure": "V-自動詞 + ている",
     "meaning": "Diễn tả trạng thái của sự vật/hiện tượng kéo dài hoặc diễn ra tự nhiên",
     "examples": [

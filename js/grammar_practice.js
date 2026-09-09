@@ -191,11 +191,11 @@ function checkGrammarAnswer(userAns, exObj, grammarTitle) {
     return true;
   }
 
-  // Tách các phương án biến thể của ngữ pháp (vd: "くらいなら／ぐらいなら" -> ["くらいなら", "ぐらいなら"])
+  // Tách các phương án biến thể của ngữ pháp (vd: "ば／たら／と...たい／のに" -> ["ば", "たら", "と", "たい", "のに"])
   const titleParts = grammarTitle
-    .split(/[→ー〉/／~～\s\(\)（）]/)
+    .split(/[→ー〉/／~～\s\(\)（）\.]/)
     .map(p => cleanText(p))
-    .filter(p => p.length >= 2);
+    .filter(p => p.length >= 1);
 
   if (titleParts.some(p => cleanUser === p || userHiragana === p || cleanText(romajiToHiragana(p)) === userHiragana)) {
     return true;
