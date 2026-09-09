@@ -162,18 +162,39 @@ export function addCustomWord(wordData) {
 }
 
 export function deleteCustomWord(id) {
-  if (!id) return;
+  if (id === undefined || id === null) return;
+  const strId = String(id);
   if (!cache.deletedIds) cache.deletedIds = [];
-  if (!cache.deletedIds.includes(id)) {
-    cache.deletedIds.push(id);
+  if (!cache.deletedIds.includes(strId)) {
+    cache.deletedIds.push(strId);
   }
-  cache.customWords = cache.customWords.filter(w => w.id !== id);
+  cache.customWords = cache.customWords.filter(w => String(w.id) !== strId);
   triggerSave();
 }
 
 export function updateCustomWord(id, newData) {
-  const idx = cache.customWords.findIndex(w => w.id === id);
-  if (idx === -1) return null;
+  if (id === undefined || id === null) return null;
+  const strId = String(id);
+  const idx = cache.customWords.findIndex(w => String(w.id) === strId);
+  if (idx === -1) {
+    const initialWord = INITIAL_N3_VOCABULARY.find(w => String(w.id) === strId);
+    if (initialWord) {
+      const updatedWord = {
+        ...initialWord,
+        kanji: newData.kanji ? newData.kanji.trim() : (initialWord.kanji || ''),
+        hiragana: newData.hiragana ? newData.hiragana.trim() : (initialWord.hiragana || ''),
+        hanviet: newData.hanviet ? newData.hanviet.trim().toUpperCase() : (initialWord.hanviet || ''),
+        meaning: newData.meaning ? newData.meaning.trim() : (initialWord.meaning || ''),
+        category: newData.category ? newData.category.trim() : (initialWord.category || 'N3'),
+        example_jp: newData.example_jp ? newData.example_jp.trim() : '',
+        example_vi: newData.example_vi ? newData.example_vi.trim() : ''
+      };
+      cache.customWords.unshift(updatedWord);
+      triggerSave();
+      return updatedWord;
+    }
+    return null;
+  }
   cache.customWords[idx] = {
     ...cache.customWords[idx],
     kanji: newData.kanji.trim(),

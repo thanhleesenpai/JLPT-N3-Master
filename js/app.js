@@ -513,7 +513,7 @@ function handleQuizSubmitOrNext(choiceValue = null) {
 
     const btnEditQuizWord = document.getElementById('btn-edit-quiz-word');
     if (btnEditQuizWord) {
-      if (res.word.id && res.word.id.startsWith('user_')) {
+      if (res.word && res.word.id !== undefined && res.word.id !== null) {
         btnEditQuizWord.style.display = 'inline-block';
         btnEditQuizWord.onclick = () => {
           openEditWordModal(res.word.id);
@@ -646,7 +646,7 @@ function renderFlashcard() {
   const w = data.word;
   const btnEditFc = document.getElementById('btn-edit-fc-word');
   if (btnEditFc) {
-    if (w.id && w.id.startsWith('user_')) {
+    if (w && w.id !== undefined && w.id !== null) {
       btnEditFc.style.display = 'inline-block';
       btnEditFc.onclick = (e) => {
         e.stopPropagation(); // prevent card flip
@@ -933,11 +933,15 @@ function setupModalForms() {
 
   // Hàm mở modal ở chế độ Sửa (gọi từ bên ngoài)
   window._openEditWordModal = function(wordId) {
-    const allWords = getCustomWords();
-    const word = allWords.find(w => w.id === wordId);
-    if (!word) return;
+    if (wordId === undefined || wordId === null) return;
+    const allWords = getAllVocabulary();
+    const word = allWords.find(w => String(w.id) === String(wordId));
+    if (!word) {
+      console.warn('Không tìm thấy từ có ID:', wordId);
+      return;
+    }
 
-    editingWordId = wordId;
+    editingWordId = word.id;
     if (modalTitle) modalTitle.textContent = '✏️ Sửa Từ Vựng';
     
     document.getElementById('add-kanji').value = word.kanji || '';
