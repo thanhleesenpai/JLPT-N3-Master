@@ -307,9 +307,9 @@ export const N3_GRAMMAR_DATA = [
   },
   {
     "id": "gr_k8dp4n0fi",
-    "grammar": "自動詞 (Tự động từ)",
-    "structure": "V-自動詞 + ている / ます",
-    "meaning": "Diễn tả trạng thái diễn ra tự nhiên",
+    "grammar": "V-自動詞 ＋ ている (Trạng thái tự động từ)",
+    "structure": "V-自動詞 + ている",
+    "meaning": "Diễn tả trạng thái của sự vật/hiện tượng kéo dài hoặc diễn ra tự nhiên",
     "examples": [
       {
         "jp": "このマンガはよく売れている。人気があるのだろう。",
