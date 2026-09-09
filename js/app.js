@@ -722,13 +722,51 @@ function setupDictionaryView() {
     renderDictionaryGrid();
   });
 
-  searchInput.addEventListener('input', () => {
-    setDictionaryFilters({ searchTerm: searchInput.value });
-    renderDictionaryGrid();
+  const updateActiveFilterUI = (currentFilter) => {
+    if (statusFilter) statusFilter.value = currentFilter;
+
+    document.querySelectorAll('.dict-dash-card').forEach(card => {
+      if (card.dataset.filter === currentFilter) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
+    });
+
+    document.querySelectorAll('.star-pill-btn').forEach(btn => {
+      if (btn.dataset.star === currentFilter) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  };
+
+  // Dashboard Cards Click (Quick Filter by low/mid/high star range)
+  document.querySelectorAll('.dict-dash-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const filter = card.dataset.filter;
+      const currentSelect = statusFilter ? statusFilter.value : 'all';
+      const newFilter = currentSelect === filter ? 'all' : filter;
+      setDictionaryFilters({ statusFilter: newFilter });
+      updateActiveFilterUI(newFilter);
+      renderDictionaryGrid();
+    });
+  });
+
+  // Star Pill Buttons Click (Quick Filter by exact 0★..5★ level)
+  document.querySelectorAll('.star-pill-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.star;
+      setDictionaryFilters({ statusFilter: filter });
+      updateActiveFilterUI(filter);
+      renderDictionaryGrid();
+    });
   });
 
   statusFilter.addEventListener('change', () => {
     setDictionaryFilters({ statusFilter: statusFilter.value });
+    updateActiveFilterUI(statusFilter.value);
     renderDictionaryGrid();
   });
 

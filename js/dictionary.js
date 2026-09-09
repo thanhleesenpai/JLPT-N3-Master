@@ -2,13 +2,13 @@
  * Module Từ Điển & Quản lý Từ Vựng N3
  */
 
-import { getAllVocabulary, getMasteredIds, getBookmarkedIds, toggleMasteredStatus, toggleBookmarkStatus, addCustomWord, deleteCustomWord } from './storage.js';
+import { getAllVocabulary, getMasteredIds, getBookmarkedIds, toggleMasteredStatus, toggleBookmarkStatus, addCustomWord, deleteCustomWord, getProficiencyLevel } from './storage.js';
 import { speakJapanese } from './audio.js';
 
 let dictionaryState = {
   searchTerm: '',
   categoryFilter: ['all'],
-  statusFilter: 'all' // 'all', 'mastered', 'unmastered', 'bookmarked', 'custom'
+  statusFilter: 'all' // 'all', 'mastered', 'unmastered', 'bookmarked', 'custom', 'star_0'..'star_5', 'star_low', 'star_mid', 'star_high'
 };
 
 /**
@@ -32,6 +32,18 @@ export function getFilteredVocabulary() {
     if (dictionaryState.statusFilter === 'unmastered' && masteredIds.includes(item.id)) return false;
     if (dictionaryState.statusFilter === 'bookmarked' && !bookmarkedIds.includes(item.id)) return false;
     if (dictionaryState.statusFilter === 'custom' && !item.id.startsWith('user_')) return false;
+
+    // Filter Star levels
+    const lvl = getProficiencyLevel(item.id);
+    if (dictionaryState.statusFilter === 'star_0' && lvl !== 0) return false;
+    if (dictionaryState.statusFilter === 'star_1' && lvl !== 1) return false;
+    if (dictionaryState.statusFilter === 'star_2' && lvl !== 2) return false;
+    if (dictionaryState.statusFilter === 'star_3' && lvl !== 3) return false;
+    if (dictionaryState.statusFilter === 'star_4' && lvl !== 4) return false;
+    if (dictionaryState.statusFilter === 'star_5' && lvl !== 5) return false;
+    if (dictionaryState.statusFilter === 'star_low' && lvl > 1) return false;
+    if (dictionaryState.statusFilter === 'star_mid' && (lvl < 2 || lvl > 3)) return false;
+    if (dictionaryState.statusFilter === 'star_high' && lvl < 4) return false;
 
     // Search term matching (Kanji, Hiragana, Hán Việt, Meaning)
     if (!term) return true;

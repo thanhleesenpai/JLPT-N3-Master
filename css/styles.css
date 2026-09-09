@@ -1796,3 +1796,41 @@ ruby rt {
   margin-top: 0.15rem;
 }
 
+/* Dictionary Interactive Star Dashboard & Star Filter Pills */
+.dict-dash-card:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.4) !important;
+}
+
+.dict-dash-card.active {
+  border-color: var(--accent-cyan) !important;
+  background: rgba(6, 182, 212, 0.12) !important;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+}
+
+.star-pill-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+
+.star-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.star-pill-btn.active {
+  background: rgba(6, 182, 212, 0.2);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+

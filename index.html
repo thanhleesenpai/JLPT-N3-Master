@@ -295,20 +295,32 @@
     <!-- ================= TAB 3: DICTIONARY ================= -->
     <section id="pane-dictionary" class="tab-pane">
       
-      <!-- Dashboard Thống Kê Độ Thông Thạo -->
-      <div id="dict-dashboard" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color); flex-wrap: wrap;">
-        <div style="flex: 1; min-width: 150px; text-align: center; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: var(--radius-md);">
-          <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Chưa thuộc (0-1 ⭐)</div>
-          <div id="dash-level-low" style="font-size: 2rem; font-weight: 800; color: var(--accent-red);">0</div>
+      <!-- Dashboard Thống Kê Độ Thông Thạo & Lọc Nhanh -->
+      <div id="dict-dashboard" style="display: flex; gap: 0.75rem; margin-bottom: 1rem; background: var(--bg-card); padding: 1rem 1.25rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color); flex-wrap: wrap;">
+        <div class="dict-dash-card" data-filter="star_low" style="flex: 1; min-width: 130px; text-align: center; padding: 0.75rem 0.85rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-md); border: 1px solid var(--border-color); cursor: pointer; transition: all 0.2s ease;" title="Bấm để lọc nhanh từ 0-1 Sao (Chưa thuộc)">
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem;">Chưa thuộc (0-1 ⭐)</div>
+          <div id="dash-level-low" style="font-size: 1.7rem; font-weight: 800; color: var(--accent-red);">0</div>
         </div>
-        <div style="flex: 1; min-width: 150px; text-align: center; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: var(--radius-md);">
-          <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Tạm nhớ (2-3 ⭐)</div>
-          <div id="dash-level-mid" style="font-size: 2rem; font-weight: 800; color: var(--accent-gold);">0</div>
+        <div class="dict-dash-card" data-filter="star_mid" style="flex: 1; min-width: 130px; text-align: center; padding: 0.75rem 0.85rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-md); border: 1px solid var(--border-color); cursor: pointer; transition: all 0.2s ease;" title="Bấm để lọc nhanh từ 2-3 Sao (Tạm nhớ)">
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem;">Tạm nhớ (2-3 ⭐)</div>
+          <div id="dash-level-mid" style="font-size: 1.7rem; font-weight: 800; color: var(--accent-gold);">0</div>
         </div>
-        <div style="flex: 1; min-width: 150px; text-align: center; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: var(--radius-md);">
-          <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Thuộc lòng (4-5 ⭐)</div>
-          <div id="dash-level-high" style="font-size: 2rem; font-weight: 800; color: var(--accent-green);">0</div>
+        <div class="dict-dash-card" data-filter="star_high" style="flex: 1; min-width: 130px; text-align: center; padding: 0.75rem 0.85rem; background: rgba(255,255,255,0.03); border-radius: var(--radius-md); border: 1px solid var(--border-color); cursor: pointer; transition: all 0.2s ease;" title="Bấm để lọc nhanh từ 4-5 Sao (Thuộc lòng)">
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem;">Thuộc lòng (4-5 ⭐)</div>
+          <div id="dash-level-high" style="font-size: 1.7rem; font-weight: 800; color: var(--accent-green);">0</div>
         </div>
+      </div>
+
+      <!-- Quick Star Filter Pills -->
+      <div class="star-filter-bar" style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 1rem; flex-wrap: wrap;">
+        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-right: 0.2rem;">⭐ Lọc nhanh theo sao:</span>
+        <button class="star-pill-btn active" data-star="all">Tất cả</button>
+        <button class="star-pill-btn" data-star="star_0">0★ (Chưa học)</button>
+        <button class="star-pill-btn" data-star="star_1">1★</button>
+        <button class="star-pill-btn" data-star="star_2">2★</button>
+        <button class="star-pill-btn" data-star="star_3">3★</button>
+        <button class="star-pill-btn" data-star="star_4">4★</button>
+        <button class="star-pill-btn" data-star="star_5">5★ (Mastered)</button>
       </div>
 
       <div class="dictionary-bar">
@@ -329,11 +341,26 @@
         </div>
 
         <select id="dict-status-filter" class="filter-select">
-          <option value="all">Tất cả từ</option>
-          <option value="mastered">Đã thuộc</option>
-          <option value="unmastered">Chưa thuộc</option>
-          <option value="bookmarked">Yêu thích</option>
-          <option value="custom">Từ cá nhân tự thêm</option>
+          <option value="all">Tất cả trạng thái</option>
+          <optgroup label="Thống kê cơ bản">
+            <option value="mastered">Đã thuộc (✓)</option>
+            <option value="unmastered">Chưa thuộc (+)</option>
+            <option value="bookmarked">Yêu thích (♥)</option>
+            <option value="custom">Từ cá nhân tự thêm</option>
+          </optgroup>
+          <optgroup label="Lọc theo mức Sao">
+            <option value="star_0">0★ (Mới khởi tạo)</option>
+            <option value="star_1">★ 1 Sao (Mới học)</option>
+            <option value="star_2">★★ 2 Sao (Tạm nhớ)</option>
+            <option value="star_3">★★★ 3 Sao (Khá thuộc)</option>
+            <option value="star_4">★★★★ 4 Sao (Thuộc tốt)</option>
+            <option value="star_5">★★★★★ 5 Sao (Thuộc lòng)</option>
+          </optgroup>
+          <optgroup label="Lọc theo Nhóm Sao">
+            <option value="star_low">Chưa thuộc (0 - 1 ⭐)</option>
+            <option value="star_mid">Tạm nhớ (2 - 3 ⭐)</option>
+            <option value="star_high">Thuộc lòng (4 - 5 ⭐)</option>
+          </optgroup>
         </select>
       </div>
 
