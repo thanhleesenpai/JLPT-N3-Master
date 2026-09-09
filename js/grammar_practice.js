@@ -212,6 +212,18 @@ function checkGrammarAnswer(userAns, exObj, grammarTitle) {
 }
 
 // ========== CORE LOGIC: SUBMIT / NEXT ==========
+// Helper lấy chế độ làm bài thực tế cho từng câu (Dùng cho Lộ Trình Tiến Hoá)
+function getEffectiveModeForItem(question) {
+  if (currentMode !== 'progressive') {
+    return currentMode;
+  }
+  if (!question || !question.id) return 'shadow';
+  const lvl = getGrammarLevel(question.id);
+  if (lvl <= 1) return 'shadow';    // 0-1★: Gõ mẫu Shadow Typing
+  if (lvl <= 3) return 'scramble';  // 2-3★: Sắp xếp câu Scramble
+  return 'cloze';                   // 4-5★: Điền khuyết Cloze
+}
+
 function handleSubmitOrNext() {
   if (!isAnswerSubmitted) {
     doSubmit();
@@ -232,16 +244,17 @@ function doSubmit() {
   const promptMeaning = getEl('grammar-prompt-meaning');
   const promptJp = getEl('grammar-prompt-jp');
 
+  const effMode = getEffectiveModeForItem(currentQuestion);
   let ans = quizInput ? quizInput.value.trim() : '';
 
   // Nếu ở Scramble mode mà quizInput rỗng, lấy chuỗi ghép từ scrambleSlots
-  if (currentMode === 'scramble' && scrambleSlots) {
+  if (effMode === 'scramble' && scrambleSlots) {
     const slotChips = Array.from(scrambleSlots.querySelectorAll('.scramble-chip'));
     ans = slotChips.map(c => c.dataset.original).join('');
     if (quizInput) quizInput.value = ans;
   }
 
-  if (!ans && currentMode !== 'scramble') {
+  if (!ans && effMode !== 'scramble') {
     if (quizInput) quizInput.focus();
     return;
   }
@@ -259,7 +272,7 @@ function doSubmit() {
 
   // Cập nhật độ nhớ (chỉ tính 1 lần/phiên)
   if (currentQuestion.id && !profUpdatedIds.has(currentQuestion.id)) {
-    updateGrammarScore(currentQuestion.id, isCorrect, currentMode);
+    updateGrammarScore(currentQuestion.id, isCorrect, effMode);
     profUpdatedIds.add(currentQuestion.id);
   }
 
@@ -268,8 +281,8 @@ function doSubmit() {
   const actionsBlock = getEl('grammar-quiz-actions');
   if (actionsBlock) actionsBlock.style.display = 'flex';
 
-  // Trong chế độ Điền Khuyết: SAU KHI NỘP BÀI → Hiện lại tên ngữ pháp ở header và câu đầy đủ!
-  if (currentMode === 'cloze') {
+  // Trong chế độ Điền Khuyết: SAU KHI NỘP BÀI → Hiện tên ngữ pháp, cấu trúc và câu đầy đủ!
+  if (effMode === 'cloze') {
     if (promptMeaning) {
       promptMeaning.innerHTML = `
         <div style="font-size: 1.4rem; color: var(--accent-cyan); font-weight: 800; margin-bottom: 4px;">
@@ -278,6 +291,7 @@ function doSubmit() {
         <div style="color: var(--accent-gold); font-size: 1.05rem; font-weight: 600;">
           ${currentQuestion.meaning.replace(/\n/g, '<br>')}
         </div>
+        ${currentQuestion.structure ? `<div style="font-size: 0.88rem; color: var(--accent-cyan); margin-top: 6px; font-weight: 600;">🧩 Cấu trúc chia: <span style="color: #fff;">${currentQuestion.structure}</span></div>` : ''}
       `;
     }
     if (promptJp) {
@@ -294,7 +308,7 @@ function doSubmit() {
     feedbackBox.className = 'feedback-box';
     void feedbackBox.offsetWidth;
 
-    const isCloze = currentMode === 'cloze';
+    const isCloze = effMode === 'cloze';
 
     if (isCorrect) {
       feedbackBox.classList.add('correct');
@@ -510,7 +524,7 @@ function startPractice() {
     if (arrow) arrow.textContent = '▼';
   }
 
-  currentMode = modeSelect ? modeSelect.value : 'shadow';
+  currentMode = modeSelect ? modeSelect.value : 'progressive';
   const countVal = countSelect ? countSelect.value : '10';
   const sourceVal = sourceSelect ? sourceSelect.value : 'adaptive';
 
@@ -527,7 +541,12 @@ function startPractice() {
   currentIndex = 0;
   if (quizCard) quizCard.style.display = 'block';
 
-  const modeNames = { shadow: '⌨️ Shadow Typing', cloze: '💡 Điền khuyết', scramble: '🧩 Sắp xếp' };
+  const modeNames = {
+    progressive: '🔄 Tiến Hoá (Auto theo ★)',
+    shadow: '⌨️ Shadow Typing',
+    cloze: '💡 Điền khuyết',
+    scramble: '🧩 Sắp xếp'
+  };
   const sourceNames = {
     adaptive: '🤖 Học Lũy Tiến',
     unmastered: '⚠️ Bài chưa thuộc',
@@ -545,6 +564,7 @@ function startPractice() {
 function loadNextQuestion() {
   const progressLabel = getEl('grammar-quiz-progress-label');
   const progressBar = getEl('grammar-quiz-progress-bar');
+  const modeLabel = getEl('grammar-quiz-mode-label');
   const feedbackBox = getEl('grammar-feedback-box');
   const quizInput = getEl('grammar-quiz-input');
   const btnSubmit = getEl('btn-grammar-submit');
@@ -553,14 +573,27 @@ function loadNextQuestion() {
   const scrambleContainer = getEl('grammar-scramble-container');
   const scrambleSlots = getEl('grammar-scramble-slots');
   const typingSection = getEl('grammar-typing-section');
+  const sourceSelect = getEl('grammar-practice-source');
 
   currentQuestion = practiceQueue[currentIndex];
   currentExample = getQuestionExample(currentQuestion);
   const exObj = currentExample;
+  const effMode = getEffectiveModeForItem(currentQuestion);
 
-  // Progress Bar
+  // Progress Bar & Mode Badge
   if (progressLabel) progressLabel.textContent = `Câu ${currentIndex + 1} / ${practiceQueue.length}`;
   if (progressBar) progressBar.style.width = `${(currentIndex / practiceQueue.length) * 100}%`;
+
+  const modeNames = { shadow: '⌨️ Shadow Typing', cloze: '💡 Điền khuyết', scramble: '🧩 Sắp xếp' };
+  const sourceVal = sourceSelect ? sourceSelect.value : 'adaptive';
+  const sourceNames = { adaptive: '🤖 Học Lũy Tiến', unmastered: '⚠️ Bài chưa thuộc', new: '🆕 Bài mới', random: '🔀 Ngẫu nhiên' };
+  if (modeLabel) {
+    if (currentMode === 'progressive') {
+      modeLabel.textContent = `Chế độ: 🔄 Tiến Hoá (${modeNames[effMode] || effMode}) • ${sourceNames[sourceVal] || ''}`;
+    } else {
+      modeLabel.textContent = `Chế độ: ${modeNames[currentMode] || currentMode} • ${sourceNames[sourceVal] || ''}`;
+    }
+  }
 
   // Reset UI
   if (feedbackBox) feedbackBox.className = 'feedback-box';
@@ -575,7 +608,7 @@ function loadNextQuestion() {
   }
 
   // ── Shadow Typing ──
-  if (currentMode === 'shadow') {
+  if (effMode === 'shadow') {
     if (promptMeaning) {
       promptMeaning.innerHTML = `
         <div style="font-size: 1.4rem; color: var(--accent-cyan); font-weight: 800; margin-bottom: 4px;">
@@ -608,8 +641,8 @@ function loadNextQuestion() {
     if (quizInput) quizInput.focus();
 
   // ── Cloze (Điền khuyết) ──
-  } else if (currentMode === 'cloze') {
-    // Trong chế độ Điền Khuyết: ẨN hoàn toàn tên ngữ pháp ở header khi đang làm bài để tránh lộ đáp án!
+  } else if (effMode === 'cloze') {
+    // Trong chế độ Điền Khuyết: ẨN hoàn toàn tên ngữ pháp và cấu trúc chia ở header để bảo mật đáp án!
     if (promptMeaning) {
       promptMeaning.innerHTML = `
         <div style="background: rgba(236, 72, 153, 0.12); border: 1px dashed var(--accent-pink); border-radius: 8px; padding: 6px 12px; margin-bottom: 8px; color: var(--accent-pink); font-weight: 700; font-size: 0.9rem; display: inline-block;">
@@ -618,7 +651,6 @@ function loadNextQuestion() {
         <div style="font-size: 1.1rem; color: #fff; font-weight: 600; margin-top: 4px;">
           Ý nghĩa / Gợi ý: <span style="color: var(--accent-gold); font-weight: 700;">${currentQuestion.meaning.replace(/\n/g, '<br>')}</span>
         </div>
-        ${currentQuestion.structure ? `<div style="font-size: 0.88rem; color: var(--accent-cyan); margin-top: 6px; font-weight: 600;">🧩 Cấu trúc chia: <span style="color: #fff;">${currentQuestion.structure}</span></div>` : ''}
       `;
     }
 
@@ -640,7 +672,7 @@ function loadNextQuestion() {
     if (quizInput) quizInput.focus();
 
   // ── Scramble (Sắp xếp câu) ──
-  } else if (currentMode === 'scramble') {
+  } else if (effMode === 'scramble') {
     if (promptMeaning) {
       const grammarTag = `<div style="font-size: 1.4rem; color: var(--accent-cyan); font-weight: 800; margin-bottom: 4px;">${currentQuestion.grammar}</div>`;
       const structTag = currentQuestion.structure ? `<div style="font-size: 0.88rem; color: var(--accent-cyan); margin-top: 4px; font-weight: 600;">🧩 Cấu trúc: ${currentQuestion.structure}</div>` : '';
