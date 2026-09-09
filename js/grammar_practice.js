@@ -9,7 +9,7 @@
  * - Giao diện Scramble có khung xếp câu rõ ràng
  */
 import { N3_GRAMMAR_DATA } from './grammar_data.js';
-import { updateGrammarScore } from './storage.js';
+import { updateGrammarScore, getGrammarLevel } from './storage.js';
 import { attachRomajiInput, romajiToHiragana } from './romaji.js';
 
 // ========== STATE ==========
@@ -393,10 +393,112 @@ function doNext() {
   }
 }
 
+// ========== SMART QUEUE GENERATOR ==========
+function generateSmartPracticeQueue(sourceMode, countLimit) {
+  const validGrammars = N3_GRAMMAR_DATA.filter(g => g && (g.examples || g.grammar));
+
+  let limit = 10;
+  if (countLimit === 'all') {
+    limit = validGrammars.length;
+  } else {
+    const parsed = parseInt(countLimit, 10);
+    limit = isNaN(parsed) ? 10 : Math.min(parsed, validGrammars.length);
+  }
+
+  const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+
+  if (limit >= validGrammars.length || sourceMode === 'random') {
+    return shuffle(validGrammars).slice(0, limit);
+  }
+
+  if (sourceMode === 'unmastered') {
+    const unmastered = validGrammars.filter(g => {
+      const lvl = getGrammarLevel(g.id);
+      return lvl > 0 && lvl < 3;
+    });
+    const selected = shuffle(unmastered).slice(0, limit);
+    if (selected.length < limit) {
+      const usedIds = new Set(selected.map(g => g.id));
+      const rest = validGrammars
+        .filter(g => !usedIds.has(g.id))
+        .sort((a, b) => getGrammarLevel(a.id) - getGrammarLevel(b.id));
+      selected.push(...rest.slice(0, limit - selected.length));
+    }
+    return selected;
+  }
+
+  if (sourceMode === 'new') {
+    const newItems = validGrammars.filter(g => getGrammarLevel(g.id) === 0);
+    const selected = shuffle(newItems).slice(0, limit);
+    if (selected.length < limit) {
+      const usedIds = new Set(selected.map(g => g.id));
+      const rest = validGrammars
+        .filter(g => !usedIds.has(g.id))
+        .sort((a, b) => getGrammarLevel(a.id) - getGrammarLevel(b.id));
+      selected.push(...rest.slice(0, limit - selected.length));
+    }
+    return selected;
+  }
+
+  // Adaptive Mode (🤖 Học Lũy Tiến Thông Minh)
+  const queue = [];
+  const usedIds = new Set();
+
+  const addItems = (items, maxCount) => {
+    const shuffled = shuffle(items);
+    for (const item of shuffled) {
+      if (queue.length >= limit || maxCount <= 0) break;
+      if (!usedIds.has(item.id)) {
+        usedIds.add(item.id);
+        queue.push(item);
+        maxCount--;
+      }
+    }
+  };
+
+  const mastered = validGrammars.filter(g => getGrammarLevel(g.id) >= 4);
+  const unmastered = validGrammars.filter(g => {
+    const lvl = getGrammarLevel(g.id);
+    return lvl >= 1 && lvl <= 2;
+  });
+  const newItems = validGrammars.filter(g => getGrammarLevel(g.id) === 0);
+  const neutral = validGrammars.filter(g => getGrammarLevel(g.id) === 3);
+
+  // 1. Spaced Review: ~15-20% từ đã 4-5 sao (nếu có)
+  if (mastered.length > 0) {
+    const spacedCount = Math.max(1, Math.floor(limit * 0.2));
+    addItems(mastered, spacedCount);
+  }
+
+  // 2. Unmastered Priority: Ưu tiên câu chưa thuộc (1-2 sao)
+  if (unmastered.length > 0) {
+    addItems(unmastered, limit - queue.length);
+  }
+
+  // 3. Progressive Unlock: Mở khóa câu mới (0 sao)
+  if (newItems.length > 0 && queue.length < limit) {
+    addItems(newItems, limit - queue.length);
+  }
+
+  // 4. Neutral (3 sao)
+  if (neutral.length > 0 && queue.length < limit) {
+    addItems(neutral, limit - queue.length);
+  }
+
+  // 5. Fallback nếu chưa đủ limit
+  if (queue.length < limit) {
+    const remaining = validGrammars.filter(g => !usedIds.has(g.id));
+    addItems(remaining, limit - queue.length);
+  }
+
+  return queue;
+}
+
 // ========== START PRACTICE ==========
 function startPractice() {
   const modeSelect = getEl('grammar-practice-mode');
   const countSelect = getEl('grammar-practice-count');
+  const sourceSelect = getEl('grammar-practice-source');
   const quizCard = getEl('grammar-quiz-card');
   const modeLabel = getEl('grammar-quiz-mode-label');
   const grammarControls = getEl('grammar-practice-controls');
@@ -410,20 +512,9 @@ function startPractice() {
 
   currentMode = modeSelect ? modeSelect.value : 'shadow';
   const countVal = countSelect ? countSelect.value : '10';
+  const sourceVal = sourceSelect ? sourceSelect.value : 'adaptive';
 
-  // Lọc tất cả các bài ngữ pháp có dữ liệu
-  const validGrammars = N3_GRAMMAR_DATA.filter(g => g && (g.examples || g.grammar));
-  const shuffled = [...validGrammars].sort(() => Math.random() - 0.5);
-
-  let limit = 10;
-  if (countVal === 'all') {
-    limit = shuffled.length;
-  } else {
-    const parsed = parseInt(countVal, 10);
-    limit = isNaN(parsed) ? 10 : Math.min(parsed, shuffled.length);
-  }
-
-  practiceQueue = shuffled.slice(0, limit);
+  practiceQueue = generateSmartPracticeQueue(sourceVal, countVal);
   profUpdatedIds = new Set();
   isAnswerSubmitted = false;
   grammarPracticeActive = true;
@@ -437,7 +528,15 @@ function startPractice() {
   if (quizCard) quizCard.style.display = 'block';
 
   const modeNames = { shadow: '⌨️ Shadow Typing', cloze: '💡 Điền khuyết', scramble: '🧩 Sắp xếp' };
-  if (modeLabel) modeLabel.textContent = `Chế độ: ${modeNames[currentMode] || currentMode}`;
+  const sourceNames = {
+    adaptive: '🤖 Học Lũy Tiến',
+    unmastered: '⚠️ Bài chưa thuộc',
+    new: '🆕 Bài mới',
+    random: '🔀 Ngẫu nhiên'
+  };
+  if (modeLabel) {
+    modeLabel.textContent = `Chế độ: ${modeNames[currentMode] || currentMode} • ${sourceNames[sourceVal] || ''}`;
+  }
 
   loadNextQuestion();
 }
